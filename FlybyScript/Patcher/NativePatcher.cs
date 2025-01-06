@@ -37,7 +37,7 @@ namespace FlybyScript
 
             if (string.IsNullOrEmpty(mountedDriveLetter))
             {
-                _logger.Log("Failed to mount ISO. Exiting.", Color.Crimson);
+                _logger.Log("ISO のマウントに失敗しました。終了します。", Color.Crimson);
                 return;
             }
 
@@ -50,13 +50,13 @@ namespace FlybyScript
         {
             try
             {
-                _logger.Log("Starting the download of the Windows 24H2 ISO...", Color.Blue);
+                _logger.Log("Windows 24H2 ISO のダウンロードを開始しています...", Color.Blue);
 
                 // Run Fido.ps1 to download the ISO (PowerShell script)
                 string downloadCommand = $"& \"{_fidoScriptPath}\"";
                 await ExecutePowerShellCommand(downloadCommand);
 
-                _logger.Log("Windows 24H2 ISO download completed.", System.Drawing.Color.Green);
+                _logger.Log("Windows 24H2 ISO のダウンロードが完了しました。", System.Drawing.Color.Green);
 
                 MessageBox.Show("Please wait for the ISO file to download, and then select the ISO file.",
                 "Information",
@@ -104,7 +104,7 @@ namespace FlybyScript
                 }
                 else
                 {
-                    _logger.Log("No ISO file selected.", System.Drawing.Color.Black);
+                    _logger.Log("ISO が選択されていません。", System.Drawing.Color.Black);
                     return null;
                 }
             }
@@ -331,8 +331,8 @@ namespace FlybyScript
         {
             using (var openFileDialog = new OpenFileDialog
             {
-                Title = "Select Windows 11 ISO File",
-                Filter = "ISO Files (*.iso)|*.iso|All Files (*.*)|*.*",
+                Title = "Windows 11 ISO ファイルを選択",
+                Filter = "ISO ファイル (*.iso)|*.iso|すべてのファイル (*.*)|*.*",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer)
             })
             {

@@ -70,13 +70,13 @@
             this.btnTogglePatch.FlatAppearance.BorderSize = 2;
             this.btnTogglePatch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.btnTogglePatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTogglePatch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTogglePatch.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTogglePatch.Location = new System.Drawing.Point(629, 484);
             this.btnTogglePatch.Name = "btnTogglePatch";
             this.btnTogglePatch.Size = new System.Drawing.Size(222, 40);
             this.btnTogglePatch.TabIndex = 201;
             this.btnTogglePatch.TabStop = false;
-            this.btnTogglePatch.Text = "Start";
+            this.btnTogglePatch.Text = "開始";
             this.btnTogglePatch.UseCompatibleTextRendering = true;
             this.btnTogglePatch.UseVisualStyleBackColor = false;
             this.btnTogglePatch.Click += new System.EventHandler(this.btnTogglePatch_Click);
@@ -108,13 +108,13 @@
             this.btnMountRun.FlatAppearance.BorderSize = 2;
             this.btnMountRun.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.btnMountRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMountRun.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMountRun.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMountRun.Location = new System.Drawing.Point(403, 484);
             this.btnMountRun.Name = "btnMountRun";
             this.btnMountRun.Size = new System.Drawing.Size(220, 40);
             this.btnMountRun.TabIndex = 203;
             this.btnMountRun.TabStop = false;
-            this.btnMountRun.Text = "Mount and Run ISO";
+            this.btnMountRun.Text = "ISO をマウントと実行";
             this.btnMountRun.UseVisualStyleBackColor = false;
             this.btnMountRun.Click += new System.EventHandler(this.btnMountRun_Click);
             // 
@@ -123,14 +123,13 @@
             this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Small Light", 21.25F);
+            this.lblHeader.Font = new System.Drawing.Font("Yu Gothic UI", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(115)))), ((int)(((byte)(193)))));
             this.lblHeader.Location = new System.Drawing.Point(30, 38);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(780, 82);
+            this.lblHeader.Size = new System.Drawing.Size(853, 82);
             this.lblHeader.TabIndex = 205;
-            this.lblHeader.Text = "Use FlybyScript to bypass Windows 11 restrictions and install on unsupported devi" +
-    "ces";
+            this.lblHeader.Text = "FlybyScript を使用し、Windows 11 の制限を回避して非対応のデバイスにインストールします。\r\n";
             // 
             // linkLabel1
             // 
@@ -207,13 +206,13 @@
             this.checkInstallationMedia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkInstallationMedia.AutoSize = true;
             this.checkInstallationMedia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkInstallationMedia.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkInstallationMedia.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkInstallationMedia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.checkInstallationMedia.Location = new System.Drawing.Point(34, 527);
+            this.checkInstallationMedia.Location = new System.Drawing.Point(34, 524);
             this.checkInstallationMedia.Name = "checkInstallationMedia";
-            this.checkInstallationMedia.Size = new System.Drawing.Size(249, 18);
+            this.checkInstallationMedia.Size = new System.Drawing.Size(264, 21);
             this.checkInstallationMedia.TabIndex = 209;
-            this.checkInstallationMedia.Text = "I want to create Windows 11 installation media";
+            this.checkInstallationMedia.Text = "Windows 11 のインストールメディアを作成する";
             this.checkInstallationMedia.UseVisualStyleBackColor = true;
             this.checkInstallationMedia.CheckedChanged += new System.EventHandler(this.checkInstallationMedia_CheckedChanged);
             // 
@@ -222,15 +221,15 @@
             this.linkChangeExperience.ActiveLinkColor = System.Drawing.Color.RoyalBlue;
             this.linkChangeExperience.AutoEllipsis = true;
             this.linkChangeExperience.AutoSize = true;
-            this.linkChangeExperience.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkChangeExperience.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.linkChangeExperience.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkChangeExperience.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.linkChangeExperience.Location = new System.Drawing.Point(33, 139);
             this.linkChangeExperience.Name = "linkChangeExperience";
-            this.linkChangeExperience.Size = new System.Drawing.Size(209, 16);
+            this.linkChangeExperience.Size = new System.Drawing.Size(213, 17);
             this.linkChangeExperience.TabIndex = 1;
             this.linkChangeExperience.TabStop = true;
-            this.linkChangeExperience.Text = "Change how you experience Windows";
+            this.linkChangeExperience.Text = "Windows のエクスペリエンスを変更する";
             this.linkChangeExperience.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkChangeExperience_LinkClicked);
             this.linkChangeExperience.Paint += new System.Windows.Forms.PaintEventHandler(this.linkChangeExperience_Paint);
             // 
@@ -250,10 +249,11 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(943, 592);
             this.Controls.Add(this.panelForm);
+            this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Flyby11 Upgrading Assistant";
+            this.Text = "Flyby11 アップグレード アシスタント";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();

@@ -296,6 +296,9 @@ namespace Views
             SwitchView.GoBack(this.Parent as Panel);
         }
 
-   
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

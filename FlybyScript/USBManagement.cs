@@ -304,7 +304,7 @@ namespace FlybyScript
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                saveFileDialog.Filter = "Executable Files (*.exe)|*.exe";
+                saveFileDialog.Filter = "実行可能なファイル (*.exe)|*.exe";
                 saveFileDialog.Title = $"Save {fileName}";
                 saveFileDialog.FileName = fileName;
 

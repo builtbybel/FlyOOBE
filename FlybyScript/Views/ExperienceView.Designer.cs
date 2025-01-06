@@ -85,27 +85,26 @@
             this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Small Light", 21.25F);
+            this.lblHeader.Font = new System.Drawing.Font("Yu Gothic UI", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.lblHeader.Location = new System.Drawing.Point(69, 22);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(771, 84);
             this.lblHeader.TabIndex = 234;
-            this.lblHeader.Text = "Choose privacy settings for your device";
+            this.lblHeader.Text = "デバイスのプライバシー設定を選択";
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoEllipsis = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Variable Small Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label1.Location = new System.Drawing.Point(73, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(837, 66);
             this.label1.TabIndex = 235;
-            this.label1.Text = "Good news!\r\nWith these privacy settings, you\'re in control of what’s shared and s" +
-    "hown within Microsoft.\r\n\r\nTo accept, choose \"Accept and Apply.\" If you prefer de" +
-    "fault settings, select \"Decline.\"";
+            this.label1.Text = "良いニュースです！\r\nこれらのプライバシー設定で、Microsoft 内で共有および表示される内容を制御できます。\r\n\r\n同意するには、「同意して適用」を選択しま" +
+    "す。既定の設定を希望する場合は「拒否」を選択します。";
             // 
             // btnRevert
             // 
@@ -117,13 +116,13 @@
             this.btnRevert.FlatAppearance.BorderSize = 2;
             this.btnRevert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.btnRevert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRevert.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.btnRevert.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRevert.Location = new System.Drawing.Point(473, 565);
             this.btnRevert.Name = "btnRevert";
             this.btnRevert.Size = new System.Drawing.Size(220, 40);
             this.btnRevert.TabIndex = 238;
             this.btnRevert.TabStop = false;
-            this.btnRevert.Text = "Decline";
+            this.btnRevert.Text = "拒否";
             this.btnRevert.UseVisualStyleBackColor = false;
             this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
             // 
@@ -136,13 +135,13 @@
             this.btnApply.FlatAppearance.BorderSize = 2;
             this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApply.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.btnApply.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.Location = new System.Drawing.Point(699, 565);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(222, 40);
             this.btnApply.TabIndex = 237;
             this.btnApply.TabStop = false;
-            this.btnApply.Text = "Accept and apply";
+            this.btnApply.Text = "同意して適用";
             this.btnApply.UseCompatibleTextRendering = true;
             this.btnApply.UseVisualStyleBackColor = false;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
@@ -153,12 +152,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoEllipsis = true;
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label2.Location = new System.Drawing.Point(84, 142);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 16);
+            this.label2.Size = new System.Drawing.Size(155, 17);
             this.label2.TabIndex = 239;
-            this.label2.Text = "Last updated October 2024";
+            this.label2.Text = "最終更新日 2024 年 10 月";
             // 
             // ExperienceView
             // 

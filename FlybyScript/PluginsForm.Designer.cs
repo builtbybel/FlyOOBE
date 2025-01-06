@@ -49,9 +49,10 @@
             this.checkedListBoxPlugins.Font = new System.Drawing.Font("Segoe UI Variable Text Light", 10.25F);
             this.checkedListBoxPlugins.ForeColor = System.Drawing.Color.Black;
             this.checkedListBoxPlugins.FormattingEnabled = true;
-            this.checkedListBoxPlugins.Location = new System.Drawing.Point(-1, 50);
+            this.checkedListBoxPlugins.Location = new System.Drawing.Point(-1, 58);
+            this.checkedListBoxPlugins.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkedListBoxPlugins.Name = "checkedListBoxPlugins";
-            this.checkedListBoxPlugins.Size = new System.Drawing.Size(275, 340);
+            this.checkedListBoxPlugins.Size = new System.Drawing.Size(320, 382);
             this.checkedListBoxPlugins.TabIndex = 0;
             this.checkedListBoxPlugins.ThreeDCheckBoxes = true;
             this.checkedListBoxPlugins.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxPlugins_SelectedIndexChanged);
@@ -64,10 +65,11 @@
             this.textDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.textDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textDescription.Font = new System.Drawing.Font("Segoe UI Variable Small Light", 9.75F);
-            this.textDescription.Location = new System.Drawing.Point(281, 50);
+            this.textDescription.Location = new System.Drawing.Point(328, 58);
+            this.textDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textDescription.Multiline = true;
             this.textDescription.Name = "textDescription";
-            this.textDescription.Size = new System.Drawing.Size(348, 309);
+            this.textDescription.Size = new System.Drawing.Size(406, 356);
             this.textDescription.TabIndex = 1;
             // 
             // btnDownload
@@ -76,13 +78,14 @@
             this.btnDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
             this.btnDownload.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDownload.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDownload.ForeColor = System.Drawing.Color.Black;
-            this.btnDownload.Location = new System.Drawing.Point(536, 9);
+            this.btnDownload.Location = new System.Drawing.Point(625, 10);
+            this.btnDownload.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(93, 24);
+            this.btnDownload.Size = new System.Drawing.Size(108, 28);
             this.btnDownload.TabIndex = 2;
-            this.btnDownload.Text = "Install";
+            this.btnDownload.Text = "インストール";
             this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
@@ -90,9 +93,10 @@
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(281, 360);
+            this.progressBar.Location = new System.Drawing.Point(328, 415);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(348, 23);
+            this.progressBar.Size = new System.Drawing.Size(406, 26);
             this.progressBar.TabIndex = 3;
             // 
             // lblHeader
@@ -100,13 +104,14 @@
             this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Small", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeader.Font = new System.Drawing.Font("Yu Gothic UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblHeader.Location = new System.Drawing.Point(277, 15);
+            this.lblHeader.Location = new System.Drawing.Point(323, 18);
+            this.lblHeader.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(356, 30);
+            this.lblHeader.Size = new System.Drawing.Size(415, 35);
             this.lblHeader.TabIndex = 206;
-            this.lblHeader.Text = "Welcome to Plugins Manager";
+            this.lblHeader.Text = "プラグインマネージャーへようこそ";
             // 
             // btnUninstall
             // 
@@ -114,36 +119,39 @@
             this.btnUninstall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
             this.btnUninstall.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnUninstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUninstall.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUninstall.Location = new System.Drawing.Point(437, 9);
+            this.btnUninstall.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUninstall.Location = new System.Drawing.Point(510, 10);
+            this.btnUninstall.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUninstall.Name = "btnUninstall";
-            this.btnUninstall.Size = new System.Drawing.Size(93, 24);
+            this.btnUninstall.Size = new System.Drawing.Size(108, 28);
             this.btnUninstall.TabIndex = 207;
-            this.btnUninstall.Text = "Uninstall";
+            this.btnUninstall.Text = "アンインストール";
             this.btnUninstall.UseVisualStyleBackColor = false;
             this.btnUninstall.Click += new System.EventHandler(this.btnUninstall_Click);
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.label1.Font = new System.Drawing.Font("Segoe UI Variable Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(-1, 18);
+            this.label1.Location = new System.Drawing.Point(-1, 21);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 33);
+            this.label1.Size = new System.Drawing.Size(117, 38);
             this.label1.TabIndex = 208;
-            this.label1.Text = "Available";
+            this.label1.Text = "利用可能";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnImport
             // 
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImport.Font = new System.Drawing.Font("Segoe UI Variable Text", 9F);
-            this.btnImport.Location = new System.Drawing.Point(96, 18);
+            this.btnImport.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImport.Location = new System.Drawing.Point(112, 21);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(100, 33);
+            this.btnImport.Size = new System.Drawing.Size(117, 38);
             this.btnImport.TabIndex = 209;
-            this.btnImport.Text = "Import";
+            this.btnImport.Text = "インポート";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
@@ -154,9 +162,10 @@
             this.panelBottom.Controls.Add(this.btnUninstall);
             this.panelBottom.Controls.Add(this.btnDownload);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 401);
+            this.panelBottom.Location = new System.Drawing.Point(0, 463);
+            this.panelBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(646, 45);
+            this.panelBottom.Size = new System.Drawing.Size(754, 52);
             this.panelBottom.TabIndex = 210;
             // 
             // linkPluginsDirectory
@@ -165,23 +174,24 @@
             this.linkPluginsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkPluginsDirectory.AutoEllipsis = true;
             this.linkPluginsDirectory.AutoSize = true;
-            this.linkPluginsDirectory.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.75F);
+            this.linkPluginsDirectory.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.linkPluginsDirectory.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkPluginsDirectory.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.linkPluginsDirectory.Location = new System.Drawing.Point(12, 17);
+            this.linkPluginsDirectory.Location = new System.Drawing.Point(14, 20);
+            this.linkPluginsDirectory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkPluginsDirectory.Name = "linkPluginsDirectory";
-            this.linkPluginsDirectory.Size = new System.Drawing.Size(97, 16);
+            this.linkPluginsDirectory.Size = new System.Drawing.Size(121, 17);
             this.linkPluginsDirectory.TabIndex = 208;
             this.linkPluginsDirectory.TabStop = true;
-            this.linkPluginsDirectory.Text = "Plugins directory";
+            this.linkPluginsDirectory.Text = "プラグインのディレクトリ";
             this.linkPluginsDirectory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPluginsDirectory_LinkClicked);
             // 
             // PluginsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.ClientSize = new System.Drawing.Size(646, 446);
+            this.ClientSize = new System.Drawing.Size(754, 515);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.label1);
@@ -189,11 +199,13 @@
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.textDescription);
             this.Controls.Add(this.checkedListBoxPlugins);
+            this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PluginsForm";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Plugins-Manager";
+            this.Text = "プラグインマネージャー";
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.ResumeLayout(false);

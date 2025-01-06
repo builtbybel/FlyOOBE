@@ -79,19 +79,19 @@
             this.rtbLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.rtbLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbLog.Enabled = false;
-            this.rtbLog.Font = new System.Drawing.Font("Segoe UI Variable Small Light", 9.75F);
-            this.rtbLog.Location = new System.Drawing.Point(59, 362);
+            this.rtbLog.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rtbLog.Location = new System.Drawing.Point(59, 334);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(835, 148);
+            this.rtbLog.Size = new System.Drawing.Size(835, 137);
             this.rtbLog.TabIndex = 234;
-            this.rtbLog.Text = "Ready";
+            this.rtbLog.Text = "待機中";
             // 
             // comboBoxDrives
             // 
             this.comboBoxDrives.Enabled = false;
             this.comboBoxDrives.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxDrives.FormattingEnabled = true;
-            this.comboBoxDrives.Location = new System.Drawing.Point(59, 258);
+            this.comboBoxDrives.Location = new System.Drawing.Point(59, 238);
             this.comboBoxDrives.Name = "comboBoxDrives";
             this.comboBoxDrives.Size = new System.Drawing.Size(121, 25);
             this.comboBoxDrives.TabIndex = 235;
@@ -106,13 +106,13 @@
             this.btnStart.FlatAppearance.BorderSize = 2;
             this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.btnStart.Location = new System.Drawing.Point(671, 562);
+            this.btnStart.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Location = new System.Drawing.Point(671, 519);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(205, 40);
+            this.btnStart.Size = new System.Drawing.Size(205, 37);
             this.btnStart.TabIndex = 236;
             this.btnStart.TabStop = false;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "開始";
             this.btnStart.UseCompatibleTextRendering = true;
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -121,38 +121,38 @@
             // 
             this.lblDriveInfo.AutoEllipsis = true;
             this.lblDriveInfo.Enabled = false;
-            this.lblDriveInfo.Font = new System.Drawing.Font("Segoe UI Variable Small", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDriveInfo.Font = new System.Drawing.Font("Yu Gothic UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblDriveInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.lblDriveInfo.Location = new System.Drawing.Point(55, 194);
+            this.lblDriveInfo.Location = new System.Drawing.Point(55, 192);
             this.lblDriveInfo.Name = "lblDriveInfo";
-            this.lblDriveInfo.Size = new System.Drawing.Size(182, 32);
+            this.lblDriveInfo.Size = new System.Drawing.Size(182, 30);
             this.lblDriveInfo.TabIndex = 237;
             this.lblDriveInfo.Tag = "";
-            this.lblDriveInfo.Text = "Drive Properties";
+            this.lblDriveInfo.Text = "ドライブのプロパティ";
             // 
             // lblDeviceIDInfo
             // 
             this.lblDeviceIDInfo.AutoEllipsis = true;
-            this.lblDeviceIDInfo.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeviceIDInfo.Location = new System.Drawing.Point(57, 240);
+            this.lblDeviceIDInfo.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeviceIDInfo.Location = new System.Drawing.Point(57, 222);
             this.lblDeviceIDInfo.Name = "lblDeviceIDInfo";
-            this.lblDeviceIDInfo.Size = new System.Drawing.Size(79, 15);
+            this.lblDeviceIDInfo.Size = new System.Drawing.Size(79, 14);
             this.lblDeviceIDInfo.TabIndex = 238;
             this.lblDeviceIDInfo.Tag = "";
-            this.lblDeviceIDInfo.Text = "Device ID";
+            this.lblDeviceIDInfo.Text = "デバイス ID";
             // 
             // lblStatusInfo
             // 
             this.lblStatusInfo.AutoEllipsis = true;
             this.lblStatusInfo.Enabled = false;
-            this.lblStatusInfo.Font = new System.Drawing.Font("Segoe UI Variable Small", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatusInfo.Font = new System.Drawing.Font("Yu Gothic UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblStatusInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.lblStatusInfo.Location = new System.Drawing.Point(55, 328);
+            this.lblStatusInfo.Location = new System.Drawing.Point(55, 303);
             this.lblStatusInfo.Name = "lblStatusInfo";
-            this.lblStatusInfo.Size = new System.Drawing.Size(114, 31);
+            this.lblStatusInfo.Size = new System.Drawing.Size(114, 29);
             this.lblStatusInfo.TabIndex = 241;
             this.lblStatusInfo.Tag = "";
-            this.lblStatusInfo.Text = "Status";
+            this.lblStatusInfo.Text = "ステータス";
             // 
             // btnSelect
             // 
@@ -162,13 +162,13 @@
             this.btnSelect.FlatAppearance.BorderSize = 2;
             this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
             this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelect.Font = new System.Drawing.Font("Arial", 8.75F);
-            this.btnSelect.Location = new System.Drawing.Point(60, 114);
+            this.btnSelect.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelect.Location = new System.Drawing.Point(60, 105);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(132, 36);
+            this.btnSelect.Size = new System.Drawing.Size(132, 33);
             this.btnSelect.TabIndex = 242;
             this.btnSelect.TabStop = false;
-            this.btnSelect.Text = "Select";
+            this.btnSelect.Text = "選択";
             this.tt.SetToolTip(this.btnSelect, "This built-in method prepares a USB drive for a clean install, enabling a fresh r" +
         "einstallation of your system.");
             this.btnSelect.UseCompatibleTextRendering = true;
@@ -178,13 +178,13 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(58, 96);
+            this.label6.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label6.Location = new System.Drawing.Point(58, 89);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(76, 15);
+            this.label6.Size = new System.Drawing.Size(95, 15);
             this.label6.TabIndex = 243;
             this.label6.Tag = "";
-            this.label6.Text = "Select ISO file";
+            this.label6.Text = "ISO ファイルを選択";
             // 
             // btnMCT
             // 
@@ -194,14 +194,14 @@
             this.btnMCT.FlatAppearance.BorderSize = 2;
             this.btnMCT.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(103)))), ((int)(((byte)(160)))));
             this.btnMCT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMCT.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMCT.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnMCT.ForeColor = System.Drawing.Color.White;
-            this.btnMCT.Location = new System.Drawing.Point(463, 114);
+            this.btnMCT.Location = new System.Drawing.Point(463, 105);
             this.btnMCT.Name = "btnMCT";
-            this.btnMCT.Size = new System.Drawing.Size(214, 36);
+            this.btnMCT.Size = new System.Drawing.Size(214, 33);
             this.btnMCT.TabIndex = 244;
             this.btnMCT.TabStop = false;
-            this.btnMCT.Text = "Media Creation Tool (Microsoft)";
+            this.btnMCT.Text = "メディア作成ツール (Microsoft)";
             this.tt.SetToolTip(this.btnMCT, "If you want to perform a reinstall or clean install of Windows 11 on a new or use" +
         "d PC, use this option to download the media creation tool to make a bootable USB" +
         " or DVD.");
@@ -212,22 +212,22 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(233, 96);
+            this.label7.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(233, 89);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 15);
+            this.label7.Size = new System.Drawing.Size(87, 15);
             this.label7.TabIndex = 245;
             this.label7.Tag = "";
-            this.label7.Text = "or prepare with";
+            this.label7.Text = "または準備をする";
             // 
             // progressBar
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.Enabled = false;
-            this.progressBar.Location = new System.Drawing.Point(60, 516);
+            this.progressBar.Location = new System.Drawing.Point(60, 476);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(834, 23);
+            this.progressBar.Size = new System.Drawing.Size(834, 21);
             this.progressBar.TabIndex = 246;
             // 
             // lblStatus
@@ -236,9 +236,9 @@
             this.lblStatus.AutoEllipsis = true;
             this.lblStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(361, 519);
+            this.lblStatus.Location = new System.Drawing.Point(361, 479);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(226, 18);
+            this.lblStatus.Size = new System.Drawing.Size(226, 17);
             this.lblStatus.TabIndex = 247;
             this.lblStatus.Tag = "";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -249,12 +249,12 @@
             this.checkCreateUnattend.AutoEllipsis = true;
             this.checkCreateUnattend.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.checkCreateUnattend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkCreateUnattend.Font = new System.Drawing.Font("Arial", 8.75F);
-            this.checkCreateUnattend.Location = new System.Drawing.Point(73, 156);
+            this.checkCreateUnattend.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkCreateUnattend.Location = new System.Drawing.Point(60, 144);
             this.checkCreateUnattend.Name = "checkCreateUnattend";
-            this.checkCreateUnattend.Size = new System.Drawing.Size(214, 25);
+            this.checkCreateUnattend.Size = new System.Drawing.Size(214, 32);
             this.checkCreateUnattend.TabIndex = 250;
-            this.checkCreateUnattend.Text = "Skip Hardware limits and go local";
+            this.checkCreateUnattend.Text = "ハードウェア制限を回避してローカルにする";
             this.checkCreateUnattend.UseVisualStyleBackColor = true;
             this.checkCreateUnattend.Visible = false;
             this.checkCreateUnattend.CheckedChanged += new System.EventHandler(this.checkCreateUnattend_CheckedChanged);
@@ -265,7 +265,7 @@
             this.comboBoxDriveLetters.Enabled = false;
             this.comboBoxDriveLetters.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxDriveLetters.FormattingEnabled = true;
-            this.comboBoxDriveLetters.Location = new System.Drawing.Point(210, 258);
+            this.comboBoxDriveLetters.Location = new System.Drawing.Point(210, 238);
             this.comboBoxDriveLetters.Name = "comboBoxDriveLetters";
             this.comboBoxDriveLetters.Size = new System.Drawing.Size(121, 25);
             this.comboBoxDriveLetters.TabIndex = 251;
@@ -273,50 +273,52 @@
             // linkShowDiskList
             // 
             this.linkShowDiskList.Enabled = false;
+            this.linkShowDiskList.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.linkShowDiskList.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.linkShowDiskList.Location = new System.Drawing.Point(60, 286);
+            this.linkShowDiskList.Location = new System.Drawing.Point(56, 266);
             this.linkShowDiskList.Name = "linkShowDiskList";
-            this.linkShowDiskList.Size = new System.Drawing.Size(177, 16);
+            this.linkShowDiskList.Size = new System.Drawing.Size(190, 15);
             this.linkShowDiskList.TabIndex = 252;
             this.linkShowDiskList.TabStop = true;
-            this.linkShowDiskList.Text = "Help me identify the device id";
+            this.linkShowDiskList.Text = "デバイス ID の特定方法がわかりません";
             this.linkShowDiskList.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkShowDiskList_LinkClicked);
             // 
             // label3
             // 
             this.label3.AutoEllipsis = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Variable Small", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Yu Gothic UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(192)))));
-            this.label3.Location = new System.Drawing.Point(55, 25);
+            this.label3.Location = new System.Drawing.Point(55, 23);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(232, 32);
+            this.label3.Size = new System.Drawing.Size(232, 30);
             this.label3.TabIndex = 253;
             this.label3.Tag = "";
-            this.label3.Text = "Create Installation Media";
+            this.label3.Text = "インストールメディアの作成";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblDriveLetterInfo
             // 
             this.lblDriveLetterInfo.AutoEllipsis = true;
             this.lblDriveLetterInfo.Enabled = false;
-            this.lblDriveLetterInfo.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDriveLetterInfo.Location = new System.Drawing.Point(207, 240);
+            this.lblDriveLetterInfo.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblDriveLetterInfo.Location = new System.Drawing.Point(207, 222);
             this.lblDriveLetterInfo.Name = "lblDriveLetterInfo";
-            this.lblDriveLetterInfo.Size = new System.Drawing.Size(79, 15);
+            this.lblDriveLetterInfo.Size = new System.Drawing.Size(79, 14);
             this.lblDriveLetterInfo.TabIndex = 254;
             this.lblDriveLetterInfo.Tag = "";
-            this.lblDriveLetterInfo.Text = "Device Letter";
+            this.lblDriveLetterInfo.Text = "ドライブレター";
             // 
             // lblPartitionSchemeInfo
             // 
             this.lblPartitionSchemeInfo.AutoEllipsis = true;
             this.lblPartitionSchemeInfo.Enabled = false;
-            this.lblPartitionSchemeInfo.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPartitionSchemeInfo.Location = new System.Drawing.Point(361, 240);
+            this.lblPartitionSchemeInfo.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblPartitionSchemeInfo.Location = new System.Drawing.Point(361, 222);
             this.lblPartitionSchemeInfo.Name = "lblPartitionSchemeInfo";
-            this.lblPartitionSchemeInfo.Size = new System.Drawing.Size(109, 15);
+            this.lblPartitionSchemeInfo.Size = new System.Drawing.Size(109, 14);
             this.lblPartitionSchemeInfo.TabIndex = 255;
             this.lblPartitionSchemeInfo.Tag = "";
-            this.lblPartitionSchemeInfo.Text = "Partition scheme";
+            this.lblPartitionSchemeInfo.Text = "パーティションスキーム";
             // 
             // comboBoxPartitionScheme
             // 
@@ -324,7 +326,7 @@
             this.comboBoxPartitionScheme.Enabled = false;
             this.comboBoxPartitionScheme.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPartitionScheme.FormattingEnabled = true;
-            this.comboBoxPartitionScheme.Location = new System.Drawing.Point(364, 258);
+            this.comboBoxPartitionScheme.Location = new System.Drawing.Point(364, 238);
             this.comboBoxPartitionScheme.Name = "comboBoxPartitionScheme";
             this.comboBoxPartitionScheme.Size = new System.Drawing.Size(126, 25);
             this.comboBoxPartitionScheme.TabIndex = 256;
@@ -337,14 +339,14 @@
             this.btnInstallAssistant.FlatAppearance.BorderSize = 2;
             this.btnInstallAssistant.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(103)))), ((int)(((byte)(160)))));
             this.btnInstallAssistant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInstallAssistant.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInstallAssistant.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnInstallAssistant.ForeColor = System.Drawing.Color.White;
-            this.btnInstallAssistant.Location = new System.Drawing.Point(236, 114);
+            this.btnInstallAssistant.Location = new System.Drawing.Point(236, 105);
             this.btnInstallAssistant.Name = "btnInstallAssistant";
-            this.btnInstallAssistant.Size = new System.Drawing.Size(214, 36);
+            this.btnInstallAssistant.Size = new System.Drawing.Size(214, 33);
             this.btnInstallAssistant.TabIndex = 257;
             this.btnInstallAssistant.TabStop = false;
-            this.btnInstallAssistant.Text = "Installation Assistant (Microsoft)";
+            this.btnInstallAssistant.Text = "インストール アシスタント (Microsoft)";
             this.tt.SetToolTip(this.btnInstallAssistant, "This is the best option for installing Windows 11 on the device you’re currently " +
         "using.");
             this.btnInstallAssistant.UseCompatibleTextRendering = true;
@@ -356,14 +358,13 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoEllipsis = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(60, 57);
+            this.label1.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(60, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(846, 15);
+            this.label1.Size = new System.Drawing.Size(846, 19);
             this.label1.TabIndex = 258;
             this.label1.Tag = "";
-            this.label1.Text = "There are 3 options below for installing or creating Windows 11 media. Check out " +
-    "each one to determine the best option for you.";
+            this.label1.Text = "Windows 11 メディアをインストールまたは作成するには、以下の 3 つのオプションがあります。それぞれを確認後に最適なオプションを決定してください。";
             // 
             // linkPCHealthCheckApp
             // 
@@ -371,21 +372,20 @@
             this.linkPCHealthCheckApp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkPCHealthCheckApp.AutoEllipsis = true;
-            this.linkPCHealthCheckApp.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkPCHealthCheckApp.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkPCHealthCheckApp.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkPCHealthCheckApp.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkPCHealthCheckApp.Location = new System.Drawing.Point(44, 605);
+            this.linkPCHealthCheckApp.Location = new System.Drawing.Point(44, 558);
             this.linkPCHealthCheckApp.Name = "linkPCHealthCheckApp";
-            this.linkPCHealthCheckApp.Size = new System.Drawing.Size(566, 16);
+            this.linkPCHealthCheckApp.Size = new System.Drawing.Size(607, 15);
             this.linkPCHealthCheckApp.TabIndex = 260;
             this.linkPCHealthCheckApp.TabStop = true;
-            this.linkPCHealthCheckApp.Text = "Before installing, please refer to the WhyNotWin11 app to confirm your device mee" +
-    "ts the minimum system requirements";
+            this.linkPCHealthCheckApp.Text = "インストールを行う前に、WhyNotWin11 アプリでデバイスが最小システム要件を満たしているか確認してください。";
             this.linkPCHealthCheckApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPCHealthCheckApp_LinkClicked);
             // 
             // MediaView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
@@ -413,7 +413,7 @@
             this.Controls.Add(this.rtbLog);
             this.Controls.Add(this.btnBack);
             this.Name = "MediaView";
-            this.Size = new System.Drawing.Size(959, 631);
+            this.Size = new System.Drawing.Size(959, 582);
             this.ResumeLayout(false);
             this.PerformLayout();
 
