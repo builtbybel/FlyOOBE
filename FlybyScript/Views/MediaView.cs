@@ -49,7 +49,7 @@ namespace Views
         {
             // Initialize disk numbers
             comboBoxDrives.Items.Clear();
-            comboBoxDrives.Items.AddRange(new object[] { "Select (e.g., 1, 2, 3...)", "1", "2", "3" });
+            comboBoxDrives.Items.AddRange(new object[] { "選択 (例: 1, 2, 3...)", "1", "2", "3" });
             comboBoxDrives.SelectedIndex = 0;
 
             // Initialize removable drives
@@ -203,8 +203,8 @@ namespace Views
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "ISO Files (*.iso)|*.iso|All Files (*.*)|*.*";
-                openFileDialog.Title = "Select an ISO File";
+                openFileDialog.Filter = "ISO ファイル (*.iso)|*.iso|すべてのファイル (*.*)|*.*";
+                openFileDialog.Title = "ISO ファイルを選択してください";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -215,7 +215,7 @@ namespace Views
                 }
                 else
                 {
-                    logger.Log("ISO file selection was cancelled.", Color.Red);
+                    logger.Log("ISO ファイルの選択はキャンセルされました。", Color.Red);
                     ToggleIsoControls(false); // Disable ISO-related controls if selection is canceled
                 }
 

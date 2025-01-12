@@ -123,13 +123,13 @@
             this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Font = new System.Drawing.Font("Yu Gothic UI", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHeader.Font = new System.Drawing.Font("Yu Gothic UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(115)))), ((int)(((byte)(193)))));
-            this.lblHeader.Location = new System.Drawing.Point(30, 38);
+            this.lblHeader.Location = new System.Drawing.Point(34, 38);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(853, 82);
+            this.lblHeader.Size = new System.Drawing.Size(867, 90);
             this.lblHeader.TabIndex = 205;
-            this.lblHeader.Text = "FlybyScript を使用し、Windows 11 の制限を回避して非対応のデバイスにインストールします。\r\n";
+            this.lblHeader.Text = "FlybyScript で Windows 11 の制限を回避して非対応のデバイスにインストールします";
             // 
             // linkLabel1
             // 
