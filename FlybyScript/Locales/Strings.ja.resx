@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -172,10 +172,10 @@
     <value>A: エラーメッセージを確認して GitHub で報告してください。</value>
   </data>
   <data name="faq_a5" xml:space="preserve">
-    <value>A: はい、Microsoft は、このバックドアを開いたままにしています。この方法は、Windows Server バリアントのインストールを使用する Windows 11 セットアップ プロセスの機能を活用します。通常の Windows 11 セットアップと異なり、このバリアントはほとんどのハードウェア互換性のチェックをスキップします。</value>
+    <value>A: はい。Microsoft は、このバックドアを開いたままにしています。この方法は、Windows Server バリアントのインストールを使用する Windows 11 セットアップ プロセスの機能を活用します。通常の Windows 11 セットアップと異なり、このバリアントはほとんどのハードウェア互換性のチェックをスキップします。</value>
   </data>
   <data name="faq_a6" xml:space="preserve">
-    <value>A: Microsoft によると PC を廃棄した方が良いそうです。Linux をインストールして Windows から離れることを推奨します。</value>
+    <value>A: Microsoft によると PC を廃棄した方が良いそうです。Linux をインストールして Windows から離れることをお勧めします。</value>
   </data>
   <data name="faq_a7" xml:space="preserve">
     <value>A: 開発者は、Windows コミュニティに多くのコードを提供してきた、Builtbybel としても知られている Belim 氏です。</value>
@@ -217,16 +217,16 @@
     <value>1. デバイスは現在サポートされているバージョンの Windows 10 を実行しています。デバイスが現在サポートされている Windows 10 を実行していない場合は、サポートされている Windows 10 にアップグレードしてください。</value>
   </data>
   <data name="ciuView_lblPtAns2" xml:space="preserve">
-    <value>2. このデバイス</value>
+    <value>2. 既存のデバイスが</value>
   </data>
   <data name="ciuView_lblPtAns3" xml:space="preserve">
-    <value>1. ダウンロードして実行する</value>
+    <value>1. ダウンロードと実行</value>
   </data>
   <data name="ciuView_lblPtAns4" xml:space="preserve">
     <value>2. 次の Windows Update ショートカットを選択して「更新プログラムの確認」ボタンを選択します:</value>
   </data>
   <data name="ciuView_lblPtAns5" xml:space="preserve">
-    <value>3. 使用しているデバイスは Windows 11 の公式要件を満たしていませんか？互換性パッチを適用して、Windows Update 経由でのインプレース アップグレードを有効化することができます。</value>
+    <value>3. 使用しているデバイスで Windows 11 の公式要件を満たしていませんか？互換性パッチを適用して、Windows Update 経由でのインプレース アップグレードを有効化することができます。</value>
   </data>
   <data name="ciuView_lblPtHdr" xml:space="preserve">
     <value>既存の Windows 10 デバイスは、次の条件を満たしている場合に Windows 11 にアップグレードできます:</value>
@@ -235,10 +235,10 @@
     <value>Windows 10 デバイスが Windows 11 にアップグレードできるかどうかを確認するには、次のいずれかのオプションに従ってください。</value>
   </data>
   <data name="ciuView_linkPtAns2" xml:space="preserve">
-    <value>Windows 11 を実行するための最小ハードウェア仕様である。</value>
+    <value>Windows 11 を実行するための最小ハードウェア構成になっている。</value>
   </data>
   <data name="ciuView_linkPtAns3" xml:space="preserve">
-    <value>WhyNotWin11 アプリは、デバイスが最小のシステム要件を満たしているかどうかを確認できます</value>
+    <value>WhyNotWin11 アプリで、最小のシステム要件を満たしているか確認できます。</value>
   </data>
   <data name="msg_InstallReady" xml:space="preserve">
     <value>Windows 11 のインストールを続行できます。セットアップ ウィンドウの指示に従ってください。</value>
