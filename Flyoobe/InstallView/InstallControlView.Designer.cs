@@ -81,7 +81,7 @@
             // 
             // btnQuickRepair
             // 
-            this.btnQuickRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQuickRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuickRepair.BackColor = System.Drawing.Color.Transparent;
             this.btnQuickRepair.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(138)))), ((int)(((byte)(211)))));
             this.btnQuickRepair.FlatAppearance.BorderSize = 2;
@@ -89,7 +89,7 @@
             this.btnQuickRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnQuickRepair.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F);
             this.btnQuickRepair.ForeColor = System.Drawing.Color.Black;
-            this.btnQuickRepair.Location = new System.Drawing.Point(512, 357);
+            this.btnQuickRepair.Location = new System.Drawing.Point(512, 427);
             this.btnQuickRepair.Name = "btnQuickRepair";
             this.btnQuickRepair.Size = new System.Drawing.Size(138, 27);
             this.btnQuickRepair.TabIndex = 337;
@@ -98,7 +98,7 @@
             // 
             // btnCreateUsb
             // 
-            this.btnCreateUsb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateUsb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateUsb.BackColor = System.Drawing.Color.Transparent;
             this.btnCreateUsb.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(138)))), ((int)(((byte)(211)))));
             this.btnCreateUsb.FlatAppearance.BorderSize = 2;
@@ -106,7 +106,7 @@
             this.btnCreateUsb.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnCreateUsb.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F);
             this.btnCreateUsb.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateUsb.Location = new System.Drawing.Point(656, 357);
+            this.btnCreateUsb.Location = new System.Drawing.Point(656, 427);
             this.btnCreateUsb.Name = "btnCreateUsb";
             this.btnCreateUsb.Size = new System.Drawing.Size(138, 27);
             this.btnCreateUsb.TabIndex = 338;
@@ -115,11 +115,11 @@
             // 
             // lblOneClick
             // 
-            this.lblOneClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOneClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOneClick.AutoEllipsis = true;
             this.lblOneClick.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
             this.lblOneClick.ForeColor = System.Drawing.Color.Black;
-            this.lblOneClick.Location = new System.Drawing.Point(418, 360);
+            this.lblOneClick.Location = new System.Drawing.Point(418, 430);
             this.lblOneClick.Name = "lblOneClick";
             this.lblOneClick.Size = new System.Drawing.Size(89, 27);
             this.lblOneClick.TabIndex = 336;
@@ -130,6 +130,7 @@
             // 
             this.panelInstall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelInstall.AutoScroll = true;
             this.panelInstall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(243)))), ((int)(((byte)(240)))));
             this.panelInstall.Controls.Add(this.lblBadgeDl);
             this.panelInstall.Controls.Add(this.lblBadgeIso);
@@ -141,7 +142,7 @@
             this.panelInstall.Controls.Add(this.lblBadgeNative);
             this.panelInstall.Location = new System.Drawing.Point(42, 169);
             this.panelInstall.Name = "panelInstall";
-            this.panelInstall.Size = new System.Drawing.Size(752, 173);
+            this.panelInstall.Size = new System.Drawing.Size(752, 214);
             this.panelInstall.TabIndex = 335;
             // 
             // lblBadgeDl
@@ -190,12 +191,12 @@
             this.btnHomepage.FlatAppearance.BorderSize = 2;
             this.btnHomepage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnHomepage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnHomepage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHomepage.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnHomepage.Font = new System.Drawing.Font("Segoe UI Variable Text Semiligh", 10.25F);
             this.btnHomepage.ForeColor = System.Drawing.Color.Black;
-            this.btnHomepage.Location = new System.Drawing.Point(11, 116);
+            this.btnHomepage.Location = new System.Drawing.Point(111, 95);
             this.btnHomepage.Name = "btnHomepage";
-            this.btnHomepage.Size = new System.Drawing.Size(122, 31);
+            this.btnHomepage.Size = new System.Drawing.Size(94, 31);
             this.btnHomepage.TabIndex = 6;
             this.btnHomepage.Text = "Web";
             this.btnHomepage.UseCompatibleTextRendering = true;
@@ -221,12 +222,12 @@
             this.btnDownload.FlatAppearance.BorderSize = 2;
             this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnDownload.Font = new System.Drawing.Font("Segoe UI Variable Text Semiligh", 10.25F);
             this.btnDownload.ForeColor = System.Drawing.Color.Black;
-            this.btnDownload.Location = new System.Drawing.Point(139, 116);
+            this.btnDownload.Location = new System.Drawing.Point(11, 95);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(122, 31);
+            this.btnDownload.Size = new System.Drawing.Size(94, 31);
             this.btnDownload.TabIndex = 11;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseCompatibleTextRendering = true;
@@ -240,12 +241,12 @@
             this.btnRun.FlatAppearance.BorderSize = 2;
             this.btnRun.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.btnRun.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
-            this.btnRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRun.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRun.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnRun.ForeColor = System.Drawing.Color.Black;
-            this.btnRun.Location = new System.Drawing.Point(530, 115);
+            this.btnRun.Location = new System.Drawing.Point(582, 95);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(214, 31);
+            this.btnRun.Size = new System.Drawing.Size(162, 31);
             this.btnRun.TabIndex = 10;
             this.btnRun.Text = "Run";
             this.btnRun.UseCompatibleTextRendering = true;

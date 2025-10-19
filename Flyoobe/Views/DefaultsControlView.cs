@@ -26,7 +26,6 @@ namespace Flyoobe
         {
             InitializeComponent();
             LoadRegisteredBrowsers();
-            assetViewInfo.Text = "\uECAA";
 
             if (comboDownload != null)
             {

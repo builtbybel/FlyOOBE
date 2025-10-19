@@ -13,7 +13,6 @@ namespace Flyoobe
 
         {
             InitializeComponent();
-            assetViewInfo.Text = "\uE77B";
         }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)

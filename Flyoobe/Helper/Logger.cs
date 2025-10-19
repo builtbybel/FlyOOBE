@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Flyoobe
 {
@@ -15,54 +14,130 @@ namespace Flyoobe
 
     public static class Logger
     {
-        // Event raised when a warning or error is logged
-        public static event Action<string, LogLevel> OnNotificationLogged;
+        private static LogForm loggerFormInstance;
+        private static readonly List<(string Message, Color Color)> logBuffer = new List<(string, Color)>();
+        private static Form mainForm;
 
-        private static readonly List<string> _logBuffer = new List<string>();
-        private static readonly string _logFilePath;
-
-        // Static constructor initializes the log file path
-        static Logger()
+        /// <summary>
+        /// Sets the LoggerForm instance dynamically.
+        /// </summary>
+        public static void SetLogForm(LogForm loggerForm)
         {
-            string exeDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string appDirectory = Path.Combine(exeDirectory, "app");
-            _logFilePath = Path.Combine(appDirectory, "log.txt");
+            if (loggerForm == null)
+                throw new ArgumentNullException(nameof(loggerForm), "LoggerForm cannot be null.");
+
+            loggerFormInstance = loggerForm;
+
+            // Flush any buffered logs to the UI
+            foreach (var log in logBuffer)
+            {
+                loggerFormInstance.AddLog(log.Message, log.Color);
+            }
+
+            //   logBuffer.Clear();
         }
 
         /// <summary>
-        /// Logs a message with timestamp and log level.
-        /// Also appends the message to the log file.
+        /// Logs a message using the given LogLevel.
+        /// Each level has its own color.
         /// </summary>
         public static void Log(string message, LogLevel level = LogLevel.Info)
         {
-            var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            var levelStr = level.ToString().ToUpper();
-            var logLine = $"[{timestamp}] [{levelStr}] {message}";
+            Color color;
 
-            _logBuffer.Add(logLine);
-
-            try
+            switch (level)
             {
-                File.AppendAllText(_logFilePath, logLine + Environment.NewLine);
+                case LogLevel.Warning:
+                    color = Color.Olive;
+                    break;
+
+                case LogLevel.Error:
+                    color = Color.ForestGreen;
+                    break;
+
+                default:
+                    color = Color.Black;
+                    break;
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to write to log file: {ex.Message}");
-            }
 
-            // Fire event if level is Warning or Error
-            if (level == LogLevel.Warning || level == LogLevel.Error)
+            Log(message, color);
+        }
+
+        /// <summary>
+        /// Logs a message with an explicit color.
+        /// </summary>
+        public static void Log(string message, Color color)
+        {
+            string timestampedMessage = $"{DateTime.Now:HH:mm:ss} - {message}";
+
+            if (loggerFormInstance != null)
             {
-                OnNotificationLogged?.Invoke(message, level);
+                loggerFormInstance.AddLog(timestampedMessage, color);
+            }
+            else
+            {
+                logBuffer.Add((timestampedMessage, color));
             }
         }
 
         /// <summary>
-        /// Returns the full log history stored in memory.
+        /// Creates and shows (or hides) the LogForm window.
         /// </summary>
-        public static string GetLog()
+        public static void ToggleLogForm(Form parentForm)
         {
-            return string.Join(Environment.NewLine, _logBuffer);
+            if (parentForm == null)
+                throw new ArgumentNullException(nameof(parentForm));
+
+            mainForm = parentForm;
+
+            // Check if there is no existing form or the old one was disposed
+            if (loggerFormInstance == null || loggerFormInstance.IsDisposed)
+            {
+                loggerFormInstance = new LogForm
+                {
+                    Text = "OOBEE • Console",
+                    Size = new Size(400, 600),
+                    TopMost = true,
+                    StartPosition = FormStartPosition.Manual
+                };
+
+                // Prevent the form from being destroyed when the user clicks "X"
+                // Instead, just hide it and reset the main form opacity
+                loggerFormInstance.FormClosing += (s, e) =>
+                {
+                    e.Cancel = true;
+                    loggerFormInstance.Hide();
+                    if (mainForm != null)
+                        mainForm.Opacity = 1.0;
+                };
+
+                // Register this form as the global logger target
+                SetLogForm(loggerFormInstance);
+            }
+
+            // Safety check in case the form was disposed unexpectedly
+            if (loggerFormInstance == null || loggerFormInstance.IsDisposed)
+                return;
+
+            // Toggle visibility
+            if (loggerFormInstance.Visible)
+            {
+                // Hide the logger form and restore main form opacity
+                loggerFormInstance.Hide();
+                mainForm.Opacity = 1.0;
+            }
+            else
+            {
+                // Position the logger window relative to the main form
+                loggerFormInstance.Location = new Point(
+                    parentForm.Right - 400,
+                    parentForm.Top + 50);
+
+                // Show the logger form and dim the main form slightly
+                loggerFormInstance.Show();
+                loggerFormInstance.BringToFront();
+                mainForm.Opacity = 0.9;
+            }
         }
     }
 }

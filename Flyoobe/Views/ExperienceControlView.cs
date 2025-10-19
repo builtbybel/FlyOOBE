@@ -16,7 +16,6 @@ namespace Flyoobe
         public ExperienceControlView()
         {
             InitializeComponent();
-            assetViewInfo.Text = "\uEA18";
             _featureManager = new FeatureManager();
 
             // Load categories when control is loaded

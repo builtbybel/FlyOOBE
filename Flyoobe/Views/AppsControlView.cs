@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -16,21 +17,22 @@ namespace Flyoobe
 
         private Dictionary<string, string> _appDirectory = new Dictionary<string, string>();
         private string currentSearchTerm = string.Empty;
-
-        private string activePatternFile = "Flyoobe_Profile_Full.txt";
+        private string activePatternFile = "FlyOOBE_Profile_Full.txt";
 
         public AppsControlView()
         {
             InitializeComponent();
         }
 
-        private void AppControlView_Load(object sender, EventArgs e)
+        private async void AppsControlView_Load(object sender, EventArgs e)
         {
             InitializeProfileDropdown();
-            RefreshView();
-
-            assetViewInfo.Text = "\uE773";
+            await ApplyProfileChange();
         }
+
+        /// <summary>
+        /// Initializes the cleanup profile selector.
+        /// </summary>
         private void InitializeProfileDropdown()
         {
             profileDropdown.Items.Clear();
@@ -39,47 +41,51 @@ namespace Flyoobe
             profileDropdown.Items.Add("Minimal Windows – only essentials, zero bloat");
             profileDropdown.Items.Add("Community (from GitHub)");
 
-            profileDropdown.SelectedIndex = 1; // Default to Balanced
+            profileDropdown.SelectedIndex = 1; // Default: Balanced
             profileDropdown.SelectedIndexChanged += async (s, e) => await ApplyProfileChange();
         }
 
         /// <summary>
-        /// Called when profile dropdown is changed.
-        /// Updates label + sets correct pattern file + reloads app list.
+        /// Called when the cleanup profile is changed.
+        /// Updates label text, sets pattern file, and reloads the apps.
         /// </summary>
         private async Task ApplyProfileChange()
         {
-            string baseText = "Select the apps you want to uninstall. Use the dropdown to pick a cleanup profile. ";
+            string profileName = string.Empty;
+            string baseText = "Select the apps you want to uninstall. Use the dropdown to pick a cleanup profile.\n";
 
             switch (profileDropdown.SelectedIndex)
             {
                 case 0: // Full
-                    lblStatus.Text = baseText + "Currently showing: Full Microsoft Experience.";
-                    activePatternFile = "Flyoobe_Profile_Full.txt";
-                    await LoadAndDisplayApps();
+                    activePatternFile = "FlyOOBE_Profile_Full.txt";
+                    profileName = "Full Microsoft Experience – everything included.";
                     break;
 
                 case 1: // Balanced
-                    lblStatus.Text = baseText + "Currently showing: Balanced profile.";
-                    activePatternFile = "Flyoobe_Profile_Balanced.txt";
-                    await LoadAndDisplayApps();
+                    activePatternFile = "FlyOOBE_Profile_Balanced.txt";
+                    profileName = "Balanced – essentials plus Store (recommended).";
                     break;
 
                 case 2: // Minimal
-                    lblStatus.Text = baseText + "Currently showing: Minimal Windows profile.";
-                    activePatternFile = "Flyoobe_Profile_Minimal.txt";
-                    await LoadAndDisplayApps();
+                    activePatternFile = "FlyOOBE_Profile_Minimal.txt";
+                    profileName = "Minimal Windows – only essentials, zero bloat.";
                     break;
 
                 case 3: // Community
                     await LoadCommunityProfileAsync();
-                    break;
+                    return;
             }
+
+            // --- Load apps after profile is set ---
+            await LoadAndDisplayApps();
+
+            // --- Update label AFTER apps are loaded ---
+            int count = dgvApps.Rows.Count;
+            lblStatus.Text = $"{baseText}Currently showing: {profileName} Loaded {count} app(s) from profile: {Path.GetFileNameWithoutExtension(activePatternFile)}.";
         }
 
         /// <summary>
-        /// Downloads and applies the community profile from GitHub.
-        /// Always overwrites the local copy.
+        /// Downloads and loads the community cleanup profile from GitHub.
         /// </summary>
         private async Task LoadCommunityProfileAsync()
         {
@@ -90,9 +96,8 @@ namespace Flyoobe
             try
             {
                 var result = MessageBox.Show(
-                    "A Community Cleanup Profile is available online.\n\n" +
-                    "This profile contains the most commonly removed apps, curated by the community.\n\n" +
-                    "Do you want to download and apply it now?",
+                    "Download the Community Cleanup Profile from GitHub?\n\n" +
+                    "This profile contains the most commonly removed apps, curated by the community.",
                     "Community Profile",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -101,61 +106,46 @@ namespace Flyoobe
                 {
                     Directory.CreateDirectory(appDir);
                     using (var client = new System.Net.WebClient())
-                    {
                         await client.DownloadFileTaskAsync(new Uri(url), localPath);
-                    }
 
                     activePatternFile = Path.GetFileName(localPath);
-
-                    lblStatus.Text = "Community Profile active – showing most commonly removed apps.";
+                    lblStatus.Text = "Community Profile active – showing common bloatware.";
                     await LoadAndDisplayApps();
                 }
                 else
                 {
-                    lblStatus.Text = "Community Profile was not applied.";
+                    lblStatus.Text = "Community Profile not applied.";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "⚠️ Failed to load the Community Profile.\n\n" + ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show($"⚠️ Failed to load Community Profile:\n{ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-
-        // Loads all installed apps and displays matches in the checked list
+        /// <summary>
+        /// Loads installed UWP apps and applies filtering based on the selected pattern file.
+        /// </summary>
         private async Task LoadAndDisplayApps()
         {
-            checkedListBoxApps.Items.Clear();
-
+            dgvApps.Rows.Clear();
             var (bloatware, whitelist, scanAll) = LoadNativeAppPatterns();
             await LoadInstalledAppsAsync();
 
-            foreach (var app in _appDirectory)
-            {
-                string appNameLower = app.Key.ToLower();
+            var filtered = _appDirectory
+                .Where(app =>
+                    !whitelist.Any(w => app.Key.ToLower().Contains(w)) &&
+                    (scanAll || bloatware.Any(b => app.Key.ToLower().Contains(b))) &&
+                    (string.IsNullOrEmpty(currentSearchTerm) || app.Key.ToLower().Contains(currentSearchTerm)))
+                .ToList();
 
-                // Skip whitelisted apps
-                if (whitelist.Any(w => appNameLower.Contains(w)))
-                    continue;
-
-                // Apply search filter
-                if (!string.IsNullOrEmpty(currentSearchTerm) &&
-                    !appNameLower.Contains(currentSearchTerm))
-                    continue;
-
-                // Show all apps if wildcard is enabled, or match by pattern
-                if (scanAll || bloatware.Any(b => appNameLower.Contains(b)))
-                {
-                    checkedListBoxApps.Items.Add(app.Key, false);
-                }
-            }
+            RefreshAppList(filtered);
         }
 
-        // Loads installed UWP apps into the internal dictionary
+        /// <summary>
+        /// Loads all installed UWP apps into internal dictionary.
+        /// </summary>
         private async Task LoadInstalledAppsAsync()
         {
             _appDirectory.Clear();
@@ -170,25 +160,40 @@ namespace Flyoobe
                 string fullName = p.Id.FullName;
 
                 if (!_appDirectory.ContainsKey(name))
-                {
                     _appDirectory[name] = fullName;
-                }
             }
         }
 
-        // Loads bloatware patterns and whitelist from text file
+        /// <summary>
+        /// Updates DataGridView with app name, checkbox and remove button.
+        /// </summary>
+        private void RefreshAppList(IEnumerable<KeyValuePair<string, string>> apps)
+        {
+            dgvApps.Rows.Clear();
+
+            foreach (var app in apps)
+            {
+                int rowIndex = dgvApps.Rows.Add(false, app.Key, "Remove");
+                dgvApps.Rows[rowIndex].Tag = app.Value;
+            }
+
+            lblStatus.Text = $"{apps.Count()} apps listed.";
+        }
+
+        /// <summary>
+        /// Reads cleanup patterns from the current profile file.
+        /// </summary>
         private (string[] bloatware, string[] whitelist, bool scanAll) LoadNativeAppPatterns()
         {
             var bloatware = new List<string>();
             var whitelist = new List<string>();
             bool scanAll = false;
 
-            string pathToUse = GetActivePatternFilePath(activePatternFile);
-
-            if (string.IsNullOrEmpty(pathToUse) || !File.Exists(pathToUse))
+            string path = GetActivePatternFilePath(activePatternFile);
+            if (string.IsNullOrEmpty(path) || !File.Exists(path))
                 return (Array.Empty<string>(), Array.Empty<string>(), false);
 
-            foreach (var rawLine in File.ReadLines(pathToUse))
+            foreach (var rawLine in File.ReadLines(path))
             {
                 string line = rawLine.Split('#')[0].Trim();
                 if (string.IsNullOrWhiteSpace(line))
@@ -208,87 +213,60 @@ namespace Flyoobe
 
             return (bloatware.ToArray(), whitelist.ToArray(), scanAll);
         }
+
         /// <summary>
         /// Gets the path to the selected profile pattern file inside /app directory.
         /// </summary>
+
         private string GetActivePatternFilePath(string fileName, bool ensureExists = false)
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             string appDir = Path.Combine(baseDir, "app");
-            string profilePath = Path.Combine(appDir, fileName);
+            string path = Path.Combine(appDir, fileName);
 
-            if (ensureExists && !File.Exists(profilePath))
+            if (ensureExists && !File.Exists(path))
             {
-                Directory.CreateDirectory(appDir); // make sure folder exists
-                File.WriteAllText(profilePath, "# Add your app detection patterns here\n");
+                Directory.CreateDirectory(appDir);
+                File.WriteAllText(path, "# Add your app detection patterns here\n");
             }
 
-            return profilePath;
+            return path;
         }
 
-        private async void btnRemoveSelected_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Handles clicks on the "Remove" button inside the DataGridView.
+        /// Immediately removes the selected app and refreshes the list afterward.
+        /// </summary>
+        private async void dgvApps_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            lblStatus.Text = "Starting cleanup...";
-            progressBar.Visible = true;
+            if (e.RowIndex < 0) return;
 
-            var toRemove = new List<string>();
-
-            // Get selected app full names from checked list
-            foreach (var item in checkedListBoxApps.CheckedItems)
+            // Check if "Remove" button column was clicked
+            if (dgvApps.Columns[e.ColumnIndex].Name == "ActionColumn")
             {
-                string appName = item.ToString();
-                if (_appDirectory.TryGetValue(appName, out var fullName))
-                {
-                    toRemove.Add(fullName);
-                }
-            }
+                var row = dgvApps.Rows[e.RowIndex];
+                string appName = row.Cells["NameColumn"].Value?.ToString();
+                string fullName = row.Tag?.ToString();
 
-            if (toRemove.Count == 0)
-            {
-                MessageBox.Show("Please select at least one app.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+                if (string.IsNullOrEmpty(fullName)) return;
 
-            progressBar.Minimum = 0;
-            progressBar.Maximum = toRemove.Count;
-            progressBar.Value = 0;
-
-            int count = 0;
-
-            foreach (var fullName in toRemove)
-            {
-                string name = _appDirectory.FirstOrDefault(x => x.Value == fullName).Key;
-
-                lblStatus.Text = $"Removing {name}...";
+                // Start removal
+                lblStatus.Text = $"Removing {appName}...";
                 bool success = await UninstallAppAsync(fullName);
 
-                count++;
-                progressBar.Value = count;
+                // Update status text
+                lblStatus.Text = success
+                    ? $"{appName} successfully removed."
+                    : $"Failed to remove {appName}.";
 
-                if (!success)
-                {
-                    lblStatus.Text = $"Failed to remove {name}";
-                    Logger.Log($"Uninstalling {name} ({fullName}) - Success: {success}", LogLevel.Warning);
-                }
-                else
-                {
-                    lblStatus.Text = $"Removed {name}";
-                    Logger.Log($"Successfully uninstalled {name} ({fullName})", LogLevel.Info);
-                }
-
-                await Task.Delay(200); // pause to visualize progress
+                // Automatically refresh list after removal
+                await LoadAndDisplayApps();
             }
-
-            MessageBox.Show("Uninstallation completed.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // Refresh app list after cleanup
-            await LoadAndDisplayApps();
-            progressBar.Value = 0;
-            progressBar.Visible = false;
-            lblStatus.Text = "Cleanup finished.";
         }
 
-        // Uninstalls a UWP app using its full package name
+        /// <summary>
+        /// Uninstalls an app by its full package name.
+        /// </summary>
         private async Task<bool> UninstallAppAsync(string fullName)
         {
             try
@@ -300,56 +278,100 @@ namespace Flyoobe
                 operation.Completed = (o, s) => resetEvent.Set();
 
                 await Task.Run(() => resetEvent.WaitOne());
-
                 return operation.Status == AsyncStatus.Completed;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error uninstalling:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Error uninstalling:\n{ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
-        private void btnEdit_Click(object sender, EventArgs e)
+
+        private async void btnRemoveSelected_Click(object sender, EventArgs e)
         {
-            try
+            var selected = dgvApps.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => Convert.ToBoolean(r.Cells["SelectColumn"].Value))
+                .ToList();
+
+            if (selected.Count == 0)
             {
-                // Use the currently active profile file
-                string filePath = GetActivePatternFilePath(activePatternFile, ensureExists: true);
-                System.Diagnostics.Process.Start("notepad.exe", filePath);
+                MessageBox.Show("Please select at least one app.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            catch (Exception ex)
+
+            progressBar.Visible = true;
+            progressBar.Maximum = selected.Count;
+            progressBar.Value = 0;
+
+            foreach (var row in selected)
             {
-                MessageBox.Show("Error opening profile file: " + ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string appName = row.Cells["NameColumn"].Value.ToString();
+                string fullName = row.Tag.ToString();
+
+                lblStatus.Text = $"Removing {appName}...";
+                bool success = await UninstallAppAsync(fullName);
+                progressBar.PerformStep();
+
+                if (!success)
+                    lblStatus.Text = $"Failed to remove {appName}";
+                else
+                    lblStatus.Text = $"Removed {appName}";
+
+                await Task.Delay(150);
             }
+
+            progressBar.Visible = false;
+            lblStatus.Text = "Batch removal completed.";
+            await LoadAndDisplayApps();
         }
 
         private void textSearch_TextChanged(object sender, EventArgs e)
         {
             currentSearchTerm = textSearch.Text.Trim().ToLower();
-            _ = LoadAndDisplayApps(); // Re-run with filter
+            _ = LoadAndDisplayApps();
         }
 
-        private void textSearch_Click(object sender, EventArgs e)
-        {
-            textSearch.Clear();
-        }
+        private void textSearch_Click(object sender, EventArgs e) => textSearch.Clear();
 
+        /// <summary>
+        /// Reloads the current view with the selected profile.
+        /// </summary>
         public async void RefreshView()
         {
             currentSearchTerm = string.Empty;
-            checkedListBoxApps.Items.Clear();
-
-            await ApplyProfileChange(); // reload with current profile
+            await ApplyProfileChange();
+            lblStatus.Text = "Ready.";
         }
 
+        /// <summary>
+        /// Selects or deselects all apps in the DataGridView when the master checkbox is toggled.
+        /// </summary>
         private void checkSelectAll_CheckedChanged(object sender, EventArgs e)
         {
             bool checkAll = checkSelectAll.Checked;
 
-            for (int i = 0; i < checkedListBoxApps.Items.Count; i++)
+            foreach (DataGridViewRow row in dgvApps.Rows)
             {
-                checkedListBoxApps.SetItemChecked(i, checkAll);
+                if (row.Cells["SelectColumn"] is DataGridViewCheckBoxCell checkCell)
+                {
+                    checkCell.Value = checkAll;
+                }
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filePath = GetActivePatternFilePath(activePatternFile, ensureExists: true);
+                Process.Start("notepad.exe", filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening profile file:\n{ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -9,14 +9,13 @@ namespace Flyoobe
 {
     public partial class DeviceControlView : UserControl, IView
     {
-        public string ViewTitle => "Getting Started";
+        public string ViewTitle => "Device Prep";
         private const string PlaceholderText = "System display language";
 
         public DeviceControlView()
         {
             InitializeComponent();
             InitializeQuickTools();
-            assetViewInfo.Text = "\uEF58";
             LoadCurrentNames();
             LoadAvailableLanguages();
         }

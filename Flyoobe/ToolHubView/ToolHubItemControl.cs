@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,7 +53,8 @@ namespace Flyoobe.ToolHub
             try
             {
                 string arg = null;
-                bool useConsole = _tool.UseConsole; // default from script header
+                bool useConsole = _tool.UseConsole; // default from # Host
+                bool useLog = _tool.UseLog;         // global default from # Host
 
                 if (comboOptions != null && comboOptions.SelectedItem != null)
                 {
@@ -60,21 +62,41 @@ namespace Flyoobe.ToolHub
 
                     // Per-option override via suffix (console) = to show console window
                     // (silent) = hide 
+                    // (log) = show internal log window
                     if (arg.EndsWith(" (console)", StringComparison.Ordinal))
                     {
-                        useConsole = true;
+                        useConsole = true; useLog = false;
                         arg = arg.Substring(0, arg.Length - " (console)".Length).Trim();
                     }
+
                     else if (arg.EndsWith(" (silent)", StringComparison.Ordinal))
                     {
-                        useConsole = false;
+                        useConsole = false; useLog = false;
                         arg = arg.Substring(0, arg.Length - " (silent)".Length).Trim();
+                    } 
+
+                    // Logging to internal LogForm 
+                    else if (arg.EndsWith(" (log)", StringComparison.Ordinal))
+                    {
+                        useLog = true; useConsole = false;
+                        arg = arg.Substring(0, arg.Length - " (log)".Length).Trim();
                     }
+
+                }
+                // open LogForm if requested
+                LogForm liveLog = null;
+                if (useLog)
+                {
+                    liveLog = new LogForm();
+                    liveLog.Show(this); // non-blocking
                 }
 
-                var output = await RunScriptAsync(_tool.ScriptPath, arg, useConsole);
+                // run (console/silent) and stream to log if present
+                var output = await RunScriptAsync(_tool.ScriptPath, arg, useConsole, liveLog);
 
-                labelStatus.Text = useConsole ? "Opened in console." : "Done.";
+                labelStatus.Text = useConsole ? "Opened in console."
+                                  : useLog ? "Completed with log."
+                                              : "Done.";
 
                 Logger.Log(output, LogLevel.Info);
             }
@@ -90,7 +112,7 @@ namespace Flyoobe.ToolHub
         }
 
 
-        private Task<string> RunScriptAsync(string scriptPath, string optionArg, bool useConsole)
+        private Task<string> RunScriptAsync(string scriptPath, string optionArg, bool useConsole, LogForm liveLog = null)
         {
             return Task.Run(() =>
             {
@@ -110,7 +132,7 @@ namespace Flyoobe.ToolHub
                 }
                 else
                 {
-                    // Run inside app and capture output
+                    // Run PowerShell inside app and capture output
                     var psi = new ProcessStartInfo("powershell.exe",
                         $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\"{arg}")
                     {
@@ -126,12 +148,43 @@ namespace Flyoobe.ToolHub
                     p.OutputDataReceived += (s, e) =>
                     {
                         if (!string.IsNullOrEmpty(e.Data))
+                        {
                             sb.AppendLine(e.Data);
+
+                            // stream normal output into LoggerForm (Info color)
+                            if (liveLog != null && liveLog.IsHandleCreated)
+                            {
+                                liveLog.BeginInvoke(new Action(() =>
+                                {
+                                    liveLog.AddLog(e.Data, Color.Black);
+                                }));
+                            }
+                            else
+                            {
+                                Logger.Log(e.Data, LogLevel.Info);
+                            }
+                        }
                     };
+
                     p.ErrorDataReceived += (s, e) =>
                     {
                         if (!string.IsNullOrEmpty(e.Data))
+                        {
                             sb.AppendLine("ERROR: " + e.Data);
+
+                            // stream errors into LoggerForm (Error color)
+                            if (liveLog != null && liveLog.IsHandleCreated)
+                            {
+                                liveLog.BeginInvoke(new Action(() =>
+                                {
+                                    liveLog.AddLog("ERROR: " + e.Data, Color.ForestGreen);
+                                }));
+                            }
+                            else
+                            {
+                                Logger.Log("ERROR: " + e.Data, LogLevel.Error);
+                            }
+                        }
                     };
 
                     p.Start();
@@ -143,5 +196,7 @@ namespace Flyoobe.ToolHub
                 }
             });
         }
+
+
     }
 }

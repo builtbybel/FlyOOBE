@@ -56,12 +56,11 @@
             this.btnCheckUpdates.FlatAppearance.BorderSize = 0;
             this.btnCheckUpdates.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(205)))), ((int)(((byte)(250)))));
             this.btnCheckUpdates.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(205)))), ((int)(((byte)(250)))));
-            this.btnCheckUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckUpdates.Font = new System.Drawing.Font("Segoe UI Variable Small", 10.25F);
             this.btnCheckUpdates.ForeColor = System.Drawing.Color.White;
-            this.btnCheckUpdates.Location = new System.Drawing.Point(629, 55);
+            this.btnCheckUpdates.Location = new System.Drawing.Point(651, 55);
             this.btnCheckUpdates.Name = "btnCheckUpdates";
-            this.btnCheckUpdates.Size = new System.Drawing.Size(160, 31);
+            this.btnCheckUpdates.Size = new System.Drawing.Size(160, 35);
             this.btnCheckUpdates.TabIndex = 11;
             this.btnCheckUpdates.Text = "Check for updates";
             this.btnCheckUpdates.UseCompatibleTextRendering = true;
@@ -76,12 +75,12 @@
             this.updatesListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.updatesListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.updatesListBox.CheckOnClick = true;
-            this.updatesListBox.Font = new System.Drawing.Font("Segoe UI Variable Small", 11.25F);
+            this.updatesListBox.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.5F);
             this.updatesListBox.ForeColor = System.Drawing.Color.Black;
             this.updatesListBox.FormattingEnabled = true;
             this.updatesListBox.Location = new System.Drawing.Point(23, 129);
             this.updatesListBox.Name = "updatesListBox";
-            this.updatesListBox.Size = new System.Drawing.Size(766, 264);
+            this.updatesListBox.Size = new System.Drawing.Size(788, 273);
             this.updatesListBox.TabIndex = 12;
             this.updatesListBox.UseCompatibleTextRendering = true;
             // 
@@ -93,12 +92,11 @@
             this.btnInstallUpdates.FlatAppearance.BorderSize = 0;
             this.btnInstallUpdates.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnInstallUpdates.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
-            this.btnInstallUpdates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInstallUpdates.Font = new System.Drawing.Font("Segoe UI Variable Small", 10.25F);
             this.btnInstallUpdates.ForeColor = System.Drawing.Color.White;
-            this.btnInstallUpdates.Location = new System.Drawing.Point(629, 55);
+            this.btnInstallUpdates.Location = new System.Drawing.Point(651, 55);
             this.btnInstallUpdates.Name = "btnInstallUpdates";
-            this.btnInstallUpdates.Size = new System.Drawing.Size(160, 31);
+            this.btnInstallUpdates.Size = new System.Drawing.Size(160, 35);
             this.btnInstallUpdates.TabIndex = 13;
             this.btnInstallUpdates.Text = "Install updates";
             this.btnInstallUpdates.UseCompatibleTextRendering = true;
@@ -123,9 +121,9 @@
             this.lblStatus.AutoEllipsis = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 12.25F, System.Drawing.FontStyle.Bold);
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(150, 24);
+            this.lblStatus.Location = new System.Drawing.Point(131, 24);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(430, 76);
+            this.lblStatus.Size = new System.Drawing.Size(500, 76);
             this.lblStatus.TabIndex = 15;
             this.lblStatus.Text = "Update check pending.";
             // 
@@ -136,7 +134,7 @@
             this.label4.AutoEllipsis = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Variable Text Semiligh", 10.25F);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(23, 408);
+            this.label4.Location = new System.Drawing.Point(23, 422);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(766, 22);
             this.label4.TabIndex = 23;
@@ -153,10 +151,10 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.btnInstallUpdates);
             this.Controls.Add(this.updatesListBox);
-            this.Controls.Add(this.btnCheckUpdates);
             this.Controls.Add(this.assetViewInfo);
+            this.Controls.Add(this.btnInstallUpdates);
+            this.Controls.Add(this.btnCheckUpdates);
             this.Name = "UpdatesControlView";
             this.Size = new System.Drawing.Size(835, 457);
             this.ResumeLayout(false);

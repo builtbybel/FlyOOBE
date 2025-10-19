@@ -7,7 +7,7 @@
     <ProjectGuid>{50CA0D4D-45AD-4E03-BFC5-64FFF4CDA36C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Flyoobe</RootNamespace>
-    <AssemblyName>Flyo</AssemblyName>
+    <AssemblyName>FlyOOBE</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -63,12 +63,19 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\UIHelper.cs" />
+    <Compile Include="ToolHubView\PostToolHubControlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolHubView\PostToolHubControlView.Designer.cs">
+      <DependentUpon>PostToolHubControlView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolHubView\ToolHubCategory.cs" />
     <Compile Include="ToolHubView\ToolHubHelper.cs" />
     <Compile Include="ToolHubView\ToolHubUrlDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper\DonationHelper.cs" />
-    <Compile Include="Helper\CopilotHelper.cs" />
     <Compile Include="InstallView\BackupDriversProvider.cs" />
     <Compile Include="InstallView\BootMenuInfoProvider.cs" />
     <Compile Include="InstallView\InPlaceRepairProvider.cs" />
@@ -81,8 +88,6 @@
     <Compile Include="InstallView\RunSetupFromIsoProvider.cs" />
     <Compile Include="InstallView\ToolHelper.cs" />
     <Compile Include="InstallView\VentoyProvider.cs" />
-    <Compile Include="UpgradeView\EsuEnrollmentHandler.cs" />
-    <Compile Include="UpgradeView\IsoHandler.cs" />
     <Compile Include="LogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,8 +157,6 @@
     <Compile Include="Features\Gaming\GameDVR.cs" />
     <Compile Include="Features\Gaming\PowerThrotteling.cs" />
     <Compile Include="Features\Gaming\VisualFX.cs" />
-    <Compile Include="Features\Issues\BasicCleanup.cs" />
-    <Compile Include="Features\Issues\WingetUpgrade.cs" />
     <Compile Include="Features\Privacy\ActivityHistory.cs" />
     <Compile Include="Features\Privacy\LocationTracking.cs" />
     <Compile Include="Features\Privacy\PrivacyExperience.cs" />
@@ -239,17 +242,14 @@
     <Compile Include="Views\UpdatesControlView.Designer.cs">
       <DependentUpon>UpdatesControlView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpgradeView\UpgradeControlView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UpgradeView\UpgradeControlView.Designer.cs">
-      <DependentUpon>UpgradeControlView.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolHubView\PostToolHubControlView.resx">
+      <DependentUpon>PostToolHubControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolHubView\ToolHubControlView.resx">
       <DependentUpon>ToolHubControlView.cs</DependentUpon>
@@ -301,9 +301,6 @@
     <EmbeddedResource Include="Views\UpdatesControlView.resx">
       <DependentUpon>UpdatesControlView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpgradeView\UpgradeControlView.resx">
-      <DependentUpon>UpgradeControlView.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -328,9 +325,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assetCopilot.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />

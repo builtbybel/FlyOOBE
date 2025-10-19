@@ -20,8 +20,6 @@ namespace Flyoobe.ToolHub
         {
             if (navigator == null) return;   // safeguard
             navigator.ShowView("Extensions");
-
-     
         }
 
         /// <summary>
@@ -87,7 +85,6 @@ namespace Flyoobe.ToolHub
 
                     // Switch and refresh
                     SwitchAndRefreshToExtensionsView(navigator);
-
                 }
                 catch (Exception ex)
                 {
@@ -122,8 +119,6 @@ namespace Flyoobe.ToolHub
                     // Switch and refresh
                     SwitchAndRefreshToExtensionsView(navigator);
                 }
-
-
                 catch (Exception ex)
                 {
                     MessageBox.Show(owner, "Import failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -2,7 +2,6 @@
 using Settings.Ads;
 using Settings.Edge;
 using Settings.Gaming;
-using Settings.Issues;
 using Settings.Personalization;
 using Settings.Privacy;
 using Settings.System;
@@ -21,14 +20,6 @@ namespace Features
         {
             return new List<FeatureNode>
             {
-                new FeatureNode("Issues")
-                {
-                    Children = new List<FeatureNode>
-                    {
-                        new FeatureNode(new BasicCleanup()),
-                        new FeatureNode(new WingetUpgradeAll())
-                    }
-                },
 
                 new FeatureNode("System")
                 {

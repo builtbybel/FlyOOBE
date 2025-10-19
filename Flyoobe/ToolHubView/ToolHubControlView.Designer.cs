@@ -46,9 +46,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanelTools.AutoScroll = true;
             this.flowLayoutPanelTools.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.flowLayoutPanelTools.Location = new System.Drawing.Point(18, 64);
+            this.flowLayoutPanelTools.Location = new System.Drawing.Point(28, 64);
             this.flowLayoutPanelTools.Name = "flowLayoutPanelTools";
-            this.flowLayoutPanelTools.Size = new System.Drawing.Size(814, 361);
+            this.flowLayoutPanelTools.Size = new System.Drawing.Size(804, 377);
             this.flowLayoutPanelTools.TabIndex = 0;
             // 
             // textSearch
@@ -57,7 +57,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textSearch.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F);
             this.textSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textSearch.Location = new System.Drawing.Point(196, 18);
+            this.textSearch.Location = new System.Drawing.Point(197, 3);
             this.textSearch.Name = "textSearch";
             this.textSearch.Size = new System.Drawing.Size(473, 25);
             this.textSearch.TabIndex = 10;

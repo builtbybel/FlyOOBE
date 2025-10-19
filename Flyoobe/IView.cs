@@ -12,4 +12,5 @@ public interface IView
     /// Gets the title of the view for display in the UI.
     /// </summary>
     string ViewTitle { get; }
+
 }

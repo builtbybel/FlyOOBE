@@ -6,7 +6,7 @@ namespace Flyoobe
     public sealed class MctProvider : IInstallProvider
     {
         public string Id => "mct";
-        public string DisplayName => "Media Creation Tool (Windows 11 Version 24H2)";
+        public string DisplayName => "Media Creation Tool (Windows 11 Version 25H2)";
         public string HomepageUrl => "https://www.microsoft.com/software-download/windows11";
         public string DirectDownloadUrl => "https://go.microsoft.com/fwlink/?linkid=2156295";
         public string[] ExactExeNames => new[] { "MediaCreationTool_Win11.exe" };

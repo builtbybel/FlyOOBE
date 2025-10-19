@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
-            this.assetViewInfo = new System.Windows.Forms.Label();
             this.btnApply = new System.Windows.Forms.Button();
             this.textUsername = new System.Windows.Forms.TextBox();
             this.lblHeader = new System.Windows.Forms.Label();
@@ -53,21 +52,9 @@
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(28, 114);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(421, 29);
+            this.cmbLanguage.Size = new System.Drawing.Size(712, 29);
             this.cmbLanguage.TabIndex = 9;
             this.cmbLanguage.TabStop = false;
-            // 
-            // assetViewInfo
-            // 
-            this.assetViewInfo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.assetViewInfo.AutoSize = true;
-            this.assetViewInfo.Font = new System.Drawing.Font("Segoe MDL2 Assets", 80.75F);
-            this.assetViewInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(205)))), ((int)(((byte)(250)))));
-            this.assetViewInfo.Location = new System.Drawing.Point(101, 126);
-            this.assetViewInfo.Name = "assetViewInfo";
-            this.assetViewInfo.Size = new System.Drawing.Size(114, 108);
-            this.assetViewInfo.TabIndex = 16;
-            this.assetViewInfo.Text = "...";
             // 
             // btnApply
             // 
@@ -77,10 +64,10 @@
             this.btnApply.FlatAppearance.BorderSize = 0;
             this.btnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
             this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
-            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnApply.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnApply.ForeColor = System.Drawing.Color.Black;
-            this.btnApply.Location = new System.Drawing.Point(341, 165);
+            this.btnApply.Location = new System.Drawing.Point(632, 165);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(108, 31);
             this.btnApply.TabIndex = 19;
@@ -94,11 +81,11 @@
             // 
             this.textUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textUsername.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textUsername.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.5F);
             this.textUsername.ForeColor = System.Drawing.Color.Black;
             this.textUsername.Location = new System.Drawing.Point(28, 30);
             this.textUsername.Name = "textUsername";
-            this.textUsername.Size = new System.Drawing.Size(421, 25);
+            this.textUsername.Size = new System.Drawing.Size(712, 26);
             this.textUsername.TabIndex = 20;
             this.textUsername.TabStop = false;
             this.textUsername.Text = "Name";
@@ -121,11 +108,11 @@
             // 
             this.textComputername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textComputername.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textComputername.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.5F);
             this.textComputername.ForeColor = System.Drawing.Color.Black;
             this.textComputername.Location = new System.Drawing.Point(28, 72);
             this.textComputername.Name = "textComputername";
-            this.textComputername.Size = new System.Drawing.Size(421, 25);
+            this.textComputername.Size = new System.Drawing.Size(712, 26);
             this.textComputername.TabIndex = 22;
             this.textComputername.TabStop = false;
             this.textComputername.Text = "Computer Name";
@@ -145,9 +132,9 @@
             this.panel1.Controls.Add(this.cmbLanguage);
             this.panel1.Controls.Add(this.btnApply);
             this.panel1.Controls.Add(this.textUsername);
-            this.panel1.Location = new System.Drawing.Point(321, 75);
+            this.panel1.Location = new System.Drawing.Point(30, 75);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(480, 287);
+            this.panel1.Size = new System.Drawing.Size(771, 361);
             this.panel1.TabIndex = 23;
             // 
             // btnJoinDomain
@@ -162,7 +149,7 @@
             this.btnJoinDomain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnJoinDomain.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJoinDomain.ForeColor = System.Drawing.Color.Black;
-            this.btnJoinDomain.Location = new System.Drawing.Point(29, 245);
+            this.btnJoinDomain.Location = new System.Drawing.Point(29, 319);
             this.btnJoinDomain.Name = "btnJoinDomain";
             this.btnJoinDomain.Size = new System.Drawing.Size(93, 29);
             this.btnJoinDomain.TabIndex = 23;
@@ -179,19 +166,16 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(243)))), ((int)(((byte)(240)))));
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblHeader);
-            this.Controls.Add(this.assetViewInfo);
             this.Name = "DeviceControlView";
             this.Size = new System.Drawing.Size(835, 457);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.ComboBox cmbLanguage;
-        private System.Windows.Forms.Label assetViewInfo;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.TextBox textUsername;
         private System.Windows.Forms.Label lblHeader;

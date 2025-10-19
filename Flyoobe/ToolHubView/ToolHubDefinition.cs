@@ -10,6 +10,8 @@ namespace Flyoobe.ToolHub
         public string ScriptPath { get; }
         public List<string> Options { get; } = new List<string>(); // Dropdown options
         public bool UseConsole { get; set; } = false; // Console host
+        public bool UseLog { get; set; } // optional log viewer
+
 
         public ToolHubDefinition(string title, string description, string icon, string scriptPath)
         {

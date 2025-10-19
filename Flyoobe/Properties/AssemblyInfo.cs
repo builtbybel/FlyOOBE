@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Flyoobe")]
-[assembly: AssemblyDescription("Flyoobe")]
+[assembly: AssemblyTitle("FlyOOBE")]
+[assembly: AssemblyDescription("FlyOOBE")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("A Belim app creation")]
-[assembly: AssemblyProduct("Flyoobe")]
+[assembly: AssemblyProduct("FlyOOBE")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
 [assembly: AssemblyTrademark("Builtbybel")]
 [assembly: AssemblyCulture("")]
@@ -28,5 +28,5 @@ using System.Runtime.InteropServices;
 //      Buildnummer
 //      Revision
 //
-[assembly: AssemblyVersion("1.10.357")]
-[assembly: AssemblyFileVersion("1.10.357")]
+[assembly: AssemblyVersion("1.40.564")]
+[assembly: AssemblyFileVersion("1.40.564")]

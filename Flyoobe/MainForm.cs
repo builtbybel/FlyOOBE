@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Flyoobe
@@ -10,30 +8,34 @@ namespace Flyoobe
     {
         private ViewNavigator _navigator;
         private AboutForm aboutForm;
-        private int _notificationCount = 0;
 
         public MainForm()
         {
             InitializeComponent();
-            Logger.OnNotificationLogged += Logger_OnNotificationLogged;       // Subscribe to log events
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // Set up buttons
             InitializeButtons();
-            // Calculate DPI scaling factor once for this form.
-            // Used to build navigation buttons and badges in a size
-            float dpiScale = GetDpiScale();
+            // Rounded panel
+            UIHelper.EnableRoundedPanel(panelControls, 30, 1);
+            UIHelper.EnableRoundedSplitContainer(splitContainer, 10, 0);
+            // Set default form size
+            UIHelper.SetDefaultFormSize(this);
+            // Set app logo
+            UIHelper.SetAppLogo(pictureApp, 24);
+            // DPI scale
+            float dpiScale = UIHelper.GetDpiScale(this);
 
             // Initialize ViewNavigator, which manages loading and switching between different views inside host panel
-            _navigator = new ViewNavigator(panelHost, navPanel, btnNext, title =>
-            {
-                linkSubHeader.Text = $"Running - {title} - {Program.GetAppVersion()}";
-            });
+            _navigator = new ViewNavigator(
+                   panelHost,
+                   navTree, ViewTitle => this.Text = $"FlyOOBE",
+                   toolStripButtonNext);
 
             // Register views
             _navigator.RegisterView("Home", () => new HomeControlView(_navigator));
-            _navigator.RegisterView("Upgrade", () => new UpgradeControlView());
             _navigator.RegisterView("Reinstall", () => new InstallControlView());
             _navigator.RegisterView("Device", () => new DeviceControlView());
             _navigator.RegisterView("Personalization", () => new PersonalizationControlView());
@@ -46,102 +48,27 @@ namespace Flyoobe
             _navigator.RegisterView("Installer", () => new InstallerControlView());
             _navigator.RegisterView("Updates", () => new UpdatesControlView());
             _navigator.RegisterView("Extensions", () => new ToolHub.ToolHubControlView());
+            _navigator.RegisterView("Post-Setup", () => new Flyoobe.ToolHub.PostToolHubControlView());
 
             // Load OOBE navigation with system status
-            _navigator.BuildBottomNavigation(dpiScale);
+            _navigator.BuildSidebarNavigation();
 
             // Show initial view
             _navigator.ShowView("Home");
+            Logger.Log($"FlyOOBE {Program.GetAppVersion()} is airborne!", LogLevel.Info);
+            Logger.Log("OOBEE warming up the engines... 🚀", LogLevel.Info);
+            Logger.Log("Code. Fly. Repeat. Source & updates:", LogLevel.Info);
+            Logger.Log("GitHub → https://github.com/builtbybel/Flyoobe", LogLevel.Info);
+            Logger.Log("X (Twitter) → https://x.com/builtbybel", LogLevel.Info);
+            Logger.Log("FlyOOBE – built for speed, built by bel.", LogLevel.Info);
         }
 
         private void InitializeButtons()
         {
-            CopilotHelper.SetupCopilotButton(btnAskCopilot, 20);
-
-            btnExtensions.Text = "\uEA86";
-            btnAbout.Text = "\uE946";
-            btnRefresh.Text = "\uE72C";
-        }
-
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            if (aboutForm == null || aboutForm.IsDisposed)
-            {
-                aboutForm = new AboutForm();
-                aboutForm.StartPosition = FormStartPosition.Manual;
-                aboutForm.Owner = this;
-                aboutForm.Show();
-            }
-            PositionAboutForm();
-        }
-
-        private void PositionAboutForm()
-        {
-            if (aboutForm != null && !aboutForm.IsDisposed)
-            {
-                int x = this.Left + (this.Width - aboutForm.Width) / 2;
-                int y = this.Top + (this.Height - aboutForm.Height) / 2;
-                aboutForm.Location = new Point(x, y);
-            }
-        }
-
-        private void MainForm_LocationChanged(object sender, EventArgs e)
-        {
-            PositionAboutForm();
-        }
-
-        private void btnAskCopilot_Click(object sender, EventArgs e)
-        {
-            CopilotHelper.LaunchCopilot();
-        }
-
-        /// <summary>
-        /// Handles log notifications (Warnings/Errors).
-        /// Increments the notification counter and updates the notification button text.
-        /// </summary>
-        private void Logger_OnNotificationLogged(string message, LogLevel level)
-        {
-            _notificationCount++;
-            UpdateNotificationButton();
-        }
-
-        /// <summary>
-        /// Updates the notification button text based on the current notification count.
-        /// Ensures thread-safe UI updates.
-        /// </summary>
-        private void UpdateNotificationButton()
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(UpdateNotificationButton));
-                return;
-            }
-
-            if (_notificationCount > 0)
-            {
-                btnNotification.Text = $"Notifications ({_notificationCount})";
-                btnNotification.ForeColor = Color.Blue;
-            }
-            else
-            {
-                btnNotification.Text = "No new notifications";
-                btnNotification.ForeColor = Color.Black;
-            }
-
-            btnNotification.Visible = true;
-        }
-
-        /// <summary>
-        /// Opens the LogForm to display the complete log.
-        /// Resets the notification count afterwards.
-        /// </summary>
-        private void btnNotification_Click(object sender, EventArgs e)
-        {
-            new LogForm(Logger.GetLog()).ShowDialog(this);
-
-            // Reset notification count after viewing log
-            _notificationCount = 0;
-            UpdateNotificationButton();
+            btnToggle.Text = "\uEDE3";    // Hamburger menu
+            btnMore.Text = "\uE712";      // More
+            btnSettings.Text = "\uE713";  // Settings
+            btnRefresh.Text = "\uE72C";   // Refresh
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -158,53 +85,75 @@ namespace Flyoobe
             if (_navigator.CurrentView is IView view)
             {
                 view.RefreshView();
-                btnNotification.Visible = false; 
             }
         }
 
-        /// <summary>
-        /// Calculates the current DPI scale factor of the main form.
-        /// This is used to size navigation buttons and UI elements consistently
-        /// across different display scaling settings (100%, 125%, 150%, ...).
-        /// Returns 1.0f at 96 DPI (default baseline).
-        /// </summary>
-        private float GetDpiScale()
+        // Navigation toggle button click handler
+        private void btnToggle_Click(object sender, EventArgs e)
         {
-            using (Graphics g = this.CreateGraphics())
-            {
-                return g.DpiX / 96f;   // 96 dpi = baseline (100% scaling)
-            }
+            splitContainer.Panel1Collapsed = !splitContainer.Panel1Collapsed;
         }
 
-        private void btnExtensions_Click(object sender, EventArgs e)
+        private void manageExtensionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var location = btnExtensions.PointToScreen(new Point(0, btnExtensions.Height));
-            contextDropDown.Show(location);
+            ToolHub.ExtensionsHelper.SwitchToExtensionsView(_navigator);
         }
 
-        private async void toolStripAddExtensionUrl_Click(object sender, EventArgs e)
+        private async void installFromUrlToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await ToolHub.ExtensionsHelper.InstallFromUrlAsync(this, _navigator);
         }
 
-        private void toolStripAddExtensionLocal_Click(object sender, EventArgs e)
+        private void installFromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolHub.ExtensionsHelper.ImportLocalFile(this, _navigator);
         }
 
-        private void toolStripExtensionGuide_Click(object sender, EventArgs e)
+        private void writeAnExtensionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolHub.ExtensionsHelper.OpenExtensionGuide();
         }
 
-        private void toolStripExtensionSource_Click(object sender, EventArgs e)
+        private void extensionFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolHub.ExtensionsHelper.OpenScriptsFolder(this);
         }
 
-        private void toolStripExtensions_Click(object sender, EventArgs e)
+        private void btnMore_Click(object sender, EventArgs e) => Logger.ToggleLogForm(this);
+
+        private void btnSettings_Click(object sender, EventArgs e) => ShowAboutForm();
+
+        private void PositionAboutForm(Form owner)
         {
-            ToolHub.ExtensionsHelper.SwitchToExtensionsView(_navigator);
+            if (aboutForm != null && !aboutForm.IsDisposed)
+            {
+                int x = owner.Left + (owner.Width - aboutForm.Width) / 2;
+                int y = owner.Top + (owner.Height - aboutForm.Height) / 2;
+                aboutForm.Location = new Point(x, y);
+            }
+        }
+
+        private void ShowAboutForm()
+        {
+            var owner = this.FindForm(); // find MainForm
+            if (owner == null) return;
+
+            if (aboutForm == null || aboutForm.IsDisposed)
+            {
+                aboutForm = new AboutForm
+                {
+                    StartPosition = FormStartPosition.Manual,
+                    Owner = owner
+                };
+
+                // On owner move/resize, reposition about form
+                owner.LocationChanged += (s, e) => PositionAboutForm(owner);
+                owner.SizeChanged += (s, e) => PositionAboutForm(owner);
+
+                aboutForm.Show(owner);
+            }
+
+            PositionAboutForm(owner);
         }
     }
 }

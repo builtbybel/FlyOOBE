@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.assetViewInfo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCreateAccountWizard = new System.Windows.Forms.Button();
             this.linkOnlineAccount = new System.Windows.Forms.LinkLabel();
@@ -42,24 +41,11 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // assetViewInfo
-            // 
-            this.assetViewInfo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.assetViewInfo.AutoSize = true;
-            this.assetViewInfo.Font = new System.Drawing.Font("Segoe MDL2 Assets", 70.75F);
-            this.assetViewInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(205)))), ((int)(((byte)(250)))));
-            this.assetViewInfo.Location = new System.Drawing.Point(101, 172);
-            this.assetViewInfo.Name = "assetViewInfo";
-            this.assetViewInfo.Size = new System.Drawing.Size(100, 95);
-            this.assetViewInfo.TabIndex = 9;
-            this.assetViewInfo.Text = "...";
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.panel1.Controls.Add(this.btnCreateAccountWizard);
             this.panel1.Controls.Add(this.linkOnlineAccount);
@@ -69,14 +55,14 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(372, 70);
+            this.panel1.Location = new System.Drawing.Point(31, 70);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(418, 350);
+            this.panel1.Size = new System.Drawing.Size(759, 364);
             this.panel1.TabIndex = 10;
             // 
             // btnCreateAccountWizard
             // 
-            this.btnCreateAccountWizard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateAccountWizard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateAccountWizard.BackColor = System.Drawing.Color.Transparent;
             this.btnCreateAccountWizard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(206)))), ((int)(((byte)(249)))));
             this.btnCreateAccountWizard.FlatAppearance.BorderSize = 2;
@@ -85,7 +71,7 @@
             this.btnCreateAccountWizard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateAccountWizard.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnCreateAccountWizard.ForeColor = System.Drawing.Color.White;
-            this.btnCreateAccountWizard.Location = new System.Drawing.Point(29, 286);
+            this.btnCreateAccountWizard.Location = new System.Drawing.Point(368, 314);
             this.btnCreateAccountWizard.Name = "btnCreateAccountWizard";
             this.btnCreateAccountWizard.Size = new System.Drawing.Size(227, 31);
             this.btnCreateAccountWizard.TabIndex = 8;
@@ -111,7 +97,7 @@
             // 
             // btnCreateAccount
             // 
-            this.btnCreateAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(206)))), ((int)(((byte)(249)))));
             this.btnCreateAccount.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnCreateAccount.FlatAppearance.BorderSize = 2;
@@ -120,7 +106,7 @@
             this.btnCreateAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateAccount.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnCreateAccount.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateAccount.Location = new System.Drawing.Point(275, 286);
+            this.btnCreateAccount.Location = new System.Drawing.Point(614, 314);
             this.btnCreateAccount.Name = "btnCreateAccount";
             this.btnCreateAccount.Size = new System.Drawing.Size(130, 31);
             this.btnCreateAccount.TabIndex = 6;
@@ -138,7 +124,7 @@
             this.textPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(43)))));
             this.textPassword.Location = new System.Drawing.Point(19, 164);
             this.textPassword.Name = "textPassword";
-            this.textPassword.Size = new System.Drawing.Size(384, 25);
+            this.textPassword.Size = new System.Drawing.Size(725, 25);
             this.textPassword.TabIndex = 4;
             this.textPassword.UseSystemPasswordChar = true;
             // 
@@ -151,7 +137,7 @@
             this.textUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(34)))), ((int)(((byte)(43)))));
             this.textUsername.Location = new System.Drawing.Point(19, 97);
             this.textUsername.Name = "textUsername";
-            this.textUsername.Size = new System.Drawing.Size(384, 25);
+            this.textUsername.Size = new System.Drawing.Size(725, 25);
             this.textUsername.TabIndex = 1;
             // 
             // label3
@@ -211,19 +197,15 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(244)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.assetViewInfo);
             this.Name = "AccountControlView";
             this.Size = new System.Drawing.Size(835, 457);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label assetViewInfo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textPassword;
         private System.Windows.Forms.TextBox textUsername;

@@ -7,7 +7,7 @@ namespace Flyoobe
 {
     public partial class InstallControlView : UserControl, IView
     {
-        public string ViewTitle => "Custom: Install && Repair";
+        public string ViewTitle => "Custom: Install & Repair";
 
         // Providers & per-provider last selections
         private readonly List<IInstallProvider> _providers = new List<IInstallProvider>();
@@ -112,7 +112,7 @@ namespace Flyoobe
 
         public void RefreshView()
         {
-            // Reserved for future state refresh (e.g., detect admin etc.)
+            textProviderSearch.Clear();
         }
 
         // --------------------------------------------------------------------------------
@@ -341,5 +341,6 @@ namespace Flyoobe
         {
             textProviderSearch.Clear();
         }
+
     }
 }

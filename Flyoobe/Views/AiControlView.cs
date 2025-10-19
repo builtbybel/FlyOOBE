@@ -9,14 +9,13 @@ namespace Flyoobe
 {
     public partial class AiControlView : UserControl, IView
     {
-        public string ViewTitle => "AI Experiences (a.k.a. Windows Knows Best)";
+        public string ViewTitle => "AI Experiences";
 
         public AiControlView()
         {
             InitializeComponent();
             btnCheck.Click += async (s, e) => await DoScan();
             btnDisable.Click += async (s, e) => await DoRemove();
-            assetViewInfo.Text = "\uE99A";
         }
 
         // IView Refreshes the UI by re-scanning.

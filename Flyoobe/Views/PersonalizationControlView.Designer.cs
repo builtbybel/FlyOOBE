@@ -76,7 +76,7 @@
             this.btnChangeWallpaper.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnChangeWallpaper.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangeWallpaper.ForeColor = System.Drawing.Color.Black;
-            this.btnChangeWallpaper.Location = new System.Drawing.Point(16, 426);
+            this.btnChangeWallpaper.Location = new System.Drawing.Point(16, 427);
             this.btnChangeWallpaper.Name = "btnChangeWallpaper";
             this.btnChangeWallpaper.Size = new System.Drawing.Size(138, 27);
             this.btnChangeWallpaper.TabIndex = 21;
@@ -99,19 +99,19 @@
             // 
             // btnApplyTheme
             // 
-            this.btnApplyTheme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnApplyTheme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApplyTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(183)))), ((int)(((byte)(135)))));
             this.btnApplyTheme.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnApplyTheme.FlatAppearance.BorderSize = 0;
             this.btnApplyTheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
             this.btnApplyTheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
-            this.btnApplyTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApplyTheme.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnApplyTheme.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnApplyTheme.ForeColor = System.Drawing.Color.Black;
-            this.btnApplyTheme.Location = new System.Drawing.Point(45, 225);
+            this.btnApplyTheme.Location = new System.Drawing.Point(46, 315);
             this.btnApplyTheme.Name = "btnApplyTheme";
-            this.btnApplyTheme.Size = new System.Drawing.Size(375, 35);
+            this.btnApplyTheme.Size = new System.Drawing.Size(666, 35);
             this.btnApplyTheme.TabIndex = 31;
             this.btnApplyTheme.Text = "Apply theme";
             this.btnApplyTheme.UseCompatibleTextRendering = true;
@@ -128,7 +128,7 @@
             this.checkToggleTransparency.ForeColor = System.Drawing.Color.Black;
             this.checkToggleTransparency.Location = new System.Drawing.Point(41, 140);
             this.checkToggleTransparency.Name = "checkToggleTransparency";
-            this.checkToggleTransparency.Size = new System.Drawing.Size(380, 27);
+            this.checkToggleTransparency.Size = new System.Drawing.Size(671, 27);
             this.checkToggleTransparency.TabIndex = 32;
             this.checkToggleTransparency.Text = "Toggle Transparency";
             this.checkToggleTransparency.UseVisualStyleBackColor = true;
@@ -138,30 +138,31 @@
             this.pictureBoxWallpaper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxWallpaper.Location = new System.Drawing.Point(16, 119);
+            this.pictureBoxWallpaper.Location = new System.Drawing.Point(143, 173);
             this.pictureBoxWallpaper.Name = "pictureBoxWallpaper";
-            this.pictureBoxWallpaper.Size = new System.Drawing.Size(282, 205);
+            this.pictureBoxWallpaper.Size = new System.Drawing.Size(474, 122);
             this.pictureBoxWallpaper.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxWallpaper.TabIndex = 33;
             this.pictureBoxWallpaper.TabStop = false;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(252)))), ((int)(((byte)(251)))));
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.comboTaskbarAlignment);
+            this.panel1.Controls.Add(this.pictureBoxWallpaper);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.comboSystemTheme);
             this.panel1.Controls.Add(this.comboAppTheme);
             this.panel1.Controls.Add(this.btnApplyTheme);
             this.panel1.Controls.Add(this.checkToggleTransparency);
-            this.panel1.Location = new System.Drawing.Point(321, 38);
+            this.panel1.Location = new System.Drawing.Point(30, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(480, 369);
+            this.panel1.Size = new System.Drawing.Size(771, 369);
             this.panel1.TabIndex = 34;
             // 
             // label3
@@ -189,7 +190,7 @@
             this.comboTaskbarAlignment.FormattingEnabled = true;
             this.comboTaskbarAlignment.Location = new System.Drawing.Point(179, 100);
             this.comboTaskbarAlignment.Name = "comboTaskbarAlignment";
-            this.comboTaskbarAlignment.Size = new System.Drawing.Size(241, 25);
+            this.comboTaskbarAlignment.Size = new System.Drawing.Size(532, 25);
             this.comboTaskbarAlignment.TabIndex = 37;
             this.comboTaskbarAlignment.TabStop = false;
             // 
@@ -231,7 +232,7 @@
             this.comboSystemTheme.FormattingEnabled = true;
             this.comboSystemTheme.Location = new System.Drawing.Point(179, 27);
             this.comboSystemTheme.Name = "comboSystemTheme";
-            this.comboSystemTheme.Size = new System.Drawing.Size(241, 25);
+            this.comboSystemTheme.Size = new System.Drawing.Size(532, 25);
             this.comboSystemTheme.TabIndex = 34;
             this.comboSystemTheme.TabStop = false;
             // 
@@ -247,7 +248,7 @@
             this.comboAppTheme.FormattingEnabled = true;
             this.comboAppTheme.Location = new System.Drawing.Point(179, 64);
             this.comboAppTheme.Name = "comboAppTheme";
-            this.comboAppTheme.Size = new System.Drawing.Size(241, 25);
+            this.comboAppTheme.Size = new System.Drawing.Size(532, 25);
             this.comboAppTheme.TabIndex = 33;
             this.comboAppTheme.TabStop = false;
             // 
@@ -278,7 +279,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnChangeDesktopIcons);
-            this.Controls.Add(this.pictureBoxWallpaper);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnChangeWallpaper);
             this.Controls.Add(this.btnChangeAccent);

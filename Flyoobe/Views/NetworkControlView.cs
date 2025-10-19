@@ -14,7 +14,6 @@ namespace Flyoobe
         public NetworkControlView()
         {
             InitializeComponent();
-            assetViewInfo.Text = "\uE701";
         }
 
         private async Task RefreshNetworks()
@@ -87,7 +86,7 @@ namespace Flyoobe
                     string error = proc.StandardError.ReadToEnd();
                     proc.WaitForExit();
 
-                    // detect location service requirement 
+                    // --- detect location service requirement ---
                     if (proc.ExitCode != 0)
 
                     {
@@ -104,7 +103,7 @@ namespace Flyoobe
                         return ssids; // empty
                     }
 
-                    // normal parsing
+                    // --- normal parsing ---
                     foreach (var line in output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
                     {
                         if (line.Trim().StartsWith("SSID ", StringComparison.OrdinalIgnoreCase))

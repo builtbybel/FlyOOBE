@@ -28,58 +28,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richLog = new System.Windows.Forms.RichTextBox();
-            this.panelLogger = new System.Windows.Forms.Panel();
-            this.panelLogger.SuspendLayout();
+            this.richTextBoxLogs = new System.Windows.Forms.RichTextBox();
+            this.panelControls = new System.Windows.Forms.Panel();
+            this.border = new System.Windows.Forms.Label();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.panelControls.SuspendLayout();
             this.SuspendLayout();
             // 
-            // richLog
+            // richTextBoxLogs
             // 
-            this.richLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.richTextBoxLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.richLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richLog.Font = new System.Drawing.Font("Cascadia Code", 8.75F);
-            this.richLog.Location = new System.Drawing.Point(14, 14);
-            this.richLog.Name = "richLog";
-            this.richLog.Size = new System.Drawing.Size(608, 290);
-            this.richLog.TabIndex = 0;
-            this.richLog.Text = "";
+            this.richTextBoxLogs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.richTextBoxLogs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxLogs.Font = new System.Drawing.Font("Cascadia Code", 8.75F);
+            this.richTextBoxLogs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(89)))), ((int)(((byte)(63)))));
+            this.richTextBoxLogs.Location = new System.Drawing.Point(14, 52);
+            this.richTextBoxLogs.Name = "richTextBoxLogs";
+            this.richTextBoxLogs.Size = new System.Drawing.Size(428, 465);
+            this.richTextBoxLogs.TabIndex = 0;
+            this.richTextBoxLogs.TabStop = false;
+            this.richTextBoxLogs.Text = "";
+            this.richTextBoxLogs.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxLogs_LinkClicked);
             // 
-            // panelLogger
+            // panelControls
             // 
-            this.panelLogger.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelLogger.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.panelLogger.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLogger.Controls.Add(this.richLog);
-            this.panelLogger.Location = new System.Drawing.Point(12, 12);
-            this.panelLogger.Name = "panelLogger";
-            this.panelLogger.Size = new System.Drawing.Size(637, 319);
-            this.panelLogger.TabIndex = 1;
+            this.panelControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.panelControls.Controls.Add(this.border);
+            this.panelControls.Controls.Add(this.lblHeader);
+            this.panelControls.Controls.Add(this.richTextBoxLogs);
+            this.panelControls.Location = new System.Drawing.Point(10, 7);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Size = new System.Drawing.Size(455, 530);
+            this.panelControls.TabIndex = 1;
+            // 
+            // border
+            // 
+            this.border.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.border.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(79)))), ((int)(((byte)(203)))));
+            this.border.ForeColor = System.Drawing.Color.Transparent;
+            this.border.Location = new System.Drawing.Point(0, 40);
+            this.border.Name = "border";
+            this.border.Size = new System.Drawing.Size(453, 1);
+            this.border.TabIndex = 259;
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHeader.AutoEllipsis = true;
+            this.lblHeader.BackColor = System.Drawing.Color.Transparent;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 10F, System.Drawing.FontStyle.Bold);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(23, 9);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(420, 24);
+            this.lblHeader.TabIndex = 258;
+            this.lblHeader.Text = "Activity";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(232)))));
-            this.ClientSize = new System.Drawing.Size(661, 343);
-            this.Controls.Add(this.panelLogger);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.ClientSize = new System.Drawing.Size(473, 546);
+            this.Controls.Add(this.panelControls);
             this.Name = "LogForm";
+            this.Opacity = 0.96D;
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Notifications";
-            this.panelLogger.ResumeLayout(false);
+            this.Text = "OOBEE • Console";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.LogForm_Paint);
+            this.panelControls.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richLog;
-        private System.Windows.Forms.Panel panelLogger;
+        private System.Windows.Forms.RichTextBox richTextBoxLogs;
+        private System.Windows.Forms.Panel panelControls;
+        private System.Windows.Forms.Label border;
+        private System.Windows.Forms.Label lblHeader;
     }
 }

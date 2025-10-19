@@ -1,64 +1,167 @@
 ﻿using Flyoobe;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 public sealed class ViewNavigator
 {
-    private ToolTip _toolTip = new ToolTip();
+    private readonly Panel _host;                    // hosts the active view inside the main panel
+    private readonly TreeView _tree;                 // navigation tree for switching setup sections
+    private readonly Action<string> _onViewChanged;  // callback to update window title or UI when view changes
+    private readonly ToolStripButton _nextBtn;       // "Next" button that shows the current step and moves to the next one
 
-    // OOOBE Views order
-    private static readonly string[] DefaultOobeViews =
-    {
-        "Home",    // first menu item
-        "Upgrade",
-        "Reinstall",
-        "Device",
-        "Personalization",
-        "Browser",
-        "AI",
-        "Network",
-        "Account",
-        "Apps",
-        "Experience",
-        "Installer",
-        "Updates",
-        "Extensions"
-    };
-
-    private readonly Panel _host;                           // where the active view is shown
-    private readonly FlowLayoutPanel _nav;                  // bottom nav bar (scrollable)
-    private readonly Button _nextBtn;                       // Next button on the right
-    private readonly Action<string> _onViewChanged;         // header/subheader updater
-
-    // View factories and cache for lazy loading
     private readonly Dictionary<string, Func<UserControl>> _factories = new Dictionary<string, Func<UserControl>>();
     private readonly Dictionary<string, UserControl> _cache = new Dictionary<string, UserControl>();
-    private readonly Dictionary<string, Button> _buttons = new Dictionary<string, Button>();
 
     public UserControl CurrentView { get; private set; }
 
-    public ViewNavigator(Panel hostPanel, FlowLayoutPanel navPanel, Button nextButton, Action<string> onViewChanged)
+    // track the current logical nav key (matches arrays)
+    private string _currentKey;
+
+    // Logical navigation order
+    private static readonly string[] SetupViews = { "Home", "Upgrade", "Reinstall" };
+
+    private static readonly string[] OobeViews = {
+        "Device", "Personalization", "Browser", "AI", "Network",
+        "Account", "Apps", "Experience", "Installer", "Updates"
+    };
+
+    // Extension-related setup steps
+    private static readonly string[] ExtensionViews = {
+            "Extensions", "Post-Setup"
+        };
+
+    public ViewNavigator(Panel hostPanel, TreeView treeView, Action<string> onViewChanged, ToolStripButton nextButton = null)
     {
         _host = hostPanel;
-        _nav = navPanel;
-        _nextBtn = nextButton;
+        _tree = treeView;
         _onViewChanged = onViewChanged;
+        _nextBtn = nextButton;
 
-        // Wire Next button once
-        _nextBtn.Click += (s, e) => ShowNext();
+        ConfigureTreeAppearance();
+        WireTreeEvents();
+
+        if (_nextBtn != null)
+            _nextBtn.Click += (s, e) => ShowNextView();
     }
 
-    /// <summary>Register a view factory under a unique name.</summary>
+    // ---------- TREEVIEW STYLE ----------
+    /// <summary>
+    /// Applies style to the TreeView.
+    /// </summary>
+    private void ConfigureTreeAppearance()
+    {
+        _tree.BorderStyle = BorderStyle.None;
+        _tree.BackColor = Color.FromArgb(248, 249, 251);
+        _tree.ForeColor = Color.FromArgb(30, 30, 30);
+        _tree.FullRowSelect = true;
+        _tree.HideSelection = false;
+        _tree.Indent = 20;
+        _tree.ItemHeight = 28;
+    }
+
+    /// <summary>
+    /// Handles click navigation for TreeView nodes.
+    /// Loads the appropriate view when a leaf node is selected,
+    /// and ignores category headers.
+    /// </summary>
+    private void WireTreeEvents()
+    {
+        _tree.AfterSelect += (s, e) =>
+        {
+            string key = e.Node.Text;
+
+            // Handle main headers (expand only)
+            if (key == "Install Operating System" || key == "Setup Operating System")
+            {
+                if (e.Node.IsExpanded)
+                    e.Node.Collapse();
+                else
+                    e.Node.Expand();
+                return;
+            }
+
+            // Handle Finalize Setup header
+            if (key == "Finalize Setup")
+            {
+                e.Node.Expand();
+                // Show the same view as Extensions
+                ShowView("Extensions");
+                return;
+            }
+
+            // Show the corresponding view
+            ShowView(key);
+        };
+    }
+
+    /// <summary>
+    /// Register a view and its factory.
+    /// </summary>
     public void RegisterView(string name, Func<UserControl> factory)
     {
         _factories[name] = factory;
     }
 
-    /// <summary>Show a view by name (lazy loads it on demand).</summary>
+    /// <summary>
+    /// Build the navigation tree (Install + Setup).
+    /// </summary>
+    public void BuildSidebarNavigation()
+    {
+        _tree.Nodes.Clear();
+        Font headerFont = new Font("Segoe UI Semibold", 9f, FontStyle.Bold);
+
+        // Install OS section
+        TreeNode installNode = new TreeNode("Install Operating System") { NodeFont = headerFont };
+        foreach (string v in SetupViews)
+            installNode.Nodes.Add(new TreeNode(v));
+
+        // OOBE setup section
+        TreeNode setupNode = new TreeNode("Setup Operating System") { NodeFont = headerFont };
+        foreach (string v in OobeViews)
+            setupNode.Nodes.Add(new TreeNode(v));
+
+        // Extensions section
+        TreeNode extensionsGroup = new TreeNode("Finalize Setup") { NodeFont = headerFont };
+        foreach (string view in ExtensionViews)
+            extensionsGroup.Nodes.Add(new TreeNode(view));
+
+        // Add the new section to the setup tree
+        setupNode.Nodes.Add(extensionsGroup);
+        extensionsGroup.Collapse();
+
+        // ========== FINALIZE TREE ==========
+        // Expand or collapse sections depending on Windows version
+        bool isWin11 = Utils.DetectWindows11();
+        installNode.Expand();
+        if (isWin11)
+            setupNode.Expand();
+        else
+            setupNode.Collapse();
+
+        // Add the root nodes to the TreeView control
+        _tree.Nodes.Add(installNode);
+        _tree.Nodes.Add(setupNode);
+    }
+
+    /// <summary>
+    /// Displays a view in the host panel.
+    /// </summary>
     public void ShowView(string name)
     {
+        // always set current key first – even for special cases like "Upgrade"
+        _currentKey = name;
+
+        if (name == "Upgrade")
+        {
+            TryLaunchUpgradeHelper();
+            return;
+        }
+
         if (!_factories.ContainsKey(name))
             return;
 
@@ -74,175 +177,91 @@ public sealed class ViewNavigator
         CurrentView = control;
         _host.Controls.Add(control);
 
-        // Update the MainForm's header label
-        if (CurrentView is IView view)
-            _onViewChanged?.Invoke(view.ViewTitle);
-        else
-            _onViewChanged?.Invoke(name);
+        _onViewChanged?.Invoke((control as IView)?.ViewTitle ?? name);
 
-        HighlightButton(name);
-        UpdateNextButtonState();
+        HighlightActiveNode(name);
+        //Update the Next button label after switching view
+        UpdateNextButton();
     }
 
     /// <summary>
-    /// Build the bottom navigation bar with Setup (Home/Upgrade/Reinstall)
-    /// and OOBE (Device…Extensions).
+    /// Launches Flyby11.exe (Upgrade Helper) safely.
     /// </summary>
-    public void BuildBottomNavigation(float dpiScale)
+    private void TryLaunchUpgradeHelper()
     {
-        _nav.SuspendLayout();
-        _nav.Controls.Clear();
-        _buttons.Clear();
-
-        bool isWin11 = Utils.DetectWindows11();
-
-        for (int i = 0; i < DefaultOobeViews.Length; i++)
+        try
         {
-            string name = DefaultOobeViews[i];
-            string caption = name;
-
-            // Upgrade caption
-            if (name == "Upgrade")
-                caption = isWin11 ? "Upgrade (Done)" : "Upgrade (Required)";
-
-            // Insert OOBE badge before "Device"
-            if (i == 3)
-                _nav.Controls.Add(CreateBadge("OOBE"));
-
-            var btn = CreateNavButton(caption, name, dpiScale);
-
-            // --- Styling ---
-            if (i < 3) // Setup section
+            string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app", "Flyby11.exe");
+            if (File.Exists(exePath))
             {
-                btn.BackColor = Color.White;
-
-                if (name == "Upgrade")
+                Process.Start(new ProcessStartInfo
                 {
-                    if (isWin11)
-                        btn.ForeColor = Color.FromArgb(97, 75, 61); // brownish for "Done"
-                    else
-                    {
-                        btn.ForeColor = Color.Red;                 // red for "Required"
-                        _toolTip.SetToolTip(btn, "Upgrade to Windows 11 is required");
-                    }
-                }
-                else
-                {
-                    btn.ForeColor = Color.Black; // default Setup buttons
-                }
+                    FileName = exePath,
+                    Arguments = "--f-u-tpm",
+                    UseShellExecute = true
+                });
             }
-            else // OOBE section
+            else
             {
-                btn.BackColor = Color.WhiteSmoke;
-                btn.ForeColor = Color.Black;
+                MessageBox.Show("Flyby11.exe not found in the app folder.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            _nav.Controls.Add(btn);
-            _buttons[name] = btn;
         }
-
-        _nav.ResumeLayout();
-    }
-
-    // ---------- UI helpers ----------
-    /// <summary>
-    /// Creates a navigation button for the bottom navigation bar.
-    /// </summary>
-    private Button CreateNavButton(string caption, string key, float dpiScale)
-    {
-        var btn = new Button
+        catch (Exception ex)
         {
-            Tag = key,          // logical key (used to ShowView)
-            AutoSize = true,
-            Height = (int)(50 * dpiScale),
-            Margin = new Padding(6, 4, 6, 4),
-            FlatStyle = FlatStyle.Flat,
-            TextAlign = ContentAlignment.MiddleCenter,
-            UseCompatibleTextRendering = true,
-            //ImageAlign = ContentAlignment.TopCenter,
-            Text = caption
-        };
-        btn.FlatAppearance.BorderSize = 0;
+            MessageBox.Show("Failed to start Flyby11.exe:\n" + ex.Message, "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
 
-        // When clicked > show the assigned view
-        btn.Click += (s, e) =>
+    /// <summary>
+    /// Keeps the TreeView node selection in sync.
+    /// </summary>
+    private void HighlightActiveNode(string name)
+    {
+        foreach (TreeNode root in _tree.Nodes)
         {
-            if (btn.Tag is string viewKey) ShowView(viewKey);
-        };
-
-        // hover effect
-        btn.MouseEnter += (s, e) => btn.BackColor = Color.FromArgb(237, 234, 231);
-        // Reset hover effect when mouse leaves
-        btn.MouseLeave += (s, e) => { if (!_buttons[key].Equals(btn) || GetCurrentKey() != key) btn.BackColor = _nav.BackColor; };
-
-        return btn;
+            foreach (TreeNode node in root.Nodes)
+            {
+                if (string.Equals(node.Text, name, StringComparison.OrdinalIgnoreCase))
+                {
+                    _tree.SelectedNode = node;
+                    node.EnsureVisible();
+                    node.Parent?.Expand();
+                    return;
+                }
+            }
+        }
     }
 
-    // ---------- navigation helpers ----------
-
+    // ========== Next Button ==========
     /// <summary>
-    /// Show the next view in order, if one exists.
+    /// Shows the next logical setup view.
     /// </summary>
-    private void ShowNext()
+    private void ShowNextView()
     {
-        int idx = Array.IndexOf(DefaultOobeViews, GetCurrentKey());
-        if (idx >= 0 && idx < DefaultOobeViews.Length - 1)
-            ShowView(DefaultOobeViews[idx + 1]);
-    }
+        var allViews = SetupViews.Concat(OobeViews).Concat(ExtensionViews).ToList();
 
-    /// <summary>
-    /// Get the logical name of the currently displayed view.
-    /// Falls back to the first view if not found.
-    /// </summary>
-    private string GetCurrentKey()
-    {
-        // Find by cached view instance
-        foreach (var kv in _cache)
-            if (kv.Value == CurrentView)
-                return kv.Key;
-
-        // Fallback: return first item
-        return DefaultOobeViews[0];
+        int index = allViews.IndexOf(_currentKey);
+        if (index >= 0 && index < allViews.Count - 1)
+            ShowView(allViews[index + 1]);
     }
 
     /// <summary>
-    /// Highlight the active navigation button and reset all others.
+    /// Updates the button label to match the current step.
     /// </summary>
-    private void HighlightButton(string activeKey)
+    private void UpdateNextButton()
     {
-        foreach (var kv in _buttons)
-            kv.Value.BackColor = kv.Key == activeKey
-                ? Color.FromArgb(237, 234, 231)   // active highlight
-                : _nav.BackColor;                 // reset
-    }
+        if (_nextBtn == null)
+            return;
 
-    /// <summary>
-    /// Update the "Next" button icon depending on position in flow.
-    /// </summary>
-    private void UpdateNextButtonState()
-    {
-        int idx = Array.IndexOf(DefaultOobeViews, GetCurrentKey());
-        bool hasNext = idx >= 0 && idx < DefaultOobeViews.Length - 1;
+        var allViews = SetupViews.Concat(OobeViews).Concat(ExtensionViews).ToList();
 
-        // Use Segoe MDL2 Assets: E76C = forward, E930 = check/accept
-        _nextBtn.Text = hasNext ? "\uE76C" : "\uE930";
-    }
+        // Label shows current step, or "Start" initially
+        string label = string.IsNullOrEmpty(_currentKey) ? "Start Setup" : $"{_currentKey}";
+        _nextBtn.Text = label;
 
-    /// <summary>Create a OOBE badge label.</summary>
-    private Control CreateBadge(string text)
-    {
-        return new Label
-        {
-            Text = text,
-            AutoSize = true,
-            ForeColor = Color.Black,
-            BackColor = Color.FromArgb(138, 180, 248), // blue
-            Font = new Font("Segoe UI", 7f, FontStyle.Bold),
-            Padding = new Padding(8, 4, 8, 4),
-            Margin = new Padding(12, 6, 12, 6),
-            TextAlign = ContentAlignment.MiddleCenter,
-            UseCompatibleTextRendering = true,
-
-        };
+        // Optional tooltip
+        _nextBtn.ToolTipText = "Click to move to the next setup step";
     }
 }

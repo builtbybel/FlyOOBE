@@ -33,7 +33,6 @@
             this.comboBrowsers = new System.Windows.Forms.ComboBox();
             this.btnSetDefaultBrowser = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.assetViewInfo = new System.Windows.Forms.Label();
             this.checkNeedOtherBrowser = new System.Windows.Forms.CheckBox();
             this.comboDownload = new System.Windows.Forms.ComboBox();
             this.panelDownload = new System.Windows.Forms.Panel();
@@ -50,13 +49,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(252)))), ((int)(((byte)(251)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(240)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.comboBrowsers);
             this.panel1.Controls.Add(this.btnSetDefaultBrowser);
-            this.panel1.Location = new System.Drawing.Point(321, 38);
+            this.panel1.Location = new System.Drawing.Point(23, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(468, 350);
+            this.panel1.Size = new System.Drawing.Size(795, 383);
             this.panel1.TabIndex = 35;
             // 
             // label1
@@ -78,30 +77,29 @@
             this.comboBrowsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(222)))), ((int)(((byte)(218)))));
             this.comboBrowsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBrowsers.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.comboBrowsers.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 12F, System.Drawing.FontStyle.Bold);
+            this.comboBrowsers.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 11.5F, System.Drawing.FontStyle.Bold);
             this.comboBrowsers.ForeColor = System.Drawing.Color.Black;
             this.comboBrowsers.FormattingEnabled = true;
             this.comboBrowsers.Location = new System.Drawing.Point(34, 64);
             this.comboBrowsers.Name = "comboBrowsers";
-            this.comboBrowsers.Size = new System.Drawing.Size(401, 29);
+            this.comboBrowsers.Size = new System.Drawing.Size(728, 28);
             this.comboBrowsers.TabIndex = 34;
             this.comboBrowsers.TabStop = false;
             // 
             // btnSetDefaultBrowser
             // 
-            this.btnSetDefaultBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSetDefaultBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSetDefaultBrowser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(183)))), ((int)(((byte)(135)))));
             this.btnSetDefaultBrowser.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnSetDefaultBrowser.FlatAppearance.BorderSize = 0;
             this.btnSetDefaultBrowser.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
             this.btnSetDefaultBrowser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
-            this.btnSetDefaultBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSetDefaultBrowser.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSetDefaultBrowser.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnSetDefaultBrowser.ForeColor = System.Drawing.Color.Black;
-            this.btnSetDefaultBrowser.Location = new System.Drawing.Point(45, 225);
+            this.btnSetDefaultBrowser.Location = new System.Drawing.Point(561, 333);
             this.btnSetDefaultBrowser.Name = "btnSetDefaultBrowser";
-            this.btnSetDefaultBrowser.Size = new System.Drawing.Size(401, 35);
+            this.btnSetDefaultBrowser.Size = new System.Drawing.Size(231, 35);
             this.btnSetDefaultBrowser.TabIndex = 31;
             this.btnSetDefaultBrowser.Text = "Set default Browser";
             this.btnSetDefaultBrowser.UseCompatibleTextRendering = true;
@@ -120,18 +118,6 @@
             this.lblStatus.TabIndex = 36;
             this.lblStatus.Text = "Choose your browser";
             this.lblStatus.UseCompatibleTextRendering = true;
-            // 
-            // assetViewInfo
-            // 
-            this.assetViewInfo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.assetViewInfo.AutoSize = true;
-            this.assetViewInfo.Font = new System.Drawing.Font("Segoe MDL2 Assets", 70.75F);
-            this.assetViewInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(126)))), ((int)(((byte)(116)))));
-            this.assetViewInfo.Location = new System.Drawing.Point(101, 126);
-            this.assetViewInfo.Name = "assetViewInfo";
-            this.assetViewInfo.Size = new System.Drawing.Size(100, 95);
-            this.assetViewInfo.TabIndex = 37;
-            this.assetViewInfo.Text = "...";
             // 
             // checkNeedOtherBrowser
             // 
@@ -156,12 +142,12 @@
             this.comboDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(222)))), ((int)(((byte)(218)))));
             this.comboDownload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDownload.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.comboDownload.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 12F, System.Drawing.FontStyle.Bold);
+            this.comboDownload.Font = new System.Drawing.Font("Segoe UI Variable Small Semibol", 11.5F, System.Drawing.FontStyle.Bold);
             this.comboDownload.ForeColor = System.Drawing.Color.Black;
             this.comboDownload.FormattingEnabled = true;
             this.comboDownload.Location = new System.Drawing.Point(34, 64);
             this.comboDownload.Name = "comboDownload";
-            this.comboDownload.Size = new System.Drawing.Size(401, 29);
+            this.comboDownload.Size = new System.Drawing.Size(728, 28);
             this.comboDownload.TabIndex = 36;
             this.comboDownload.TabStop = false;
             // 
@@ -176,9 +162,9 @@
             this.panelDownload.Controls.Add(this.btnInstall);
             this.panelDownload.Controls.Add(this.label2);
             this.panelDownload.Controls.Add(this.comboDownload);
-            this.panelDownload.Location = new System.Drawing.Point(321, 38);
+            this.panelDownload.Location = new System.Drawing.Point(23, 38);
             this.panelDownload.Name = "panelDownload";
-            this.panelDownload.Size = new System.Drawing.Size(468, 350);
+            this.panelDownload.Size = new System.Drawing.Size(795, 383);
             this.panelDownload.TabIndex = 39;
             this.panelDownload.Visible = false;
             // 
@@ -197,19 +183,18 @@
             // 
             // btnInstall
             // 
-            this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInstall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInstall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(183)))), ((int)(((byte)(135)))));
             this.btnInstall.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnInstall.FlatAppearance.BorderSize = 0;
             this.btnInstall.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
             this.btnInstall.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
-            this.btnInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInstall.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnInstall.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnInstall.ForeColor = System.Drawing.Color.Black;
-            this.btnInstall.Location = new System.Drawing.Point(45, 225);
+            this.btnInstall.Location = new System.Drawing.Point(561, 333);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(401, 35);
+            this.btnInstall.Size = new System.Drawing.Size(231, 35);
             this.btnInstall.TabIndex = 38;
             this.btnInstall.Text = "Install Browser";
             this.btnInstall.UseCompatibleTextRendering = true;
@@ -235,7 +220,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Controls.Add(this.checkNeedOtherBrowser);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.assetViewInfo);
             this.Controls.Add(this.panelDownload);
             this.Controls.Add(this.panel1);
             this.Name = "DefaultsControlView";
@@ -245,7 +229,6 @@
             this.panelDownload.ResumeLayout(false);
             this.panelDownload.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -256,7 +239,6 @@
         private System.Windows.Forms.ComboBox comboBrowsers;
         private System.Windows.Forms.Button btnSetDefaultBrowser;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Label assetViewInfo;
         private System.Windows.Forms.CheckBox checkNeedOtherBrowser;
         private System.Windows.Forms.ComboBox comboDownload;
         private System.Windows.Forms.Panel panelDownload;

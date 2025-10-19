@@ -7,7 +7,7 @@ namespace Flyoobe
     public sealed class RufusProvider : IInstallProvider
     {
         public string Id => "rufus";
-        public string DisplayName => "Rufus (Version 4.9)";
+        public string DisplayName => "Rufus";
         public string HomepageUrl => "https://rufus.ie";
         public string DirectDownloadUrl => "https://github.com/pbatard/rufus/releases/download/v4.9/rufus-4.9.exe"; // keep homepage
         public string[] ExactExeNames => new[] { "rufus.exe" };

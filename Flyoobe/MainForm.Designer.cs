@@ -30,336 +30,337 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelControls = new System.Windows.Forms.Panel();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.navPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.linkSubHeader = new System.Windows.Forms.LinkLabel();
-            this.btnNotification = new System.Windows.Forms.Button();
+            this.btnMore = new System.Windows.Forms.Button();
             this.panelHost = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnExtensions = new System.Windows.Forms.Button();
-            this.panelContainer = new System.Windows.Forms.Panel();
-            this.lblHeader = new System.Windows.Forms.Label();
-            this.btnAbout = new System.Windows.Forms.Button();
-            this.btnAskCopilot = new System.Windows.Forms.Button();
-            this.contextDropDown = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripExtensions = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripAddExtensionUrl = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripAddExtensionLocal = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripExtensionGuide = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripExtensionSource = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.btnToggle = new System.Windows.Forms.Button();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.pictureApp = new System.Windows.Forms.PictureBox();
+            this.toolStripMenu = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonNext = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.manageExtensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.installFromUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.installFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeAnExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extensionFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.navTree = new System.Windows.Forms.TreeView();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panelControls.SuspendLayout();
-            this.panelContainer.SuspendLayout();
-            this.contextDropDown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureApp)).BeginInit();
+            this.toolStripMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControls
             // 
+            this.panelControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControls.AutoScroll = true;
-            this.panelControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.panelControls.Controls.Add(this.btnNext);
-            this.panelControls.Controls.Add(this.navPanel);
-            this.panelControls.Controls.Add(this.linkSubHeader);
-            this.panelControls.Controls.Add(this.btnNotification);
+            this.panelControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(235)))), ((int)(((byte)(229)))));
+            this.panelControls.Controls.Add(this.btnMore);
             this.panelControls.Controls.Add(this.panelHost);
             this.panelControls.Controls.Add(this.btnRefresh);
-            this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControls.Location = new System.Drawing.Point(0, 0);
+            this.panelControls.Controls.Add(this.btnSettings);
+            this.panelControls.Location = new System.Drawing.Point(97, 29);
             this.panelControls.Name = "panelControls";
-            this.panelControls.Size = new System.Drawing.Size(883, 503);
+            this.panelControls.Size = new System.Drawing.Size(502, 511);
             this.panelControls.TabIndex = 3;
             // 
-            // btnNext
+            // btnMore
             // 
-            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(242)))), ((int)(((byte)(244)))));
-            this.btnNext.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(138)))), ((int)(((byte)(211)))));
-            this.btnNext.FlatAppearance.BorderSize = 0;
-            this.btnNext.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Font = new System.Drawing.Font("Segoe MDL2 Assets", 25.25F);
-            this.btnNext.ForeColor = System.Drawing.Color.Gray;
-            this.btnNext.Location = new System.Drawing.Point(835, 429);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(45, 57);
-            this.btnNext.TabIndex = 340;
-            this.btnNext.TabStop = false;
-            this.btnNext.UseVisualStyleBackColor = false;
-            // 
-            // navPanel
-            // 
-            this.navPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.navPanel.AutoScroll = true;
-            this.navPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(242)))), ((int)(((byte)(244)))));
-            this.navPanel.Font = new System.Drawing.Font("Segoe UI Variable Small", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.navPanel.Location = new System.Drawing.Point(0, 429);
-            this.navPanel.Name = "navPanel";
-            this.navPanel.Size = new System.Drawing.Size(834, 75);
-            this.navPanel.TabIndex = 339;
-            this.navPanel.WrapContents = false;
-            // 
-            // linkSubHeader
-            // 
-            this.linkSubHeader.ActiveLinkColor = System.Drawing.Color.Magenta;
-            this.linkSubHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkSubHeader.AutoEllipsis = true;
-            this.linkSubHeader.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 8.5F);
-            this.linkSubHeader.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
-            this.linkSubHeader.LinkColor = System.Drawing.Color.Black;
-            this.linkSubHeader.Location = new System.Drawing.Point(12, 4);
-            this.linkSubHeader.Name = "linkSubHeader";
-            this.linkSubHeader.Size = new System.Drawing.Size(677, 16);
-            this.linkSubHeader.TabIndex = 334;
-            this.linkSubHeader.TabStop = true;
-            this.linkSubHeader.Text = "...";
-            // 
-            // btnNotification
-            // 
-            this.btnNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNotification.AutoEllipsis = true;
-            this.btnNotification.FlatAppearance.BorderSize = 0;
-            this.btnNotification.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnNotification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnNotification.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotification.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNotification.Location = new System.Drawing.Point(729, 0);
-            this.btnNotification.Name = "btnNotification";
-            this.btnNotification.Size = new System.Drawing.Size(123, 22);
-            this.btnNotification.TabIndex = 337;
-            this.btnNotification.Text = "Notifications";
-            this.btnNotification.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnNotification.UseVisualStyleBackColor = true;
-            this.btnNotification.Visible = false;
-            this.btnNotification.Click += new System.EventHandler(this.btnNotification_Click);
+            this.btnMore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMore.AutoSize = true;
+            this.btnMore.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMore.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.btnMore.FlatAppearance.BorderSize = 0;
+            this.btnMore.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.btnMore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.btnMore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMore.Font = new System.Drawing.Font("Segoe MDL2 Assets", 10.5F);
+            this.btnMore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMore.Location = new System.Drawing.Point(470, 3);
+            this.btnMore.Name = "btnMore";
+            this.btnMore.Size = new System.Drawing.Size(29, 25);
+            this.btnMore.TabIndex = 344;
+            this.btnMore.Text = "...";
+            this.btnMore.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip.SetToolTip(this.btnMore, "See Flyoobe working live");
+            this.btnMore.UseVisualStyleBackColor = true;
+            this.btnMore.Click += new System.EventHandler(this.btnMore_Click);
             // 
             // panelHost
             // 
             this.panelHost.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelHost.Location = new System.Drawing.Point(7, 29);
+            this.panelHost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.panelHost.Location = new System.Drawing.Point(3, 31);
             this.panelHost.Name = "panelHost";
-            this.panelHost.Size = new System.Drawing.Size(873, 400);
+            this.panelHost.Size = new System.Drawing.Size(496, 459);
             this.panelHost.TabIndex = 333;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.AutoSize = true;
-            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(222)))), ((int)(((byte)(246)))));
-            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(138)))), ((int)(((byte)(211)))));
+            this.btnRefresh.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
             this.btnRefresh.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
             this.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe MDL2 Assets", 8.25F);
             this.btnRefresh.ForeColor = System.Drawing.Color.Black;
-            this.btnRefresh.Location = new System.Drawing.Point(858, 0);
+            this.btnRefresh.Location = new System.Drawing.Point(13, 3);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(25, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(28, 25);
             this.btnRefresh.TabIndex = 332;
             this.btnRefresh.TabStop = false;
             this.btnRefresh.Text = "...";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // btnExtensions
+            // btnSettings
             // 
-            this.btnExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExtensions.AutoSize = true;
-            this.btnExtensions.BackColor = System.Drawing.Color.Transparent;
-            this.btnExtensions.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(138)))), ((int)(((byte)(211)))));
-            this.btnExtensions.FlatAppearance.BorderSize = 0;
-            this.btnExtensions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnExtensions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(235)))), ((int)(((byte)(255)))));
-            this.btnExtensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExtensions.Font = new System.Drawing.Font("Segoe MDL2 Assets", 11.5F, System.Drawing.FontStyle.Bold);
-            this.btnExtensions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExtensions.Location = new System.Drawing.Point(913, 1);
-            this.btnExtensions.Name = "btnExtensions";
-            this.btnExtensions.Size = new System.Drawing.Size(29, 27);
-            this.btnExtensions.TabIndex = 338;
-            this.btnExtensions.TabStop = false;
-            this.btnExtensions.Text = "...";
-            this.btnExtensions.UseVisualStyleBackColor = false;
-            this.btnExtensions.Click += new System.EventHandler(this.btnExtensions_Click);
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettings.BackColor = System.Drawing.Color.Transparent;
+            this.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSettings.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.Font = new System.Drawing.Font("Segoe MDL2 Assets", 10.5F);
+            this.btnSettings.ForeColor = System.Drawing.Color.Black;
+            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSettings.Location = new System.Drawing.Point(435, 3);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(29, 25);
+            this.btnSettings.TabIndex = 345;
+            this.btnSettings.Text = "...";
+            this.toolTip.SetToolTip(this.btnSettings, "App-Settings");
+            this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
-            // panelContainer
+            // btnToggle
             // 
-            this.panelContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnToggle.BackColor = System.Drawing.Color.Transparent;
+            this.btnToggle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnToggle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.btnToggle.FlatAppearance.BorderSize = 0;
+            this.btnToggle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.btnToggle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.btnToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggle.Font = new System.Drawing.Font("Segoe MDL2 Assets", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToggle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnToggle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnToggle.Location = new System.Drawing.Point(3, 3);
+            this.btnToggle.Name = "btnToggle";
+            this.btnToggle.Size = new System.Drawing.Size(40, 39);
+            this.btnToggle.TabIndex = 341;
+            this.btnToggle.Text = "...";
+            this.toolTip.SetToolTip(this.btnToggle, "Toggle sidebar");
+            this.btnToggle.UseVisualStyleBackColor = false;
+            this.btnToggle.Click += new System.EventHandler(this.btnToggle_Click);
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelContainer.AutoScroll = true;
-            this.panelContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(244)))), ((int)(((byte)(242)))));
-            this.panelContainer.Controls.Add(this.panelControls);
-            this.panelContainer.Location = new System.Drawing.Point(23, 32);
-            this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(883, 503);
-            this.panelContainer.TabIndex = 15;
+            this.splitContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.splitContainer.Location = new System.Drawing.Point(10, 5);
+            this.splitContainer.Name = "splitContainer";
             // 
-            // lblHeader
+            // splitContainer.Panel1
             // 
-            this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitContainer.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.splitContainer.Panel1.Controls.Add(this.pictureApp);
+            this.splitContainer.Panel1.Controls.Add(this.toolStripMenu);
+            this.splitContainer.Panel1.Controls.Add(this.navTree);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(247)))), ((int)(((byte)(248)))));
+            this.splitContainer.Panel2.Controls.Add(this.panelControls);
+            this.splitContainer.Panel2.Controls.Add(this.btnToggle);
+            this.splitContainer.Size = new System.Drawing.Size(925, 552);
+            this.splitContainer.SplitterDistance = 223;
+            this.splitContainer.TabIndex = 344;
+            // 
+            // pictureApp
+            // 
+            this.pictureApp.Location = new System.Drawing.Point(5, 5);
+            this.pictureApp.Name = "pictureApp";
+            this.pictureApp.Size = new System.Drawing.Size(28, 28);
+            this.pictureApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureApp.TabIndex = 348;
+            this.pictureApp.TabStop = false;
+            // 
+            // toolStripMenu
+            // 
+            this.toolStripMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Display", 27.75F);
-            this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.lblHeader.Location = new System.Drawing.Point(38, 2);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(696, 32);
-            this.lblHeader.TabIndex = 333;
-            this.lblHeader.Text = "Flyoobe";
-            this.lblHeader.UseCompatibleTextRendering = true;
+            this.toolStripMenu.AutoSize = false;
+            this.toolStripMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(252)))), ((int)(((byte)(250)))));
+            this.toolStripMenu.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripMenu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonNext,
+            this.toolStripSeparator2,
+            this.toolStripDropDownButton});
+            this.toolStripMenu.Location = new System.Drawing.Point(34, 1);
+            this.toolStripMenu.Name = "toolStripMenu";
+            this.toolStripMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStripMenu.Size = new System.Drawing.Size(185, 35);
+            this.toolStripMenu.TabIndex = 347;
+            this.toolStripMenu.Text = "Winpilot";
             // 
-            // btnAbout
+            // toolStripButtonNext
             // 
-            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAbout.AutoSize = true;
-            this.btnAbout.BackColor = System.Drawing.Color.Transparent;
-            this.btnAbout.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAbout.FlatAppearance.BorderSize = 0;
-            this.btnAbout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.btnAbout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbout.Font = new System.Drawing.Font("Segoe MDL2 Assets", 10.25F);
-            this.btnAbout.ForeColor = System.Drawing.Color.Black;
-            this.btnAbout.Location = new System.Drawing.Point(912, 517);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(30, 29);
-            this.btnAbout.TabIndex = 336;
-            this.btnAbout.Text = "...";
-            this.btnAbout.UseVisualStyleBackColor = false;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            this.toolStripButtonNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonNext.Font = new System.Drawing.Font("Segoe UI Variable Small", 10.75F, System.Drawing.FontStyle.Bold);
+            this.toolStripButtonNext.ForeColor = System.Drawing.Color.Black;
+            this.toolStripButtonNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonNext.Name = "toolStripButtonNext";
+            this.toolStripButtonNext.Size = new System.Drawing.Size(47, 32);
+            this.toolStripButtonNext.Text = "Next";
             // 
-            // btnAskCopilot
+            // toolStripSeparator2
             // 
-            this.btnAskCopilot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAskCopilot.AutoSize = true;
-            this.btnAskCopilot.BackColor = System.Drawing.Color.Transparent;
-            this.btnAskCopilot.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnAskCopilot.FlatAppearance.BorderSize = 0;
-            this.btnAskCopilot.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.btnAskCopilot.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnAskCopilot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAskCopilot.Font = new System.Drawing.Font("Segoe MDL2 Assets", 9.25F);
-            this.btnAskCopilot.ForeColor = System.Drawing.Color.Black;
-            this.btnAskCopilot.Location = new System.Drawing.Point(912, 477);
-            this.btnAskCopilot.Name = "btnAskCopilot";
-            this.btnAskCopilot.Size = new System.Drawing.Size(30, 29);
-            this.btnAskCopilot.TabIndex = 335;
-            this.btnAskCopilot.UseVisualStyleBackColor = false;
-            this.btnAskCopilot.Click += new System.EventHandler(this.btnAskCopilot_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
             // 
-            // contextDropDown
+            // toolStripDropDownButton
             // 
-            this.contextDropDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(247)))), ((int)(((byte)(242)))));
-            this.contextDropDown.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.5F);
-            this.contextDropDown.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripExtensions,
-            this.toolStripAddExtensionUrl,
-            this.toolStripAddExtensionLocal,
-            this.toolStripExtensionGuide,
-            this.toolStripSeparator1,
-            this.toolStripExtensionSource});
-            this.contextDropDown.Name = "contextDropDown";
-            this.contextDropDown.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextDropDown.Size = new System.Drawing.Size(200, 176);
+            this.toolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageExtensionsToolStripMenuItem,
+            this.installFromUrlToolStripMenuItem,
+            this.installFromFileToolStripMenuItem,
+            this.writeAnExtensionToolStripMenuItem,
+            this.extensionFolderToolStripMenuItem});
+            this.toolStripDropDownButton.Font = new System.Drawing.Font("Segoe UI Variable Display", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripDropDownButton.ForeColor = System.Drawing.Color.Black;
+            this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton.Name = "toolStripDropDownButton";
+            this.toolStripDropDownButton.Size = new System.Drawing.Size(42, 32);
+            this.toolStripDropDownButton.Text = "Add";
             // 
-            // toolStripExtensions
+            // manageExtensionsToolStripMenuItem
             // 
-            this.toolStripExtensions.Margin = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.toolStripExtensions.Name = "toolStripExtensions";
-            this.toolStripExtensions.Size = new System.Drawing.Size(199, 24);
-            this.toolStripExtensions.Text = "Manage extensions";
-            this.toolStripExtensions.Click += new System.EventHandler(this.toolStripExtensions_Click);
+            this.manageExtensionsToolStripMenuItem.Name = "manageExtensionsToolStripMenuItem";
+            this.manageExtensionsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.manageExtensionsToolStripMenuItem.Text = "Manage Extensions";
+            this.manageExtensionsToolStripMenuItem.Click += new System.EventHandler(this.manageExtensionsToolStripMenuItem_Click);
             // 
-            // toolStripAddExtensionUrl
+            // installFromUrlToolStripMenuItem
             // 
-            this.toolStripAddExtensionUrl.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.toolStripAddExtensionUrl.Name = "toolStripAddExtensionUrl";
-            this.toolStripAddExtensionUrl.Size = new System.Drawing.Size(199, 24);
-            this.toolStripAddExtensionUrl.Text = "Install from Url...";
-            this.toolStripAddExtensionUrl.Click += new System.EventHandler(this.toolStripAddExtensionUrl_Click);
+            this.installFromUrlToolStripMenuItem.Name = "installFromUrlToolStripMenuItem";
+            this.installFromUrlToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.installFromUrlToolStripMenuItem.Text = "Install from Url...";
+            this.installFromUrlToolStripMenuItem.Click += new System.EventHandler(this.installFromUrlToolStripMenuItem_Click);
             // 
-            // toolStripAddExtensionLocal
+            // installFromFileToolStripMenuItem
             // 
-            this.toolStripAddExtensionLocal.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.toolStripAddExtensionLocal.Name = "toolStripAddExtensionLocal";
-            this.toolStripAddExtensionLocal.Size = new System.Drawing.Size(199, 24);
-            this.toolStripAddExtensionLocal.Text = "Import from file...";
-            this.toolStripAddExtensionLocal.Click += new System.EventHandler(this.toolStripAddExtensionLocal_Click);
+            this.installFromFileToolStripMenuItem.Name = "installFromFileToolStripMenuItem";
+            this.installFromFileToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.installFromFileToolStripMenuItem.Text = "Install from file...";
+            this.installFromFileToolStripMenuItem.Click += new System.EventHandler(this.installFromFileToolStripMenuItem_Click);
             // 
-            // toolStripExtensionGuide
+            // writeAnExtensionToolStripMenuItem
             // 
-            this.toolStripExtensionGuide.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.toolStripExtensionGuide.Name = "toolStripExtensionGuide";
-            this.toolStripExtensionGuide.Size = new System.Drawing.Size(199, 24);
-            this.toolStripExtensionGuide.Text = "Write an extension";
-            this.toolStripExtensionGuide.Click += new System.EventHandler(this.toolStripExtensionGuide_Click);
+            this.writeAnExtensionToolStripMenuItem.Name = "writeAnExtensionToolStripMenuItem";
+            this.writeAnExtensionToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.writeAnExtensionToolStripMenuItem.Text = "Write an extension";
+            this.writeAnExtensionToolStripMenuItem.Click += new System.EventHandler(this.writeAnExtensionToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // extensionFolderToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
+            this.extensionFolderToolStripMenuItem.Name = "extensionFolderToolStripMenuItem";
+            this.extensionFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.extensionFolderToolStripMenuItem.Text = "Extension folder...";
+            this.extensionFolderToolStripMenuItem.Click += new System.EventHandler(this.extensionFolderToolStripMenuItem_Click);
             // 
-            // toolStripExtensionSource
+            // navTree
             // 
-            this.toolStripExtensionSource.Margin = new System.Windows.Forms.Padding(0, 5, 0, 2);
-            this.toolStripExtensionSource.Name = "toolStripExtensionSource";
-            this.toolStripExtensionSource.Size = new System.Drawing.Size(199, 24);
-            this.toolStripExtensionSource.Text = "Extension folder...";
-            this.toolStripExtensionSource.Click += new System.EventHandler(this.toolStripExtensionSource_Click);
+            this.navTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.navTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(251)))));
+            this.navTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.navTree.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.navTree.Font = new System.Drawing.Font("Segoe UI Variable Text", 9.5F);
+            this.navTree.HotTracking = true;
+            this.navTree.LineColor = System.Drawing.Color.HotPink;
+            this.navTree.Location = new System.Drawing.Point(13, 49);
+            this.navTree.Name = "navTree";
+            this.navTree.ShowLines = false;
+            this.navTree.ShowNodeToolTips = true;
+            this.navTree.ShowRootLines = false;
+            this.navTree.Size = new System.Drawing.Size(200, 498);
+            this.navTree.TabIndex = 0;
+            // 
+            // toolTip
+            // 
+            this.toolTip.IsBalloon = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(154)))), ((int)(((byte)(154)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(235)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(945, 565);
-            this.Controls.Add(this.btnExtensions);
-            this.Controls.Add(this.btnAbout);
-            this.Controls.Add(this.btnAskCopilot);
-            this.Controls.Add(this.panelContainer);
-            this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.splitContainer);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Flyoobe";
+            this.Text = "FlyOOBE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
             this.panelControls.ResumeLayout(false);
             this.panelControls.PerformLayout();
-            this.panelContainer.ResumeLayout(false);
-            this.contextDropDown.ResumeLayout(false);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureApp)).EndInit();
+            this.toolStripMenu.ResumeLayout(false);
+            this.toolStripMenu.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Panel panelControls;
-        private System.Windows.Forms.Panel panelContainer;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Label lblHeader;
-        private System.Windows.Forms.Button btnAskCopilot;
-        private System.Windows.Forms.Button btnAbout;
-        private System.Windows.Forms.Button btnNotification;
         private System.Windows.Forms.Panel panelHost;
-        private System.Windows.Forms.LinkLabel linkSubHeader;
-        private System.Windows.Forms.FlowLayoutPanel navPanel;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.ContextMenuStrip contextDropDown;
-        private System.Windows.Forms.ToolStripMenuItem toolStripAddExtensionUrl;
-        private System.Windows.Forms.ToolStripMenuItem toolStripAddExtensionLocal;
-        private System.Windows.Forms.ToolStripMenuItem toolStripExtensionGuide;
-        private System.Windows.Forms.ToolStripMenuItem toolStripExtensionSource;
-        private System.Windows.Forms.Button btnExtensions;
-        private System.Windows.Forms.ToolStripMenuItem toolStripExtensions;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button btnToggle;
+        private System.Windows.Forms.Button btnMore;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.TreeView navTree;
+        private System.Windows.Forms.ToolStrip toolStripMenu;
+        private System.Windows.Forms.ToolStripButton toolStripButtonNext;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem manageExtensionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem installFromUrlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem installFromFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeAnExtensionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extensionFolderToolStripMenuItem;
+        private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.PictureBox pictureApp;
     }
 }
 
