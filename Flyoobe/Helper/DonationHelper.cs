@@ -67,7 +67,7 @@ namespace Flyoobe
            "Would you like to donate via PayPal now?";
 
 
-            var result = MessageBox.Show(message, "Support @Belim", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            var result = MessageBox.Show(message, "Support @DummyLink", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (result == DialogResult.Yes)
             {
