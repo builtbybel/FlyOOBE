@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Flyoobe Update Check</title>
+<title>FlyOOBE Update Check</title>
 <style>
 :root {
   --bg: #f6f8fb;
-  --panel: #ffffffcc;
+  --panel: rgba(255, 255, 255, 0.85);
   --text: #1b1b1b;
   --accent: #2563eb;
   --radius: 20px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.1);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
-  background: var(--bg);
+  background: var(--bg) no-repeat center/cover;
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -25,7 +25,22 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
+
+/* === subtle app image background === */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://private-user-images.githubusercontent.com/57478606/503152387-02dff63c-d830-4e08-bdd8-b13ad70f6683.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjE1OTA1NjksIm5iZiI6MTc2MTU5MDI2OSwicGF0aCI6Ii81NzQ3ODYwNi81MDMxNTIzODctMDJkZmY2M2MtZDgzMC00ZTA4LWJkZDgtYjEzYWQ3MGY2NjgzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEwMjclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMDI3VDE4Mzc0OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTA5M2FmNjM0Mjg0ZGZjNGFjMGUxOTQyNDkwNDZiYWFjYTBiYmMzNTM5OTViYzQyZjgwNDliZmRkZmVmOGNkZWEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Y2uyaPXPIY4ERh8UliD9YiGGXHt2OF3MODnV4R1laaA") center/contain no-repeat;
+  opacity: 0.7;
+  filter: blur(6px);
+  z-index: 0;
+}
+
+.card, .donate, footer { position: relative; z-index: 1; }
 
 .card {
   background: var(--panel);
@@ -36,7 +51,7 @@ body {
   max-width: 420px;
   width: 100%;
   text-align: center;
-  animation: fadeIn 0.4s ease-in;
+  animation: fadeIn .4s ease-in;
 }
 
 h1 {
@@ -51,7 +66,6 @@ h1 {
 }
 
 p { font-size: .98rem; line-height: 1.5; margin-top: .5rem; }
-
 a { color: var(--accent); text-decoration: none; font-weight: 500; }
 a:hover { text-decoration: underline; }
 
@@ -94,14 +108,14 @@ footer {
 </head>
 <body>
 <div class="card">
-  <h1>🪶 Flyoobe Update Check</h1>
+  <h1>🪶 FlyOOBE Update Check</h1>
   <p id="status">Fetching update info...</p>
 </div>
 
 <div class="donate">
   <h3>How can I help?</h3>
   <p>If you like this software, you can help by 
-  <a href="https://twitter.com/intent/tweet?text=Flyoobe%20cleans%20up%20Windows%20just%20like%20the%20good%20old%20days%20💾%20https%3A%2F%2Fgithub.com%2Fbuiltbybel%2FFlyoobe" target="_blank">tweeting about it</a> 
+  <a href="https://twitter.com/intent/tweet?text=FlyOOBE%20cleans%20up%20Windows%20just%20like%20the%20good%20old%20days%20💾%20https%3A%2F%2Fgithub.com%2Fbuiltbybel%2FFlyOOBE" target="_blank">tweeting about it</a> 
   or supporting the project with a donation.</p>
 
   <form action="https://www.paypal.com/donate" method="post" target="_blank" style="margin-top:.6rem;">
@@ -116,7 +130,7 @@ footer {
   <p style="margin-top:.7rem;">Built with care, running on caffeine and community support ☕💾</p>
 </div>
 
-<footer>© builtbybel • Flyoobe Project</footer>
+<footer>© builtbybel • FlyOOBE Project</footer>
 
 <script>
 const latest = "1.40.542";
@@ -124,7 +138,7 @@ const params = new URLSearchParams(location.search);
 const user = params.get("version");
 const status = document.getElementById("status");
 
-function compare(v1, v2){
+function compare(v1,v2){
   const a=v1.split(".").map(Number),b=v2.split(".").map(Number);
   for(let i=0;i<Math.max(a.length,b.length);i++){
     if((a[i]||0)<(b[i]||0))return -1;
@@ -133,19 +147,19 @@ function compare(v1, v2){
 }
 
 function openLog(v){
-  window.open(`https://github.com/builtbybel/Flyoobe/releases/tag/${v}`,
+  window.open(`https://github.com/builtbybel/FlyOOBE/releases/tag/${v}`,
   "changelog","width=800,height=600,resizable,scrollbars");
 }
 
-setTimeout(()=> {
+setTimeout(()=>{
   if(!user){
-    status.innerHTML="❓ No version detected.<br>Open this page from Flyoobe.";
+    status.innerHTML="❓ No version detected.<br>Open this page from FlyOOBE.";
     return;
   }
   const r=compare(user,latest);
   if(r<0){
     status.innerHTML=`⚠️ Outdated (${user})<br>Latest: <strong>${latest}</strong><br>
-    <a class="btn" href="https://github.com/builtbybel/Flyoobe/releases" target="_blank">⬇️ Get Update</a><br>
+    <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a><br>
     <a href='#' onclick="openLog('${latest}')">📄 View Changelog</a>`;
   } else if(r===0){
     status.innerHTML=`✅ Up to date (${user})<br>
