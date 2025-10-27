@@ -9,12 +9,12 @@
   --bg: #f8f4f1;
   --sidebar: #efeae7;
   --panel: #ffffff;
-  --accent: #0067c0;
   --text: #1c1c1c;
   --muted: #6b6b6b;
   --radius: 18px;
   --shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
   --font: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+  --glass-bg: rgba(255,255,255,0.35);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); }
@@ -57,48 +57,72 @@ body {
   background: linear-gradient(90deg, #0078d7, #8a2be2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
+/* === Navigation === */
 nav {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
 }
 
 nav a {
   text-decoration: none;
   color: var(--text);
   font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 0.8rem;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 0.45rem 0.8rem;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
 }
 nav a:hover {
   background: rgba(0,0,0,0.05);
 }
 
+/* === Support Section  === */
 .support {
   margin-top: 2rem;
+  padding: 1.2rem;
+  background: var(--glass-bg);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   font-size: 0.9rem;
-  color: var(--muted);
   line-height: 1.5;
+  border: 1px solid rgba(255,255,255,0.4);
 }
 
 .support strong {
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
   color: var(--text);
+  font-weight: 600;
 }
 
-.support a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 500;
+/* === Donate Button === */
+.glass-donate {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  color: #1c1c1c;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.8rem;
 }
-.support a:hover { text-decoration: underline; }
+.glass-donate:hover {
+  background: rgba(255,255,255,0.75);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
 
+/* === Footer === */
 .sidebar footer {
   font-size: 0.8rem;
   color: var(--muted);
@@ -129,7 +153,9 @@ nav a:hover {
 .card h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--accent);
+  background: linear-gradient(90deg, #0078d7, #8a2be2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
 }
 
@@ -141,7 +167,7 @@ nav a:hover {
 
 .btn {
   display: inline-block;
-  background: var(--accent);
+  background: linear-gradient(90deg, #0078d7, #8a2be2);
   color: #fff;
   border-radius: 10px;
   padding: 0.6rem 1.4rem;
@@ -150,9 +176,7 @@ nav a:hover {
   text-decoration: none;
   transition: background 0.3s;
 }
-.btn:hover {
-  background: #00529b;
-}
+.btn:hover { filter: brightness(1.1); }
 
 small {
   display: block;
@@ -183,9 +207,11 @@ small {
 
       <div class="support">
         <strong>Support the Project</strong>
-        If you appreciate FlyOOBE, you can support its development via 
-        <a href="https://www.paypal.com/donate?hosted_button_id=MY7HX4QLYR4KG" target="_blank">PayPal</a> or 
-        <a href="https://ko-fi.com/builtbybel" target="_blank">Ko-fi</a>.
+        Help FlyOOBE stay alive — built with care, coffee, and community support.
+        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+          <input type="hidden" name="hosted_button_id" value="MY7HX4QLYR4KG" />
+          <button type="submit" class="glass-donate">💖 Donate</button>
+        </form>
       </div>
     </div>
     <footer>© builtbybel • FlyOOBE Project</footer>
