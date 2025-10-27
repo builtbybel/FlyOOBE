@@ -133,42 +133,48 @@ footer {
 <footer>© builtbybel • FlyOOBE Project</footer>
 
 <script>
-const latest = "1.40.542";
+const latest = "1.40.570";
 const params = new URLSearchParams(location.search);
 const user = params.get("version");
 const status = document.getElementById("status");
 
-function compare(v1,v2){
-  const a=v1.split(".").map(Number),b=v2.split(".").map(Number);
-  for(let i=0;i<Math.max(a.length,b.length);i++){
-    if((a[i]||0)<(b[i]||0))return -1;
-    if((a[i]||0)>(b[i]||0))return 1;
-  }return 0;
+function compare(v1, v2) {
+  const a = v1.split(".").map(Number), b = v2.split(".").map(Number);
+  for (let i = 0; i < Math.max(a.length, b.length); i++) {
+    if ((a[i] || 0) < (b[i] || 0)) return -1;
+    if ((a[i] || 0) > (b[i] || 0)) return 1;
+  }
+  return 0;
 }
 
-function openLog(v){
-  window.open(`https://github.com/builtbybel/FlyOOBE/releases/tag/${v}`,
-  "changelog","width=800,height=600,resizable,scrollbars");
+function openLog(v) {
+  const url = `https://github.com/builtbybel/FlyOOBE/releases/tag/${v}`;
+  window.open(url, "changelog", "width=800,height=600,resizable,scrollbars");
 }
 
-setTimeout(()=>{
-  if(!user){
-    status.innerHTML="❓ No version detected.<br>Open this page from FlyOOBE.";
+setTimeout(() => {
+  if (!user) {
+    status.innerHTML = "❓ No version detected.<br>Open this page from FlyOOBE.";
     return;
   }
-  const r=compare(user,latest);
-  if(r<0){
-    status.innerHTML=`⚠️ Outdated (${user})<br>Latest: <strong>${latest}</strong><br>
-    <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a><br>
-    <a href='#' onclick="openLog('${latest}')">📄 View Changelog</a>`;
-  } else if(r===0){
-    status.innerHTML=`✅ Up to date (${user})<br>
-    <a href='#' onclick="openLog('${latest}')">📄 View Changelog</a>`;
+  const r = compare(user, latest);
+  if (r < 0) {
+    status.innerHTML = `
+      ⚠️ Outdated (${user})<br>
+      Latest: <strong>${latest}</strong><br>
+      <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a><br>
+      <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
+  } else if (r === 0) {
+    status.innerHTML = `
+      ✅ Up to date (${user})<br>
+      <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
   } else {
-    status.innerHTML=`✅ Newer build (${user})<br><em>Development version</em><br>
-    <a href='#' onclick="openLog('${latest}')">📄 View Changelog</a>`;
+    status.innerHTML = `
+      ✅ Newer build (${user})<br><em>Development version</em><br>
+      <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
   }
-},1000);
+}, 1000);
 </script>
+
 </body>
 </html>
