@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flyoobe Update Check</title>
+<style>
+  :root {
+    --bg: #f3f4f8;
+    --primary: #2563eb;
+    --text: #1b1b1b;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    --radius: 24px;
+  }
 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
+    background: linear-gradient(145deg, #e8ecf7, #f9faff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text);
+    padding: 1.5rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    text-align: center;
+    max-width: 460px;
+    width: 100%;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  p { font-size: 1rem; margin-top: 0.5rem; line-height: 1.5; }
+  a { color: var(--primary); text-decoration: none; font-weight: 500; }
+  a:hover { text-decoration: underline; }
+
+  .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  .btn:hover { background: #1d4ed8; }
+
+  .donate-box {
+    background: #fffbe9cc;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  .donate-box h3 { margin-bottom: 0.5rem; font-size: 1rem; color: #444; }
+
+  .project-follow {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .project-follow a {
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    background: #24292f;
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .project-follow a:hover { background: #0366d6; }
+
+  footer {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>🪶 Flyoobe Update Check</h1>
+    <p id="status">Checking your version...</p>
+  </div>
+
+  <div class="donate-box">
+    <h3>How can I help?</h3>
+    <p>
+      If you like this software, you can help by
+      <a href="https://twitter.com/intent/tweet?text=Still%20cleaning%20up%20Windows%20like%20it%E2%80%99s%202005.%20Flyoobe%20fixes%20the%20mess%20Windows%20leaves%20behind.%20https%3A%2F%2Fgithub.com%2Fbuiltbybel%2FFlyoobe" target="_blank">tweeting about it</a>
+      or supporting the project with a donation.
+    </p>
+    <p>Although this software is free, any donations — large or small — are greatly appreciated :)</p>
+
+    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+      <input type="hidden" name="hosted_button_id" value="M9DW4VNKH9ECQ" />
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+             name="submit" alt="Donate with PayPal" />
+    </form>
+
+    <p style="margin-top:1rem;">
+      Or support me with a coffee: <a href="https://ko-fi.com/builtbybel" target="_blank">☕ Ko-fi</a>
+    </p>
+    <p style="margin-top:1rem;">
+      Just like the good old tools from back in the day — built with care, running on caffeine and community support ☕💾
+    </p>
+  </div>
+
+  <div class="project-follow">
+    <a href="https://github.com/builtbybel/Flyoobe" target="_blank">🐙 Follow Flyoobe on GitHub</a>
+  </div>
+
+  <footer>© builtbybel • Flyoobe Project</footer>
+
+<script>
+const latest = "1.40.542";
+const params = new URLSearchParams(location.search);
+const user = params.get("version");
+const status = document.getElementById("status");
+
+function compare(v1, v2) {
+  const a = v1.split(".").map(Number), b = v2.split(".").map(Number);
+  for (let i = 0; i < Math.max(a.length, b.length); i++) {
+    if ((a[i] || 0) < (b[i] || 0)) return -1;
+    if ((a[i] || 0) > (b[i] || 0)) return 1;
+  }
+  return 0;
+}
+
+function openChangelog(v) {
+  window.open(`https://github.com/builtbybel/Flyoobe/releases/tag/${v}`,
+    "changelogWindow", "width=800,height=600,resizable=yes,scrollbars=yes");
+}
+
+if (!user) {
+  status.innerHTML = "❓ No version detected.<br>Open this page through Flyoobe.";
+} else {
+  const r = compare(user, latest);
+  if (r < 0) {
+    status.innerHTML = `⚠️ Your version (${user}) is outdated.<br>
+    Latest version: <strong>${latest}</strong><br>
+    <a class="btn" href="https://github.com/builtbybel/Flyoobe/releases" target="_blank">⬇️ Get Update</a><br>
+    <a href="#" onclick="openChangelog('${latest}')">📄 View Changelog</a>`;
+  } else if (r === 0) {
+    status.innerHTML = `✅ You’re up to date (${user}).<br>
+    <a href="#" onclick="openChangelog('${latest}')">📄 View Changelog</a>`;
+  } else {
+    status.innerHTML = `✅ You’re ahead (${user}).<br>
+    <em>Development build detected.</em><br>
+    <a href="#" onclick="openChangelog('${latest}')">📄 View Changelog</a>`;
+  }
+}
+</script>
+</body>
+</html>
