@@ -1,103 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FlyOOBE Update Check</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlyOOBE Update Checker</title>
 <style>
 :root {
-  --bg: #f6f8fb;
-  --panel: rgba(255, 255, 255, 0.85);
-  --text: #1b1b1b;
-  --accent: #2563eb;
-  --radius: 20px;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --bg: #f8f4f1;
+  --sidebar: #efeae7;
+  --panel: #ffffff;
+  --accent: #0067c0;
+  --text: #1c1c1c;
+  --muted: #6b6b6b;
+  --radius: 18px;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  --font: "Segoe UI Variable Display", "Segoe UI", sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); }
+
 body {
-  font-family: "Segoe UI Variable Display", "Segoe UI", sans-serif;
-  background: var(--bg) no-repeat center/cover;
-  color: var(--text);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 1.5rem;
-  position: relative;
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
   overflow: hidden;
 }
 
-/* === subtle app image background === */
-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("https://github.com/builtbybel/FlyOOBE/blob/main/Illustration.png?raw=true") center/contain no-repeat;
-  opacity: 0.7;
-  filter: blur(6px);
-  z-index: 0;
+/* === Sidebar === */
+.sidebar {
+  width: 270px;
+  background: var(--sidebar);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: inset -1px 0 0 rgba(0,0,0,0.05);
 }
 
-.card, .donate, footer { position: relative; z-index: 1; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.logo span {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0078d7, #8a2be2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+nav a:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.support {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.support strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+
+.support a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.support a:hover { text-decoration: underline; }
+
+.sidebar footer {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* === Main content === */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
 
 .card {
   background: var(--panel);
-  backdrop-filter: blur(18px);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 2rem;
-  max-width: 420px;
+  padding: 2rem 2.5rem;
+  max-width: 460px;
   width: 100%;
   text-align: center;
-  animation: fadeIn .4s ease-in;
+  animation: fadeIn 0.5s ease;
 }
 
-h1 {
-  font-size: 1.6rem;
+.card h2 {
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--accent);
   margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .4rem;
 }
 
-p { font-size: .98rem; line-height: 1.5; margin-top: .5rem; }
-a { color: var(--accent); text-decoration: none; font-weight: 500; }
-a:hover { text-decoration: underline; }
+.card p {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.5;
+}
 
 .btn {
   display: inline-block;
   background: var(--accent);
   color: #fff;
-  border-radius: 12px;
-  padding: 0.6rem 1.3rem;
-  margin-top: 1rem;
+  border-radius: 10px;
+  padding: 0.6rem 1.4rem;
   font-weight: 500;
+  margin-top: 1.2rem;
   text-decoration: none;
-  transition: background .3s;
+  transition: background 0.3s;
 }
-.btn:hover { background: #1e4ed8; }
-
-.donate {
-  background: #fff9dd;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-top: 2rem;
-  padding: 1.3rem;
-  font-size: .9rem;
-  text-align: left;
+.btn:hover {
+  background: #00529b;
 }
-.donate h3 { font-size: 1rem; color: #444; margin-bottom: .3rem; }
 
-footer {
-  font-size: .8rem;
-  opacity: .7;
-  margin-top: 2rem;
-  text-align: center;
+small {
+  display: block;
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 @keyframes fadeIn {
@@ -107,76 +168,70 @@ footer {
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>🪶 FlyOOBE Update Check</h1>
-  <p id="status">Fetching update info...</p>
-</div>
 
-<div class="donate">
-  <h3>How can I help?</h3>
-  <p>If you like this software, you can help by 
-  <a href="https://twitter.com/intent/tweet?text=FlyOOBE%20cleans%20up%20Windows%20just%20like%20the%20good%20old%20days%20💾%20https%3A%2F%2Fgithub.com%2Fbuiltbybel%2FFlyOOBE" target="_blank">tweeting about it</a> 
-  or supporting the project with a donation.</p>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">
+        <img src="https://raw.githubusercontent.com/builtbybel/FlyOOBE/refs/heads/main/Flyoobe/AppIcon.png" alt="FlyOOBE Logo">
+        <span>FlyOOBE</span>
+      </div>
 
-  <form action="https://www.paypal.com/donate" method="post" target="_blank" style="margin-top:.6rem;">
-    <input type="hidden" name="hosted_button_id" value="MY7HX4QLYR4KG" />
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-      name="submit" alt="Donate with PayPal" />
-  </form>
+      <nav>
+        <a href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">What's New</a>
+        <a href="https://github.com/builtbybel/FlyOOBE" target="_blank">How it Works</a>
+      </nav>
 
-  <p style="margin-top:.7rem;">
-    Or support me with a coffee: <a href="https://ko-fi.com/builtbybel" target="_blank">☕ Ko-fi</a>
-  </p>
-  <p style="margin-top:.7rem;">Built with care, running on caffeine and community support ☕💾</p>
-</div>
+      <div class="support">
+        <strong>Support the Project</strong>
+        If you appreciate FlyOOBE, you can support its development via 
+        <a href="https://www.paypal.com/donate?hosted_button_id=MY7HX4QLYR4KG" target="_blank">PayPal</a> or 
+        <a href="https://ko-fi.com/builtbybel" target="_blank">Ko-fi</a>.
+      </div>
+    </div>
+    <footer>© builtbybel • FlyOOBE Project</footer>
+  </aside>
 
-<footer>© builtbybel • FlyOOBE Project</footer>
+  <main class="main">
+    <div class="card">
+      <h2>Update Check</h2>
+      <p id="status">Checking for updates...</p>
+      <small>Stay current with the latest FlyOOBE version</small>
+    </div>
+  </main>
 
 <script>
-const latest = "1.40.570";
-const params = new URLSearchParams(location.search);
-const user = params.get("version");
-const status = document.getElementById("status");
+const latest="1.40.570";
+const params=new URLSearchParams(location.search);
+const user=params.get("version");
+const status=document.getElementById("status");
 
-function compare(v1, v2) {
-  const a = v1.split(".").map(Number), b = v2.split(".").map(Number);
-  for (let i = 0; i < Math.max(a.length, b.length); i++) {
-    if ((a[i] || 0) < (b[i] || 0)) return -1;
-    if ((a[i] || 0) > (b[i] || 0)) return 1;
-  }
-  return 0;
+function compare(a,b){
+  const x=a.split(".").map(Number),y=b.split(".").map(Number);
+  for(let i=0;i<Math.max(x.length,y.length);i++){
+    if((x[i]||0)<(y[i]||0))return -1;
+    if((x[i]||0)>(y[i]||0))return 1;
+  } return 0;
+}
+function openLog(v){
+  window.open(`https://github.com/builtbybel/FlyOOBE/releases/tag/${v}`,"changelog","width=800,height=600,resizable,scrollbars");
 }
 
-function openLog(v) {
-  const url = `https://github.com/builtbybel/FlyOOBE/releases/tag/${v}`;
-  window.open(url, "changelog", "width=800,height=600,resizable,scrollbars");
-}
-
-setTimeout(() => {
-  if (!user) {
-    status.innerHTML = "❓ No version detected.<br>Open this page from FlyOOBE.";
+setTimeout(()=>{
+  if(!user){
+    status.innerHTML="❓ No version detected.<br>Open this page from FlyOOBE.";
     return;
   }
-  const r = compare(user, latest);
-  if (r < 0) {
-    status.innerHTML = `
-      ⚠️ Outdated (${user})<br>
-      Latest: <strong>${latest}</strong><br>
-      <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a><br>
-      <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
-  } else if (r === 0) {
-    status.innerHTML = `
-      ✅ Up to date (${user})<br>
-      <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
-  } else {
-    status.innerHTML = `
-      ✅ Newer build (${user})<br><em>Development version</em><br>
-      <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
-  }
-}, 1000);
+  const r=compare(user,latest);
+  if(r<0)
+    status.innerHTML=`⚠️ Outdated (${user})<br>Latest: <strong>${latest}</strong><br>
+    <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a><br>
+    <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
+  else if(r===0)
+    status.innerHTML=`✅ Up to date (${user})<br><a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
+  else
+    status.innerHTML=`✅ Newer build (${user})<br><em>Development version</em><br><a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
+},1000);
 </script>
 
 </body>
 </html>
-
-
