@@ -14,7 +14,14 @@
   --radius: 20px;
   --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   --font: "Segoe UI Variable Display", "Segoe UI", sans-serif;
-  --grad: linear-gradient(135deg, #0078d7 0%, #8a2be2 100%);
+  --grad: linear-gradient(135deg, #00c853, #00b0ff, #8a2be2, #ff4081, #ffeb3b);
+}
+
+/* Animated gradient */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); }
@@ -53,10 +60,12 @@ body {
 
 .logo span {
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 800;
   background: var(--grad);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradientFlow 6s ease infinite;
 }
 
 /* === Nav === */
@@ -143,8 +152,10 @@ h2 {
   font-size: 1.7rem;
   font-weight: 600;
   background: var(--grad);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradientFlow 8s ease infinite;
   margin-bottom: 1rem;
 }
 
@@ -152,6 +163,8 @@ h2 {
 .badge {
   display: inline-block;
   background: var(--grad);
+  background-size: 300% 300%;
+  animation: gradientFlow 5s ease infinite;
   color: #fff;
   padding: 1.2rem 2.2rem;
   border-radius: 100px;
@@ -178,9 +191,14 @@ small {
   font-size: 0.85rem;
 }
 
+/* === Buttons === */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: var(--grad);
+  background-size: 300% 300%;
+  animation: gradientFlow 6s ease infinite;
   color: #fff;
   border-radius: 10px;
   padding: 0.7rem 1.6rem;
@@ -188,6 +206,16 @@ small {
   margin-top: 1.4rem;
   text-decoration: none;
   transition: all 0.25s ease;
+  cursor: pointer;
+}
+.btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  transition: transform 0.2s ease;
+}
+.btn:hover svg {
+  transform: translateX(4px);
 }
 .btn:hover {
   filter: brightness(1.1);
@@ -230,7 +258,10 @@ small {
     <h2>Update Check</h2>
     <div id="badge" class="badge">Checking...</div>
     <p id="status">Checking for updates...</p>
-    <a id="actionBtn" class="btn" style="display:none;">Check again</a>
+    <a id="actionBtn" class="btn" style="display:none;">
+      <span>Check again</span>
+      <svg viewBox="0 0 24 24"><path d="M12 4l1.41 1.41L8.83 10H20v2H8.83l4.58 4.59L12 18l-8-8 8-8z"/></svg>
+    </a>
     <small>Stay current with the latest FlyOOBE version</small>
   </div>
 </main>
@@ -260,18 +291,21 @@ function runCheck(){
     if(!user){
       badge.innerHTML = "❓";
       status.innerHTML = "No version detected.<br>Open this page from FlyOOBE.";
-      actionBtn.style.display = "block";
+      actionBtn.style.display = "inline-flex";
       return;
     }
     const r = compare(user, latest);
-    actionBtn.style.display = "block";
-    actionBtn.textContent = "Check again";
+    actionBtn.style.display = "inline-flex";
+    actionBtn.querySelector("span").textContent = "Check again";
     actionBtn.onclick = runCheck;
 
     if(r < 0){
       badge.innerHTML = "⚠️ Outdated";
       status.innerHTML = `Your version: <strong>${user}</strong><br>Latest: <strong>${latest}</strong><br><br>
-      <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a>`;
+      <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">
+        <span>Get Update</span>
+        <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"/></svg>
+      </a>`;
     }
     else if(r === 0){
       badge.innerHTML = "✅ Up to Date";
