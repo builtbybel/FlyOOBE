@@ -6,15 +6,15 @@
 <title>FlyOOBE Update Checker</title>
 <style>
 :root {
-  --bg: #f8f4f1;
-  --sidebar: #efeae7;
+  --bg: #f9f9fb;
+  --sidebar: #f0f0f3;
   --panel: #ffffff;
   --text: #1c1c1c;
   --muted: #6b6b6b;
-  --radius: 18px;
-  --shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  --radius: 20px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   --font: "Segoe UI Variable Display", "Segoe UI", sans-serif;
-  --glass-bg: rgba(255,255,255,0.35);
+  --grad: linear-gradient(135deg, #0078d7 0%, #8a2be2 100%);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); }
@@ -29,7 +29,7 @@ body {
 
 /* === Sidebar === */
 .sidebar {
-  width: 270px;
+  width: 260px;
   background: var(--sidebar);
   padding: 2rem 1.5rem;
   display: flex;
@@ -41,85 +41,73 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
   margin-bottom: 2rem;
 }
 
 .logo img {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
 }
 
 .logo span {
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #0078d7, #8a2be2);
+  background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.4px;
 }
 
-/* === Navigation === */
+/* === Nav === */
 nav {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  font-size: 1rem;
+  gap: 0.9rem;
   font-weight: 500;
-  color: var(--text);
 }
-
 nav a {
   text-decoration: none;
   color: var(--text);
-  font-weight: 500;
-  padding: 0.45rem 0.8rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 10px;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.2s ease;
 }
 nav a:hover {
   background: rgba(0,0,0,0.05);
 }
 
-/* === Support Section  === */
+/* === Support === */
 .support {
   margin-top: 2rem;
   padding: 1.2rem;
-  background: var(--glass-bg);
+  background: rgba(255,255,255,0.5);
   border-radius: var(--radius);
   backdrop-filter: blur(12px);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255,255,255,0.5);
   font-size: 0.9rem;
-  line-height: 1.5;
-  border: 1px solid rgba(255,255,255,0.4);
 }
-
 .support strong {
   display: block;
   margin-bottom: 0.5rem;
-  color: var(--text);
-  font-weight: 600;
 }
-
-/* === Donate Button === */
 .glass-donate {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(255,255,255,0.4);
   border-radius: 10px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   color: #1c1c1c;
   padding: 0.6rem 1.4rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   margin-top: 0.8rem;
 }
 .glass-donate:hover {
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.9);
   transform: translateY(-1px);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
 /* === Footer === */
@@ -130,7 +118,7 @@ nav a:hover {
   margin-top: 2rem;
 }
 
-/* === Main content === */
+/* === Main === */
 .main {
   flex: 1;
   display: flex;
@@ -143,46 +131,67 @@ nav a:hover {
   background: var(--panel);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 2rem 2.5rem;
-  max-width: 460px;
+  padding: 3rem 3.5rem;
+  max-width: 480px;
   width: 100%;
   text-align: center;
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.6s ease;
+  position: relative;
 }
 
-.card h2 {
-  font-size: 1.5rem;
+h2 {
+  font-size: 1.7rem;
   font-weight: 600;
-  background: linear-gradient(90deg, #0078d7, #8a2be2);
+  background: var(--grad);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
 }
 
-.card p {
+/* === Badge === */
+.badge {
+  display: inline-block;
+  background: var(--grad);
+  color: #fff;
+  padding: 1.2rem 2.2rem;
+  border-radius: 100px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  margin: 1.5rem 0;
+  transition: transform 0.2s ease;
+}
+.badge:hover {
+  transform: scale(1.05);
+}
+
+p {
   font-size: 0.95rem;
   color: var(--text);
   line-height: 1.5;
 }
-
-.btn {
-  display: inline-block;
-  background: linear-gradient(90deg, #0078d7, #8a2be2);
-  color: #fff;
-  border-radius: 10px;
-  padding: 0.6rem 1.4rem;
-  font-weight: 500;
-  margin-top: 1.2rem;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-.btn:hover { filter: brightness(1.1); }
 
 small {
   display: block;
   margin-top: 0.8rem;
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--grad);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.7rem 1.6rem;
+  font-weight: 500;
+  margin-top: 1.4rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 
 @keyframes fadeIn {
@@ -193,43 +202,46 @@ small {
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div>
-      <div class="logo">
-        <img src="https://raw.githubusercontent.com/builtbybel/FlyOOBE/refs/heads/main/Flyoobe/AppIcon.png" alt="FlyOOBE Logo">
-        <span>FlyOOBE</span>
-      </div>
-
-      <nav>
-        <a href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">What's New</a>
-        <a href="https://github.com/builtbybel/FlyOOBE" target="_blank">How it Works</a>
-      </nav>
-
-      <div class="support">
-        <strong>Support the Project</strong>
-        Help FlyOOBE stay alive — built with care, coffee, and community support.
-        <form action="https://www.paypal.com/donate" method="post" target="_blank">
-          <input type="hidden" name="hosted_button_id" value="MY7HX4QLYR4KG" />
-          <button type="submit" class="glass-donate">💖 Donate</button>
-        </form>
-      </div>
+<aside class="sidebar">
+  <div>
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/builtbybel/FlyOOBE/refs/heads/main/Flyoobe/AppIcon.png" alt="FlyOOBE Logo">
+      <span>FlyOOBE</span>
     </div>
-    <footer>© builtbybel • FlyOOBE Project</footer>
-  </aside>
+    <nav>
+      <a href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">What's New</a>
+      <a href="https://github.com/builtbybel/FlyOOBE" target="_blank">How it Works</a>
+    </nav>
 
-  <main class="main">
-    <div class="card">
-      <h2>Update Check</h2>
-      <p id="status">Checking for updates...</p>
-      <small>Stay current with the latest FlyOOBE version</small>
+    <div class="support">
+      <strong>Support the Project</strong>
+      Help FlyOOBE stay alive — built with care, coffee, and community support.
+      <form action="https://www.paypal.com/donate" method="post" target="_blank">
+        <input type="hidden" name="hosted_button_id" value="MY7HX4QLYR4KG" />
+        <button type="submit" class="glass-donate">💖 Donate</button>
+      </form>
     </div>
-  </main>
+  </div>
+  <footer>© builtbybel • FlyOOBE Project</footer>
+</aside>
+
+<main class="main">
+  <div class="card">
+    <h2>Update Check</h2>
+    <div id="badge" class="badge">Checking...</div>
+    <p id="status">Checking for updates...</p>
+    <a id="actionBtn" class="btn" style="display:none;">Check again</a>
+    <small>Stay current with the latest FlyOOBE version</small>
+  </div>
+</main>
 
 <script>
-const latest="1.40.570";
-const params=new URLSearchParams(location.search);
-const user=params.get("version");
-const status=document.getElementById("status");
+const latest = "1.40.570";
+const params = new URLSearchParams(location.search);
+const user = params.get("version");
+const badge = document.getElementById("badge");
+const status = document.getElementById("status");
+const actionBtn = document.getElementById("actionBtn");
 
 function compare(a,b){
   const x=a.split(".").map(Number),y=b.split(".").map(Number);
@@ -238,25 +250,41 @@ function compare(a,b){
     if((x[i]||0)>(y[i]||0))return 1;
   } return 0;
 }
-function openLog(v){
-  window.open(`https://github.com/builtbybel/FlyOOBE/releases/tag/${v}`,"changelog","width=800,height=600,resizable,scrollbars");
+
+function runCheck(){
+  badge.innerHTML = "Checking...";
+  status.innerHTML = "Checking for updates...";
+  actionBtn.style.display = "none";
+
+  setTimeout(()=>{
+    if(!user){
+      badge.innerHTML = "❓";
+      status.innerHTML = "No version detected.<br>Open this page from FlyOOBE.";
+      actionBtn.style.display = "block";
+      return;
+    }
+    const r = compare(user, latest);
+    actionBtn.style.display = "block";
+    actionBtn.textContent = "Check again";
+    actionBtn.onclick = runCheck;
+
+    if(r < 0){
+      badge.innerHTML = "⚠️ Outdated";
+      status.innerHTML = `Your version: <strong>${user}</strong><br>Latest: <strong>${latest}</strong><br><br>
+      <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a>`;
+    }
+    else if(r === 0){
+      badge.innerHTML = "✅ Up to Date";
+      status.innerHTML = `You’re running the latest version <strong>${user}</strong>.`;
+    }
+    else {
+      badge.innerHTML = "🚀 Newer Build";
+      status.innerHTML = `You’re ahead with <strong>${user}</strong><br><em>Development version</em>`;
+    }
+  }, 1000);
 }
 
-setTimeout(()=>{
-  if(!user){
-    status.innerHTML="❓ No version detected.<br>Open this page from FlyOOBE.";
-    return;
-  }
-  const r=compare(user,latest);
-  if(r<0)
-    status.innerHTML=`⚠️ Outdated (${user})<br>Latest: <strong>${latest}</strong><br>
-    <a class="btn" href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">⬇️ Get Update</a><br>
-    <a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
-  else if(r===0)
-    status.innerHTML=`✅ Up to date (${user})<br><a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
-  else
-    status.innerHTML=`✅ Newer build (${user})<br><em>Development version</em><br><a href="#" onclick="openLog('${latest}')">📄 View Changelog</a>`;
-},1000);
+runCheck();
 </script>
 
 </body>
