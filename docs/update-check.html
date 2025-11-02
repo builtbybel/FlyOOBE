@@ -12,6 +12,24 @@ body {
   padding: 40px;
 }
 
+/* === Warning bar === */
+.notice {
+  background: #ffcc00;
+  border: 3px solid #808080;
+  color: black;
+  font-weight: bold;
+  padding: 8px;
+  margin-bottom: 20px;
+  box-shadow: 3px 3px 0 #404040;
+  text-align: center;
+}
+
+.notice a {
+  color: black;
+  text-decoration: underline;
+}
+
+/* === Window === */
 .window {
   width: 420px;
   background: #e0e0e0;
@@ -70,6 +88,12 @@ button:active, a.btn:active {
 </style>
 </head>
 <body>
+
+<div class="notice">
+  ⚠️ <strong>Security Notice:</strong> Do <u>not</u> download FlyOOBE from <strong>flyoobe.net</strong> —  
+  it’s an unofficial copy and may contain malware.  
+  Always use the <a href="https://github.com/builtbybel/FlyOOBE" target="_blank">official GitHub releases</a>.
+</div>
 
 <div class="window">
   <div class="titlebar">FlyOOBE Update Checker</div>
