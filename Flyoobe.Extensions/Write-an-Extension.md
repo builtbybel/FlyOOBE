@@ -28,7 +28,8 @@ Add these at the top of your .ps1:
 - `console`: launches external PowerShell with -NoExit
 - `log`: runs embedded and streams to the app’s Live Log window
   
-**Options** - `# Options: value1; value2; value3; ... `(optional)
+**Options** 
+- `# Options: value1; value2; value3; ... `(optional)
 - Adds a dropdown to pick an action.
 - The selected value is passed to the script as the first positional argument ($Option or $args[0]).
 
@@ -37,7 +38,7 @@ Add these at the top of your .ps1:
 - `"Action (silent)"` → force embedded without log
 - `"Action (log)"` → force embedded with live log
 (The suffix is removed before passing the option text to the script.)
-`# Input: true | false` (optional)
+-`# Input: true | false` (optional)
 - Shows a text box below the options if true.
 - The entered text is passed as the second positional argument `($ArgsText or $args[1])`.
 `# InputPlaceholder:` <string> (optional, requires # Input: true)
