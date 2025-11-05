@@ -1,6 +1,7 @@
 # 🆕 Setup Extensions — Technical Guide (Host · Options · Input)
 
-The Setup Extensions system lets you drop PowerShell scripts into `. \scripts\` and have them show up automatically in the Setup Extensions page. Scripts declare behavior via simple header metadata.
+The Setup Extensions system lets you drop PowerShell scripts into 
+`.\scripts\` and have them show up automatically in the Setup Extensions page. Scripts declare behavior via simple header metadata.
 
 **This doc explains:**
 - Which metadata keys are supported
@@ -40,6 +41,7 @@ Add these at the top of your .ps1:
 (The suffix is removed before passing the option text to the script.)
 
 **Textbox**
+
 -`# Input: true | false` (optional)
 - Shows a text box below the options if true.
 - The entered text is passed as the second positional argument `($ArgsText or $args[1])`.
