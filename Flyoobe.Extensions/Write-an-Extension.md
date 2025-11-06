@@ -41,8 +41,7 @@ Add these at the top of your .ps1:
 (The suffix is removed before passing the option text to the script.)
 
 **Textbox**
-
--`# Input: true | false` (optional)
+- `# Input: true | false` (optional)
 - Shows a text box below the options if true.
 - The entered text is passed as the second positional argument `($ArgsText or $args[1])`.
 `# InputPlaceholder:` <string> (optional, requires # Input: true)
