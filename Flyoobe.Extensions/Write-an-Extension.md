@@ -81,8 +81,7 @@ Use the suffix (silent) to run embedded without opening the live log, even if ho
 To keep large script collections organized, each extension can declare a **category** in its header
 Each extension can declare a **category** to indicate *when* it should be used during the setup flow.
 
-```powershell
-# Category: Pre | Post | Mid | Tool | All
+`Category: Pre | Post | Mid | Tool | All` 
 
 
 | Category                      | When It Runs / Fits                               | What It’s Typically Used For                 | Example Use-Cases                                                  |
