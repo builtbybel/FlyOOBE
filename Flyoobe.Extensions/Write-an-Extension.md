@@ -76,12 +76,23 @@ Runs headless and opens a live log window that streams output in real-time.
 **- silent** (per-option override only):
 Use the suffix (silent) to run embedded without opening the live log, even if host default is log.
 
-## 🗂️ Categories (views)
+## 🧭 Extension Categories (ToolHub)
 
-- Category: Pre → visible in Pre-Setup view
-- Category: Mid → visible in Setup view
-- Category: Post → visible in Post-Setup / Extensions view
-- Category: All/Tool → visible in all views (Extensions)
+To keep large script collections organized, each extension can declare a **category** in its header
+Each extension can declare a **category** to indicate *when* it should be used during the setup flow.
+
+```powershell
+# Category: Pre | Post | Mid | Tool | All
+
+
+| Category                      | When It Runs / Fits                               | What It’s Typically Used For                 | Example Use-Cases                                                  |
+|------------------------------|----------------------------------------------------|----------------------------------------------|--------------------------------------------------------------------|
+| Pre (Setup Operating System) | Early in the setup process, before personalization | Preparing the system state                   | Debloating, enabling services, network configuration               |
+| Mid (Configure Operating System) | During core system configuration               | Adjusting Windows behavior and defaults      | Feature toggles, performance tuning, registry adjustments          |
+| Post (Enter Extensions)      | After Windows is installed and configured          | User-facing customization and finishing touches | Explorer/UI tweaks, theme/visual styles, privacy adjustments    |
+| Tool (Utility Mode)          | Anytime — independent helper utilities             | External tools not tied to a setup phase     | Ninite installer, Winget multi-installer, Flyby11 Upgrade Helper   |
+| All (Universal)              | Always visible in all categories                   | Scripts that can be run at any time          | Generic utilities, backup/restore actions?                         |
+
 
 ## 🔎 Discovery & Display
 
