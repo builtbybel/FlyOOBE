@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FlyOOBE Update Check</title>
+<style>
+body {
+  background-color: #c0c0c0;
+  font-family: "Courier New", monospace;
+  color: black;
+  margin: 0;
+  padding: 40px;
+}
+
+/* === Warning bar === */
+.notice {
+  background: #ffcc00;
+  border: 3px solid #808080;
+  color: black;
+  font-weight: bold;
+  padding: 8px;
+  margin-bottom: 20px;
+  box-shadow: 3px 3px 0 #404040;
+  text-align: center;
+}
+
+.notice a {
+  color: black;
+  text-decoration: underline;
+}
+
+/* === Window === */
+.window {
+  width: 420px;
+  background: #e0e0e0;
+  border: 3px solid #808080;
+  box-shadow: 3px 3px 0 #404040;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.titlebar {
+  background: navy;
+  color: white;
+  padding: 4px 8px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+button, a.btn {
+  background: #d0d0d0;
+  border: 2px solid #808080;
+  padding: 6px 10px;
+  font-family: "Courier New", monospace;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+}
+
+button:active, a.btn:active {
+  border: 2px inset #808080;
+}
+
+.status-box {
+  background: #ffffff;
+  border: 2px inset #808080;
+  padding: 10px;
+  margin: 10px 0;
+  height: 60px;
+  overflow: auto;
+}
+
+.center { text-align: center; }
+
+.footer {
+  border-top: 2px solid #808080;
+  margin-top: 10px;
+  padding-top: 6px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.footer a {
+  color: black;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<div class="notice">
+  ⚠️ <strong>Security Notice:</strong> Do <u>not</u> download FlyOOBE from <strong>flyoobe.net</strong> —  
+  it’s an unofficial copy and may contain malware.  
+  Always use the <a href="https://github.com/builtbybel/FlyOOBE" target="_blank">official GitHub releases</a>.
+</div>
+
+<div class="window">
+  <div class="titlebar">FlyOOBE Update Checker</div>
+
+  <div class="status-box" id="status">Checking for updates...</div>
+
+  <div class="center">
+    <button id="checkBtn">Check Again</button>
+  </div>
+
+  <div class="center" style="margin-top:15px;">
+    <a class="btn" href="https://github.com/builtbybel/FlyOOBE" target="_blank">🔗 GitHub Repo</a>
+    <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline;">
+      <input type="hidden" name="hosted_button_id" value="MY7HX4QLYR4KG" />
+      <button type="submit">💖 Donate</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    <p>FlyOOBE by <strong>Belim</strong> • Built with ☕ & 💡</p>
+  </div>
+</div>
+
+<script>
+const latest = "2.1.790";
+const params = new URLSearchParams(location.search);
+const user = params.get("version");
+const status = document.getElementById("status");
+const btn = document.getElementById("checkBtn");
+
+function compare(a,b){
+  const x=a.split(".").map(Number),y=b.split(".").map(Number);
+  for(let i=0;i<Math.max(x.length,y.length);i++){
+    if((x[i]||0)<(y[i]||0))return -1;
+    if((x[i]||0)>(y[i]||0))return 1;
+  } return 0;
+}
+
+function runCheck(){
+  status.textContent = "Checking for updates...";
+  btn.disabled = true;
+  setTimeout(()=>{
+    btn.disabled = false;
+    if(!user){
+      status.innerHTML = "❓ No version detected.<br>Open this page from FlyOOBE.";
+      return;
+    }
+    const r = compare(user, latest);
+    if(r < 0){
+      status.innerHTML = `⚠️ Outdated<br>Your version: ${user}<br>Latest: ${latest}<br><a href="https://github.com/builtbybel/FlyOOBE/releases" target="_blank">Get Update</a>`;
+    }
+    else if(r === 0){
+      status.innerHTML = `✅ Up to date<br>Version ${user}`;
+    }
+    else {
+      status.innerHTML = `🚀 Newer build<br>You’re ahead with ${user}`;
+    }
+  }, 800);
+}
+
+btn.onclick = runCheck;
+runCheck();
+</script>
+
+</body>
+</html>
+
+
+

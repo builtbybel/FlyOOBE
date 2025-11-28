@@ -1,24 +1,24 @@
 # 🐝 FlyOOBE (ex-Flyby11) – Windows Setup Assistant
 
+<img width="1536" height="1024" alt="IllustrationBranding-Visual-FlyOOBE" src="https://github.com/user-attachments/assets/02dff63c-d830-4e08-bdd8-b13ad70f6683" />
 
-<img width="1536" height="1024" alt="IllustrationBranding-Visual-Flyoobe" src="https://github.com/user-attachments/assets/6153bfa0-c157-4422-af21-5488b2f17af0" />
 
 ---
 
 ## 📢 Quick Note for Returning Users
-**Flyoobe is the natural evolution of Flyby11.**  
-The classic Flyby11 upgrader still exists and is included inside Flyoobe,  
+**FlyOOBE is the natural evolution of Flyby11.**  
+The classic Flyby11 upgrader still exists and is included inside FlyOOBE,  
 plus it's also available as a **separate download** if you only want the minimal upgrade tool.
 
 You can now **choose**:
 
 | Version | Purpose | Features | Download |
 |---------|---------|----------|----------|
-| **Flyoobe** (New) | Upgrade + OOBE Toolkit | • Windows 10 → 11 upgrades<br>• OOBE customization<br>• Tweaks & Debloat<br>• Scriptable setup extensions | [⬇ Download Flyoobe](https://github.com/builtbybel/Flyoobe/releases/latest) |
-| **Flyby11** (Classic) | Upgrade Only | • Win10 → Win11 Inplace upgrade<br>• Hardware check bypass<br>• Minimal footprint | [⬇ Download Flyby11 Classic](https://github.com/builtbybel/Flyoobe/releases/latest) |
+| **FlyOOBE** (New) | Upgrade + OOBE Toolkit | • Windows 10 → 11 upgrades<br>• OOBE customization<br>• Tweaks & Debloat<br>• Scriptable setup extensions | [⬇ Download FlyOOBE](https://github.com/builtbybel/FlyOOBE/releases/latest) |
+| **Flyby11** (Classic) | Upgrade Only | • Win10 → Win11 Inplace upgrade<br>• Hardware check bypass<br>• Minimal footprint | [⬇ Download Flyby11 Classic](https://github.com/builtbybel/FlyOOBE/releases/latest) |
 ---
 
-## 🐝 Why Flyoobe?
+## 🐝 Why FlyOOBE?
 Originally, **Flyby11** was a simple patcher to remove the restrictions stopping you from installing Windows 11 (24H2) on unsupported hardware.  
 Old PC? No TPM, no Secure Boot, unsupported CPU? Flyby11 let you install Windows 11 anyway.
 
@@ -26,25 +26,25 @@ After helping thousands upgrade, one thing became clear:
 **Bypassing checks is only half the battle.**  
 We needed a **full setup solution** — one that respects user choices instead of Microsoft's defaults.
 
-**Flyoobe** was the next step:  
+**FlyOOBE** was the next step:  
 - Skip the fluff  
 - Remove the junk  
 - Take full control from first boot  
 
 Because your PC should work for you, not the other way around.  
-Flyoobe keeps the original idea alive and pushes it even further.
+FlyOOBE keeps the original idea alive and pushes it even further.
 
 ---
 
 No complicated steps.  
-**Just run the tool** (see ["Releases"](https://github.com/builtbybel/Flyoobe/releases/latest)),  
+**Just run the tool** (see ["Releases"](https://github.com/builtbybel/FlyOOBE/releases/latest)),  
 unpack if needed, and you'll be running Windows 11 on your “unsupported” machine in no time.  
 Think of it as sneaking through the back door without anyone noticing.
 
 ---
 
 ## 🛠 Technical Overview
-**Flyoobe method:**
+**FlyOOBE method:**
 - Uses Windows Server variant of setup → skips TPM, Secure Boot, CPU checks
 - Still installs **normal Windows 11**
 - ISO download/mount handled automatically (via [Fido script](https://github.com/pbatard/Fido))
@@ -52,7 +52,7 @@ Think of it as sneaking through the back door without anyone noticing.
 
 ---
 
-## 💡 Why Keep Flyoobe Alive?
+## 💡 Why Keep FlyOOBE Alive?
 - **Upgrade freedom** – Don’t ditch a perfectly fine PC just because Microsoft says so  
 - **Eco-friendly** – Less e-waste from forced upgrades  
 - **Save money** – No need for new hardware if yours still works
@@ -60,7 +60,7 @@ Think of it as sneaking through the back door without anyone noticing.
 ---
 
 ## ⚠ Disclaimer
-Flyby11/Flyoobe uses known, currently working methods to bypass Windows 11 24H2 restrictions.  
+Flyby11/FlyOOBE uses known, currently working methods to bypass Windows 11 24H2 restrictions.  
 **POPCNT requirement** cannot be bypassed — needed for Win11 24H2.  
 Introduced a compatibility checker in v2.3 to warn if unsupported.
 
@@ -88,7 +88,7 @@ Bottom line: Works today — but unsupported means you accept the risk. 😎
 ---
 
 ## ❤️ Support Development
-If Flyby11 or Flyoobe has helped you, consider supporting its continued development.  
+If Flyby11 or FlyOOBE has helped you, consider supporting its continued development.  
 Every bit helps keep the project alive and improving. 🙏💌☕
 
 👉 [**Donate here**](https://www.paypal.com/donate?hosted_button_id=MY7HX4QLYR4KG)
