@@ -1,353 +1,224 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Flyoobe
+namespace Flyoobe.Views
 {
     /// <summary>
-    /// Start page with a scrollable list of tiles (Win11 upgrade, install, OOBE, extensions, etc.)
+    /// Home dashboard screen that displays setup pages and extensions.
+    /// Provides search filtering and section grouping.
     /// </summary>
-    public partial class HomeControlView : UserControl, IView
+    public partial class HomeControlView : UserControl, IView, IHasSearch
     {
         private readonly ViewNavigator _navigator;
-        public string ViewTitle => "Startsite";
 
-        // MDL2 glyphs
-        private const string GLYPH_WINDOWS = "\uE9F3";
-        private const string GLYPH_MEDIA = "\uE8A5";
-        private const string GLYPH_OOBE = "\uE790";
-        private const string GLYPH_EXT = "\uE71D";
-        private const string GLYPH_CHEVRON = "\uE76C";
+        public string ViewTitle
+        { get { return "Start"; } }
 
-        // Colors
-        private readonly Color BaseColor = Color.White;
+        public string ViewSubtitle
+        { get { return null; } }
 
-        private readonly Color HoverColor = Color.FromArgb(246, 246, 246);
-        private readonly Color SeparatorColor = Color.FromArgb(230, 230, 230);
+        // Stores all tiles for search
+        private readonly List<HomeItemControl> _allTiles = new List<HomeItemControl>();
+
+        // Ensures each tile is created once and reused
+        private readonly Dictionary<string, HomeItemControl> _tileCache =
+            new Dictionary<string, HomeItemControl>(StringComparer.OrdinalIgnoreCase);
+
 
         public HomeControlView(ViewNavigator navigator)
         {
             _navigator = navigator;
-            BuildLayout();
+            InitializeComponent();
+            BuildUI();
         }
 
-        // =========================
-        // Layout setup
-        // =========================
-        private void BuildLayout()
+        private void HomeControlView_Load(object sender, EventArgs e)
         {
-            float dpi = this.CreateGraphics().DpiX / 96f;
+            comboFilter.Items.Clear();
+            comboFilter.Items.Add("All");
+            comboFilter.Items.Add("OOBE");
+            comboFilter.Items.Add("Extensions");
 
-            var root = CreateRootPanel();
-            var list = CreateListPanel();
-
-            // First tile depends on OS
-            if (!Utils.DetectWindows11())
-            {
-                AddRow(list, CreateListTile(
-                    GLYPH_WINDOWS,
-                    "Get Windows 11",
-                    "Download or upgrade to Windows 11",
-                    () => _navigator.ShowView("Upgrade"),
-                    dpi));
-            }
-            else
-            {
-                AddRow(list, CreateOobeAssistListTile(dpi));
-            }
-
-            // Additional static tiles
-            AddRow(list, CreateListTile(
-                GLYPH_MEDIA, "Install from image", "Install Windows from ISO, repair this PC.",
-                () => _navigator.ShowView("Reinstall"), dpi));
-
-            AddRow(list, CreateListTile(
-                GLYPH_OOBE, "Customize OOBE", "Tweak and personalize after install",
-                () => _navigator.ShowView("Personalization"), dpi));
-
-            AddRow(list, CreateListTile(
-                GLYPH_EXT, "Setup Extensions", "Enhance your setup with community tools",
-                () => _navigator.ShowView("Extensions"), dpi));
-
-            root.Controls.Add(list, 0, 0);
-            Controls.Add(root);
-        }
-
-        private TableLayoutPanel CreateRootPanel()
-        {
-            return new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 1,
-                RowCount = 1,
-                BackColor = BaseColor
-            };
-        }
-
-        private TableLayoutPanel CreateListPanel()
-        {
-            return new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                AutoScroll = true,
-                ColumnCount = 1,
-                BackColor = BaseColor
-            };
+            comboFilter.SelectedIndex = 0;
         }
 
         /// <summary>
-        /// Adds one row = [tile] + [separator line].
+        /// Rebuilds all home-screen content.
         /// </summary>
-        private void AddRow(TableLayoutPanel tlp, Control tile)
+        private void BuildUI()
         {
-            float dpi = this.CreateGraphics().DpiX / 96f;
+            flowRoot.SuspendLayout();
+            flowRoot.Controls.Clear();
 
-            tlp.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            tlp.Controls.Add(tile, 0, tlp.RowCount++);
+            // Recommended Section
+            var ext = AddSection("☆ Featured Extensions", "ext");
+            AddExtensionTile(ext, "Flyby11", "Upgrade to Windows 11", "Safely migrate Windows 10 to Windows 11");
 
-            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, Math.Max(1, (int)(1 * dpi))));
-            tlp.Controls.Add(new Panel
+            AddExtensionTile(ext, "Windows 11 25H2 Enablement Package", "Activate Windows 11 25H2", "Enable new features now");
+            AddExtensionTile(ext, "ViVeTool-Bridge", "ViVeTool", "Toggle experimental Windows features");
+
+            // Native Tool Pages
+            AddTile(ext, "Dumputer", "Remove unwanted apps", delegate { _navigator.ShowView("Apps"); }, "debloat bloatware remove apps cleanup");
+            AddTile(ext, "CoTweaker", "Enhance privacy settings and optimize system, gaming etc.", delegate { _navigator.ShowView("Experience"); }, "bloatware tweak copilot ai privacy boost");
+            AddTile(ext, "App Installer", "Install recommended software", delegate { _navigator.ShowView("Installer"); }, "install apps software winget");
+
+            // OOBE Setup Pages
+            var oobe = AddSection("📄 All Setup Pages", "oobe");
+            foreach (string page in _navigator.OobeStepsWithoutHome)
             {
-                Height = Math.Max(1, (int)(1 * dpi)),
-                Dock = DockStyle.Top,
-                BackColor = SeparatorColor,
-                Margin = new Padding(0)
-            }, 0, tlp.RowCount++);
+                ViewMetadata.Pages.TryGetValue(page, out var meta);
+
+                string title = meta.Title ?? page;
+                string subtitle = meta.Subtitle ?? "";
+                ViewMetadata.SearchTags.TryGetValue(page, out var tags);
+
+                AddTile(oobe, title, subtitle,
+                    delegate { _navigator.ShowView(page); }, tags);
+            }
+
+
+            // Extensions Hub
+            var tools = AddSection("🧩 Extensions Hub", "ext");
+            AddTile(tools, "Extensions", "Open extension manager", delegate { _navigator.ShowView("Extensions"); }, ViewMetadata.SearchTags["Extensions"]);
+
+            flowRoot.ResumeLayout();
+            ApplyFilter();
         }
 
-        // =========================
-        // Tile creation
-        // =========================
-
         /// <summary>
-        /// Generic clickable tile:
-        /// [icon] [title + description] [chevron].
+        /// Creates a section block with a header label.
         /// </summary>
-        private Control CreateListTile(string iconGlyph, string title, string subtitle, Action onClick, float dpi)
+        private FlowLayoutPanel AddSection(string headerText, string filterKey)
         {
-            var row = CreateRowPanel(120 * dpi);
+            var section = new FlowLayoutPanel();
+            section.AutoSize = true;
+            section.FlowDirection = FlowDirection.TopDown;
+            section.WrapContents = false;
+            section.Tag = filterKey;
 
-            // Left: icon
-            var icon = CreateIconLabel(iconGlyph, 48 * dpi, 20f * dpi, Color.FromArgb(31, 31, 31));
+            flowRoot.Controls.Add(section);
 
-            // Right: chevron
-            var chevron = CreateIconLabel(GLYPH_CHEVRON, 32 * dpi, 12f * dpi, Color.FromArgb(120, 120, 120), DockStyle.Right);
+            var header = new Label();
+            header.Text = headerText;
+            header.AutoSize = true;
+            header.Font = new Font("Segoe UI Semibold", 13f);
+            header.Margin = new Padding(8, 0, 8, 12);
+            section.Controls.Add(header);
 
-            // Middle: title + subtitle
-            var textHost = CreateTextBlock(title, subtitle, dpi);
-
-            row.Controls.Add(textHost);
-            row.Controls.Add(chevron);
-            row.Controls.Add(icon);
-
-            ApplyHover(row);
-            WireClickRecursive(row, onClick);
+            var row = new FlowLayoutPanel();
+            row.AutoSize = true;
+            row.FlowDirection = FlowDirection.LeftToRight;
+            row.WrapContents = true;
+            row.Margin = new Padding(8, 0, 8, 12);
+            section.Controls.Add(row);
 
             return row;
         }
 
         /// <summary>
-        /// Windows 11 specific tile:
-        /// [icon] [title + description] [dropdown menu].
-        /// No row click, navigation via ComboBox.
+        /// Creates (or reuses) a tile UI element.
         /// </summary>
-        private Control CreateOobeAssistListTile(float dpi)
+        private void AddTile(FlowLayoutPanel target, string title, string description, Action click, string tags)
         {
-            var row = CreateRowPanel(100 * dpi);
+            HomeItemControl tile;
 
-            // Left: icon
-            var icon = CreateIconLabel(GLYPH_WINDOWS, 48 * dpi, 20f * dpi, Color.FromArgb(224, 68, 181));
-
-            // Right: dropdown menu
-            var combo = new ComboBox
+            if (!_tileCache.TryGetValue(title, out tile))
             {
-                Dock = DockStyle.Right,
-                Width = (int)(260 * dpi),
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Font = new Font("Segoe UI", 10f, FontStyle.Regular)
-            };
+                tile = new HomeItemControl();
+                tile.ItemTitle = title;
+                tile.ItemDescription = description;
+                tile.SearchTags = (tags ?? "").ToLowerInvariant();
+                tile.Margin = new Padding(8);
+                tile.Clicked += click;
 
-            combo.Items.Add(new ComboOption("Select an action...", null));
-            combo.Items.Add(new ComboOption("Remove bundled apps and bloatware", "Apps"));
-            combo.Items.Add(new ComboOption("Pick a browser that’s not Edge as default", "Browser"));
-            combo.Items.Add(new ComboOption("Install must-have apps you’re missing", "Installer"));
-            combo.Items.Add(new ComboOption("Run post-setup actions: update Defender...", "Extensions"));
-            combo.Items.Add(new ComboOption("Create or switch to a local account", "Account"));
-            combo.Items.Add(new ComboOption("Adjust AI features to your needs", "AI"));
-            combo.SelectedIndex = 0;
+                _tileCache[title] = tile;
+                _allTiles.Add(tile);
+            }
 
-            combo.SelectedIndexChanged += (s, e) =>
+            target.Controls.Add(tile);
+        }
+
+
+        /// <summary>
+        /// Tile that opens the Extensions Hub and selects a specific tool.
+        /// </summary>
+        private void AddExtensionTile(FlowLayoutPanel panel, string toolKey, string title, string description)
+        {
+            // tile == visible UI title, e.g. Upgrade to Windows 11
+            // toolKey == internal extension identifier, e.g. Flyby11
+            string tags;
+            ViewMetadata.SearchTags.TryGetValue(toolKey, out tags);
+
+            AddTile(panel, title, description, delegate
             {
-                var opt = combo.SelectedItem as ComboOption;
-                if (opt != null && !string.IsNullOrEmpty(opt.Key))
-                    _navigator.ShowView(opt.Key);
-            };
-
-            // special link for 25H2 Enablement Package
-            var linkEP = new LinkLabel
-            {
-                Dock = DockStyle.Bottom,
-                Height = (int)(24 * dpi),
-                Font = new Font("Segoe UI", 10f, FontStyle.Regular),
-                Text = "Windows 11 25H2 is here – activate now!",
-                LinkColor = Color.FromArgb(0, 102, 204),
-                TextAlign = ContentAlignment.MiddleRight
-            };
-
-            linkEP.Click += (s, e) =>
-            {
-                // Open Extensions view
                 _navigator.ShowView("Extensions");
 
-                // Tell ToolHub to select this tool
-                if (_navigator.CurrentView is Flyoobe.ToolHub.ToolHubControlView hub)
-                {
-                    hub.SelectTool("Windows 11 25H2 Enablement Package");
-                }
-            };
+                var hub = _navigator.CurrentView as Flyoobe.ToolHub.ToolHubControlView;
+                if (hub != null)
+                    hub.SelectTool(toolKey);
+            }, tags);
 
-            // === Middle: title + description ===
-            var textHost = CreateTextBlock(
-                "Finish what Setup skipped",
-                "Quick actions after Windows is already installed",
-                dpi);
-
-            // Add all UI parts into the row
-            row.Controls.Add(textHost);
-            row.Controls.Add(combo);
-            row.Controls.Add(icon);
-            row.Controls.Add(linkEP); 
-
-            ApplyHover(row);
-            return row;
-        }
-
-        // =========================
-        // Control factories
-        // =========================
-
-        private Panel CreateRowPanel(float height)
-        {
-            return new Panel
+            // assign user count using toolKey
+            string userCount;
+            if (ViewMetadata.UserCounts.TryGetValue(toolKey, out userCount))
             {
-                Dock = DockStyle.Top,
-                Height = (int)height,
-                BackColor = BaseColor,
-                Padding = new Padding(16),
-                Margin = new Padding(0),
-                Cursor = Cursors.Hand
-            };
-        }
-
-        private Label CreateIconLabel(string text, float width, float fontSize, Color color, DockStyle dock = DockStyle.Left)
-        {
-            return new Label
-            {
-                AutoSize = false,
-                Width = (int)width,
-                Dock = dock,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font("Segoe MDL2 Assets", fontSize, FontStyle.Regular),
-                ForeColor = color,
-                Text = text
-            };
+                _tileCache[title].UserCount = userCount; // key = title (UI), but lookup = toolKey
+            }
         }
 
         /// <summary>
-        /// Builds a text block with header (title) and description (subtitle).
+        /// Shows/hides sections based on filter dropdown.
         /// </summary>
-        private Panel CreateTextBlock(string title, string subtitle, float dpi)
+        private void ApplyFilter()
         {
-            var panel = new Panel
-            {
-                Dock = DockStyle.Fill,
-                Padding = new Padding((int)(4 * dpi), 0, (int)(4 * dpi), 0)
-            };
+            string mode = comboFilter.SelectedItem != null ? comboFilter.SelectedItem.ToString() : "All";
 
-            // Description below
-            var lblSub = new Label
+            foreach (Control c in flowRoot.Controls)
             {
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 10f, FontStyle.Regular),
-                Text = subtitle,
-                TextAlign = ContentAlignment.TopLeft,
-                AutoEllipsis = true
-            };
+                var section = c as FlowLayoutPanel;
+                if (section == null) continue;
 
-            // Title on top
-            var lblTitle = new Label
-            {
-                Dock = DockStyle.Top,
-                Height = (int)(28 * dpi),
-                Font = new Font("Segoe UI", 10.5f, FontStyle.Bold),
-                Text = title,
-                TextAlign = ContentAlignment.MiddleLeft
-            };
+                string key = section.Tag as string;
 
-            panel.Controls.Add(lblSub);
-            panel.Controls.Add(lblTitle);
-            return panel;
+                if (mode == "OOBE")
+                    section.Visible = key == "oobe";
+                else if (mode == "Extensions")
+                    section.Visible = key == "ext";
+                else
+                    section.Visible = true;
+            }
         }
 
-        // =========================
-        // Hover / click helpers
-        // =========================
-
-        private void WireClickRecursive(Control root, Action onClick)
+        private void comboFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Action<Control> attach = null;
-            attach = (c) =>
-            {
-                c.Click += (s, e) => onClick?.Invoke();
-                foreach (Control child in c.Controls)
-                    attach(child);
-            };
-            attach(root);
-        }
-
-        private void ApplyHover(Control root)
-        {
-            WireHoverRecursive(root,
-                () => root.BackColor = HoverColor,
-                () =>
-                {
-                    if (!root.ClientRectangle.Contains(root.PointToClient(Cursor.Position)))
-                        root.BackColor = BaseColor;
-                });
-        }
-
-        private static void WireHoverRecursive(Control root, Action onEnter, Action onLeave)
-        {
-            EventHandler enter = (s, e) => onEnter?.Invoke();
-            EventHandler leave = (s, e) => onLeave?.Invoke();
-
-            Action<Control> attach = null;
-            attach = (c) =>
-            {
-                c.MouseEnter += enter;
-                c.MouseLeave += leave;
-                foreach (Control child in c.Controls)
-                    attach(child);
-            };
-            attach(root);
-        }
-
-        // =========================
-        // Helper class for ComboBox
-        // =========================
-        private class ComboOption
-        {
-            public string Text { get; }
-            public string Key { get; }
-
-            public ComboOption(string text, string key)
-            { Text = text; Key = key; }
-
-            public override string ToString()
-            { return Text; }
+            ApplyFilter();
         }
 
         public void RefreshView()
-        { }
+
+        {
+            BuildUI();
+        }
+
+        /// <summary>
+        /// Applies a global search filter to all home screen tiles.
+        /// This method is called by the MainForm whenever the user updates the
+        /// search box in the global header (outside of this view).
+        public void OnGlobalSearchChanged(string text)
+        {
+            string filter = (text ?? "").Trim().ToLowerInvariant();
+
+            foreach (var tile in _allTiles)
+            {
+                bool match =
+                    tile.ItemTitle.ToLowerInvariant().Contains(filter) ||
+                    tile.ItemDescription.ToLowerInvariant().Contains(filter) ||
+                    tile.SearchTags.Contains(filter);
+
+                tile.Visible = match;
+            }
+        }
     }
 }

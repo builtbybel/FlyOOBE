@@ -1,8 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.Security.Principal;
-using System.Windows.Forms;
 
 namespace Flyoobe
 {
@@ -56,7 +54,6 @@ namespace Flyoobe
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
         }
-
 
         /// <summary>
         /// Detects if the current OS is Windows 11 or newer.

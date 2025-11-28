@@ -8,8 +8,6 @@ namespace Flyoobe
 {
     public partial class PersonalizationControlView : UserControl, IView
     {
-        public string ViewTitle => "Personalize Device";
-
         // Import necessary API functions for theme changes to trigger visual updates
         [DllImport("user32.dll", SetLastError = false, CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessageTimeout(
@@ -112,7 +110,6 @@ namespace Flyoobe
             }
         }
 
-
         /// <summary>
         /// Apply taskbar alignment (0 = Left, 1 = Center) and refresh Explorer if needed.
         /// </summary>
@@ -126,7 +123,6 @@ namespace Flyoobe
                     if (adv != null)
                         adv.SetValue("TaskbarAl", alignment == 0 ? 0 : 1, RegistryValueKind.DWord);
                 }
-
             }
             catch (Exception ex)
             {
@@ -152,7 +148,6 @@ namespace Flyoobe
             {
                 MessageBox.Show("Failed to change transparency: " + ex.Message);
             }
-
         }
 
         /// <summary>
@@ -192,7 +187,6 @@ namespace Flyoobe
             SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, path, SPIF_UPDATEINIFILE);
         }
 
-
         /// <summary>
         /// Applies the selected theme and transparency settings.
         /// </summary>
@@ -206,7 +200,6 @@ namespace Flyoobe
             bool enableTransparency = checkToggleTransparency.Checked;
             ToggleTransparency(enableTransparency);
 
-
             // apply taskbar alignment from designer combo
             if (comboTaskbarAlignment != null && comboTaskbarAlignment.SelectedIndex >= 0)
             {
@@ -214,8 +207,7 @@ namespace Flyoobe
                 SetTaskbarAlignment(alignment);
             }
 
-
-            lblStatus.Text = "Personalization settings updated";
+            lblStatus.Text= "Personalization settings updated";
         }
 
         /// <summary>

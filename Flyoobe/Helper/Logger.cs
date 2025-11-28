@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace Flyoobe
 {
@@ -14,27 +13,35 @@ namespace Flyoobe
 
     public static class Logger
     {
-        private static LogForm loggerFormInstance;
+        // The active log view control where log messages are displayed
+        private static LoggerControlView loggerControlInstance;
+
+        // Temporary storage for logs before the UI is ready (e.g., during app startup)
         private static readonly List<(string Message, Color Color)> logBuffer = new List<(string, Color)>();
-        private static Form mainForm;
+
+        // Reference to the view navigation system so we can switch to the log view on demand
+        private static ViewNavigator navigator;
+
+        // Optional: name of the current log "section" (helps group logs visually)
+        private static string currentSection;
 
         /// <summary>
-        /// Sets the LoggerForm instance dynamically.
+        /// Sets the LoggerControlView instance dynamically.
         /// </summary>
-        public static void SetLogForm(LogForm loggerForm)
+        public static void SetLoggerControl(LoggerControlView loggerControl)
         {
-            if (loggerForm == null)
-                throw new ArgumentNullException(nameof(loggerForm), "LoggerForm cannot be null.");
+            if (loggerControl == null)
+                throw new ArgumentNullException(nameof(loggerControl), "LoggerControlView cannot be null.");
 
-            loggerFormInstance = loggerForm;
+            loggerControlInstance = loggerControl;
 
             // Flush any buffered logs to the UI
             foreach (var log in logBuffer)
             {
-                loggerFormInstance.AddLog(log.Message, log.Color);
+                loggerControlInstance.AddLog(log.Message, log.Color);
             }
 
-            //   logBuffer.Clear();
+            // logBuffer.Clear(); // keep buffer if history retention needed
         }
 
         /// <summary>
@@ -52,7 +59,7 @@ namespace Flyoobe
                     break;
 
                 case LogLevel.Error:
-                    color = Color.ForestGreen;
+                    color = Color.Firebrick;
                     break;
 
                 default:
@@ -70,73 +77,59 @@ namespace Flyoobe
         {
             string timestampedMessage = $"{DateTime.Now:HH:mm:ss} - {message}";
 
-            if (loggerFormInstance != null)
+            if (loggerControlInstance != null)
             {
-                loggerFormInstance.AddLog(timestampedMessage, color);
+                loggerControlInstance.AddLog(timestampedMessage, color);
             }
             else
             {
+                // LoggerControlView not ready yet, so store temporarily
                 logBuffer.Add((timestampedMessage, color));
             }
         }
 
         /// <summary>
-        /// Creates and shows (or hides) the LogForm window.
+        /// Registers the ViewNavigator so the log view can be shown when needed.
         /// </summary>
-        public static void ToggleLogForm(Form parentForm)
+        public static void AttachNavigator(ViewNavigator nav)
         {
-            if (parentForm == null)
-                throw new ArgumentNullException(nameof(parentForm));
+            navigator = nav;
+        }
 
-            mainForm = parentForm;
+        /// <summary>
+        /// Shows the log view.
+        /// </summary>
+        public static void ShowLogView()
+        {
+            if (navigator != null)
+                navigator.ShowView("Activity");
+        }
 
-            // Check if there is no existing form or the old one was disposed
-            if (loggerFormInstance == null || loggerFormInstance.IsDisposed)
+        /// <summary>
+        /// Starts a new log section, visually separated in the log window.
+        /// Example: Logger.BeginSection("Extension/Tool Name");
+        /// </summary>
+        public static void BeginSection(string sectionName)
+        {
+            if (string.IsNullOrWhiteSpace(sectionName))
+                sectionName = "Unnamed Section";
+
+            // Visually separate sections with a blank line and a header line
+            string header = $"===== {sectionName.ToUpper()} ({DateTime.Now:HH:mm:ss}) =====";
+
+            currentSection = sectionName;
+
+            if (loggerControlInstance != null)
             {
-                loggerFormInstance = new LogForm
-                {
-                    Text = "OOBEE • Console",
-                    Size = new Size(400, 600),
-                    TopMost = true,
-                    StartPosition = FormStartPosition.Manual
-                };
-
-                // Prevent the form from being destroyed when the user clicks "X"
-                // Instead, just hide it and reset the main form opacity
-                loggerFormInstance.FormClosing += (s, e) =>
-                {
-                    e.Cancel = true;
-                    loggerFormInstance.Hide();
-                    if (mainForm != null)
-                        mainForm.Opacity = 1.0;
-                };
-
-                // Register this form as the global logger target
-                SetLogForm(loggerFormInstance);
-            }
-
-            // Safety check in case the form was disposed unexpectedly
-            if (loggerFormInstance == null || loggerFormInstance.IsDisposed)
-                return;
-
-            // Toggle visibility
-            if (loggerFormInstance.Visible)
-            {
-                // Hide the logger form and restore main form opacity
-                loggerFormInstance.Hide();
-                mainForm.Opacity = 1.0;
+                loggerControlInstance.AddLog(string.Empty, Color.Black);
+                loggerControlInstance.AddLog(header, Color.DarkSlateBlue);
+                loggerControlInstance.AddLog(string.Empty, Color.Black);
             }
             else
             {
-                // Position the logger window relative to the main form
-                loggerFormInstance.Location = new Point(
-                    parentForm.Right - 400,
-                    parentForm.Top + 50);
-
-                // Show the logger form and dim the main form slightly
-                loggerFormInstance.Show();
-                loggerFormInstance.BringToFront();
-                mainForm.Opacity = 0.9;
+                logBuffer.Add((string.Empty, Color.Black));
+                logBuffer.Add((header, Color.DarkSlateBlue));
+                logBuffer.Add((string.Empty, Color.Black));
             }
         }
     }

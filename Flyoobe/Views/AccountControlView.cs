@@ -7,8 +7,6 @@ namespace Flyoobe
 {
     public partial class AccountControlView : UserControl, IView
     {
-        public string ViewTitle => "Account";
-
         public AccountControlView()
 
         {
@@ -65,7 +63,6 @@ namespace Flyoobe
                 MessageBox.Show($"Failed to create user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void linkOnlineAccount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

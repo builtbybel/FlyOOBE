@@ -5,10 +5,8 @@ using System.Windows.Forms;
 
 namespace Flyoobe
 {
-    public partial class InstallControlView : UserControl, IView
+    public partial class AdvancedControlView : UserControl, IView, IHasSearch
     {
-        public string ViewTitle => "Custom: Install & Repair";
-
         // Providers & per-provider last selections
         private readonly List<IInstallProvider> _providers = new List<IInstallProvider>();
 
@@ -16,14 +14,13 @@ namespace Flyoobe
         private readonly Dictionary<string, LastSelections> _lastByProvider =
             new Dictionary<string, LastSelections>(StringComparer.OrdinalIgnoreCase);
 
-        public InstallControlView()
+        public AdvancedControlView()
         {
             InitializeComponent();
             InitProviderCombo();
 
             WireUpTooltips();
             HookUpEvents();
-            HookSearchBox();
             UpdateHint();
         }
 
@@ -112,7 +109,7 @@ namespace Flyoobe
 
         public void RefreshView()
         {
-            textProviderSearch.Clear();
+            FilterProviders("");
         }
 
         // --------------------------------------------------------------------------------
@@ -131,7 +128,6 @@ namespace Flyoobe
 
             if (btnCreateUsb != null)
                 btnCreateUsb.Click += async (s, e) => await RunQuickAsync("mct");        // MctProvider.Id
-
         }
 
         private void WireUpTooltips()
@@ -248,7 +244,6 @@ namespace Flyoobe
             ToolHelpers.OpenUri(p.HomepageUrl);
         }
 
-
         private async Task DownloadProviderAsync()
         {
             var p = SelectedProvider;
@@ -271,7 +266,6 @@ namespace Flyoobe
         // --------------------------------------------------------------------------------
         // Finds a provider by its Id in the already-registered _providers list (Quick-click)
         // --------------------------------------------------------------------------------
-
 
         private IInstallProvider FindProviderById(string id)
         {
@@ -305,17 +299,6 @@ namespace Flyoobe
         // Wires the search box to filter the providers list on-the-fly
         // --------------------------------------------------------------------------------
 
-        private void HookSearchBox()
-        {
-            if (textProviderSearch == null || cboSource == null) return;
-
-            textProviderSearch.TextChanged += (s, e) =>
-            {
-                var q = textProviderSearch.Text?.Trim() ?? string.Empty;
-                FilterProviders(q);
-            };
-        }
-
         // Filters the combo by DisplayName/Id/Hint (case-insensitive).
         private void FilterProviders(string query)
         {
@@ -337,10 +320,12 @@ namespace Flyoobe
             if (cboSource.Items.Count > 0) cboSource.SelectedIndex = 0;
         }
 
-        private void textProviderSearch_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Called when the global search text changes from the MainForm.
+        /// </summary>
+        public void OnGlobalSearchChanged(string text)
         {
-            textProviderSearch.Clear();
+            FilterProviders(text ?? "");
         }
-
     }
 }

@@ -8,10 +8,8 @@ using System.Windows.Forms;
 
 namespace Flyoobe
 {
-    public partial class InstallerControlView : UserControl, IView
+    public partial class InstallerControlView : UserControl, IView, IHasSearch
     {
-        public string ViewTitle => "Install Essential Apps";
-
         private bool autoAcceptAgreements = false;
 
         // List of (DisplayName, WingetId)
@@ -117,12 +115,12 @@ namespace Flyoobe
             autoAcceptAgreements = result == DialogResult.Yes;
 
             btnInstall.Enabled = false;
-            textSearch.Enabled = false;
             dgvApps.Enabled = false;
 
             progressBar.Visible = true;
             progressBar.Maximum = selectedApps.Count;
             progressBar.Value = 0;
+            progressBar.Step = 1; // one step per removed app
 
             foreach (string appId in selectedApps)
             {
@@ -133,7 +131,7 @@ namespace Flyoobe
 
             lblStatus.Text = "Installation complete.";
             btnInstall.Enabled = true;
-            textSearch.Enabled = true;
+
             dgvApps.Enabled = true;
             progressBar.Visible = false;
         }
@@ -192,18 +190,16 @@ namespace Flyoobe
         }
 
         /// <summary>
-        /// Filters apps dynamically as user types in the search box.
+        /// Applies global search input.
         /// </summary>
-        private void textSearch_TextChanged(object sender, EventArgs e)
+        public void OnGlobalSearchChanged(string text)
         {
-            string query = textSearch.Text.Trim().ToLower();
-            var filtered = allApps.Where(a => a.Name.ToLower().Contains(query) || a.Id.ToLower().Contains(query));
-            RefreshAppList(filtered);
-        }
+            string filter = (text ?? "").Trim().ToLowerInvariant();
 
-        private void textSearch_Click(object sender, EventArgs e)
-        {
-            textSearch.Clear();
+            var filtered = allApps
+                .Where(a => a.Name.ToLower().Contains(filter) || a.Id.ToLower().Contains(filter));
+
+            RefreshAppList(filtered);
         }
 
         /// <summary>
@@ -224,7 +220,6 @@ namespace Flyoobe
         public void RefreshView()
         {
             RefreshAppList(allApps);
-
             lblStatus.Text = "Ready.";
         }
 
@@ -292,145 +287,173 @@ public class InputDialog : Form
     private readonly Button btnOk;
     private readonly Button btnCancel;
     private readonly Label lblInfo;
-    private readonly Panel lineSeparator;
-    private readonly TableLayoutPanel layout;
+    private readonly GroupBox grpSearch;
+    private readonly GroupBox grpInstall;
+
+    private const string PlaceholderSearch = "Enter app name (e.g. chrome)";
+    private const string PlaceholderId = "Enter Winget ID (e.g. Google.Chrome)";
 
     public string EnteredId => txtInput.Text.Trim();
 
     public InputDialog()
     {
+        AutoScaleMode = AutoScaleMode.Dpi;
+        AutoScaleDimensions = new SizeF(96F, 96F);
+
         Text = "Manual Winget Installation";
-        Font = new Font("Segoe UI", 9F);
-        BackColor = Color.FromArgb(250, 250, 250);
+        Font = SystemFonts.MessageBoxFont;
+        BackColor = SystemColors.Control;
         StartPosition = FormStartPosition.CenterParent;
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;
         MinimizeBox = false;
+        ShowInTaskbar = false;
+        ClientSize = new Size(420, 260);
 
-        // 🔹 Enable proper scaling
-        AutoScaleMode = AutoScaleMode.Dpi;
-        AutoSize = true;
-        AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        Padding = new Padding(12);
-
-        // === TableLayoutPanel for automatic layout ===
-        layout = new TableLayoutPanel
-        {
-            Dock = DockStyle.Fill,
-            ColumnCount = 2,
-            RowCount = 5,
-            AutoSize = true,
-            AutoSizeMode = AutoSizeMode.GrowAndShrink
-        };
-        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
-        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-        Controls.Add(layout);
-
-        // === Info label ===
+        // === Info ===
         lblInfo = new Label
         {
             Text = "① Enter a keyword to search in Winget.\n" +
                    "② Winget will open and show results.\n" +
                    "③ Copy the found ID below and click Install.",
-            AutoSize = true,
-            Margin = new Padding(0, 0, 0, 10)
+            AutoSize = false,
+            Dock = DockStyle.Top,
+            Height = 55,
+            TextAlign = ContentAlignment.MiddleLeft
         };
-        layout.SetColumnSpan(lblInfo, 2);
-        layout.Controls.Add(lblInfo, 0, 0);
+        Controls.Add(lblInfo);
 
-        // === Search field + button ===
-        txtSearch = new TextBox
-        {
-            Text = "Enter app name (e.g. chrome)",
-            Dock = DockStyle.Fill,
-            Margin = new Padding(0, 0, 10, 5),
-            TabStop = false
-        };
-        txtSearch.GotFocus += (s, e) => ClearPlaceholder(txtSearch);
-        layout.Controls.Add(txtSearch, 0, 1);
-
-        btnSearch = new Button
+        // === Search Group ===
+        grpSearch = new GroupBox
         {
             Text = "Search in Winget",
-            Dock = DockStyle.Fill,
-            Height = 28,
-            Margin = new Padding(0, 0, 0, 5)
+            Dock = DockStyle.Top,
+            Height = 80,
+            Padding = new Padding(10)
         };
-        btnSearch.Click += (s, e) => OpenWingetTerminal(txtSearch.Text);
-        layout.Controls.Add(btnSearch, 1, 1);
+        Controls.Add(grpSearch);
 
-        // === Separator ===
-        lineSeparator = new Panel
+        // === Layout: Textbox + Button
+        var searchLayout = new TableLayoutPanel
         {
-            Height = 1,
             Dock = DockStyle.Fill,
-            BackColor = Color.LightGray,
-            Margin = new Padding(0, 5, 0, 5)
-        };
-        layout.SetColumnSpan(lineSeparator, 2);
-        layout.Controls.Add(lineSeparator, 0, 2);
-
-        // === Input field + buttons ===
-        txtInput = new TextBox
-        {
-            Text = "Enter Winget ID (e.g. Google.Chrome)",
-            Dock = DockStyle.Fill,
-            Margin = new Padding(0, 0, 10, 5)
-        };
-        txtInput.GotFocus += (s, e) => ClearPlaceholder(txtInput);
-        layout.Controls.Add(txtInput, 0, 3);
-
-        // === OK + Cancel Buttons (in sub-panel) ===
-        var buttonPanel = new FlowLayoutPanel
-        {
-            FlowDirection = FlowDirection.TopDown,
-            Dock = DockStyle.Fill,
+            ColumnCount = 2,
+            RowCount = 1,
             AutoSize = true
         };
-        layout.Controls.Add(buttonPanel, 1, 3);
+        searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
+        searchLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+        grpSearch.Controls.Add(searchLayout);
+
+        txtSearch = new TextBox
+        {
+            Text = PlaceholderSearch,
+            ForeColor = SystemColors.GrayText,
+            Dock = DockStyle.Fill,
+            Margin = new Padding(0, 0, 6, 0)
+        };
+        txtSearch.GotFocus += (s, e) => ClearPlaceholder(txtSearch, PlaceholderSearch);
+        txtSearch.LostFocus += (s, e) => RestorePlaceholder(txtSearch, PlaceholderSearch);
+
+        // Search Button
+        btnSearch = new Button
+        {
+            Text = "&Search...",
+            AutoSize = true
+        };
+        btnSearch.Click += (s, e) => OpenWingetTerminal(txtSearch.Text);
+
+        searchLayout.Controls.Add(txtSearch, 0, 0);
+        searchLayout.Controls.Add(btnSearch, 1, 0);
+
+        grpSearch.Controls.Add(searchLayout);
+
+        // === Install Group ===
+        grpInstall = new GroupBox
+        {
+            Text = "Install by ID",
+            Dock = DockStyle.Top,
+            Height = 80,
+            Padding = new Padding(10)
+        };
+        Controls.Add(grpInstall);
+
+        txtInput = new TextBox
+        {
+            Text = PlaceholderId,
+            ForeColor = SystemColors.GrayText,
+            Dock = DockStyle.Fill
+        };
+        txtInput.GotFocus += (s, e) => ClearPlaceholder(txtInput, PlaceholderId);
+        txtInput.LostFocus += (s, e) => RestorePlaceholder(txtInput, PlaceholderId);
+
+        grpInstall.Controls.Add(txtInput);
+
+        // === Bottom Buttons ===
+        var pnlButtons = new Panel
+        {
+            Dock = DockStyle.Bottom,
+            Height = 40,
+        };
+        Controls.Add(pnlButtons);
 
         btnOk = new Button
         {
-            Text = "Install",
+            Text = "&Install",
             DialogResult = DialogResult.OK,
-            AutoSize = true,
-            Margin = new Padding(0, 0, 0, 5)
+            Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
+            AutoSize = true
         };
-        buttonPanel.Controls.Add(btnOk);
 
         btnCancel = new Button
         {
             Text = "Cancel",
             DialogResult = DialogResult.Cancel,
+            Anchor = AnchorStyles.Bottom | AnchorStyles.Right,
             AutoSize = true
         };
-        buttonPanel.Controls.Add(btnCancel);
+
+        // Align bottom buttons like Windows dialogs
+        btnCancel.SetBounds(ClientSize.Width - 90, 8, 75, 25);
+        btnOk.SetBounds(ClientSize.Width - 170, 8, 75, 25);
+        pnlButtons.Controls.Add(btnOk);
+        pnlButtons.Controls.Add(btnCancel);
 
         AcceptButton = btnOk;
         CancelButton = btnCancel;
     }
 
-    /// Clears the placeholder text when a TextBox gains focus.
-    private void ClearPlaceholder(TextBox box)
+    // === Placeholder handling ===
+    private void ClearPlaceholder(TextBox box, string placeholder)
     {
-        if (box.Text.StartsWith("Enter "))
+        if (box.Text == placeholder)
+        {
             box.Clear();
+            box.ForeColor = SystemColors.WindowText;
+        }
     }
 
-    /// <summary>
-    /// Opens Windows Terminal (if available) or CMD and immediately runs "winget search <query>".
-    /// </summary>
+    private void RestorePlaceholder(TextBox box, string placeholder)
+    {
+        if (string.IsNullOrWhiteSpace(box.Text))
+        {
+            box.Text = placeholder;
+            box.ForeColor = SystemColors.GrayText;
+        }
+    }
+
+    // === Winget Terminal ===
     private void OpenWingetTerminal(string query)
     {
+        if (string.IsNullOrWhiteSpace(query) || query == PlaceholderSearch)
+        {
+            MessageBox.Show("Please enter a search term first.",
+                "Missing Search Term", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
         try
         {
-            if (string.IsNullOrWhiteSpace(query))
-            {
-                MessageBox.Show("Please enter a search term first.",
-                    "Missing Search Term", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             string sanitized = query.Replace("\"", "").Trim();
             bool useCmd = false;
 

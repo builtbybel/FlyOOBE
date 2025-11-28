@@ -11,7 +11,7 @@ namespace Flyoobe
         private static readonly string filePath = Path.Combine("app", "FlyOOBE.txt");
 
         // Donation flag to be inserted/read from the file
-        private const string donationFlag = "#donated=false";
+        private const string donationFlag = "#donated=true";
 
         /// <summary>
         /// Checks if the user has already donated.
@@ -73,7 +73,7 @@ namespace Flyoobe
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = "https://DummyLink",
+                    FileName = "https://www.paypal.com/donate?hosted_button_id=MY7HX4QLYR4KG",
                     UseShellExecute = true
                 });
             }

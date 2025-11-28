@@ -7,10 +7,7 @@ using System.Windows.Forms;
 namespace Flyoobe
 {
     public partial class NetworkControlView : UserControl, IView
-
     {
-        public string ViewTitle => "Network Control";
-
         public NetworkControlView()
         {
             InitializeComponent();

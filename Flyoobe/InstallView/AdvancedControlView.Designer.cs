@@ -1,6 +1,6 @@
 ﻿namespace Flyoobe
 {
-    partial class InstallControlView
+    partial class AdvancedControlView
     {
         /// <summary> 
         /// Erforderliche Designervariable.
@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textProviderSearch = new System.Windows.Forms.TextBox();
             this.btnQuickRepair = new System.Windows.Forms.Button();
             this.btnCreateUsb = new System.Windows.Forms.Button();
             this.lblOneClick = new System.Windows.Forms.Label();
@@ -53,7 +52,6 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.panel1.Controls.Add(this.textProviderSearch);
             this.panel1.Controls.Add(this.btnQuickRepair);
             this.panel1.Controls.Add(this.btnCreateUsb);
             this.panel1.Controls.Add(this.lblOneClick);
@@ -65,20 +63,6 @@
             this.panel1.Size = new System.Drawing.Size(835, 457);
             this.panel1.TabIndex = 11;
             // 
-            // textProviderSearch
-            // 
-            this.textProviderSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
-            this.textProviderSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textProviderSearch.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F);
-            this.textProviderSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textProviderSearch.Location = new System.Drawing.Point(196, 18);
-            this.textProviderSearch.Name = "textProviderSearch";
-            this.textProviderSearch.Size = new System.Drawing.Size(473, 25);
-            this.textProviderSearch.TabIndex = 339;
-            this.textProviderSearch.Text = "Search";
-            this.textProviderSearch.Click += new System.EventHandler(this.textProviderSearch_Click);
-            // 
             // btnQuickRepair
             // 
             this.btnQuickRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -89,7 +73,7 @@
             this.btnQuickRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnQuickRepair.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F);
             this.btnQuickRepair.ForeColor = System.Drawing.Color.Black;
-            this.btnQuickRepair.Location = new System.Drawing.Point(512, 427);
+            this.btnQuickRepair.Location = new System.Drawing.Point(512, 417);
             this.btnQuickRepair.Name = "btnQuickRepair";
             this.btnQuickRepair.Size = new System.Drawing.Size(138, 27);
             this.btnQuickRepair.TabIndex = 337;
@@ -106,7 +90,7 @@
             this.btnCreateUsb.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnCreateUsb.Font = new System.Drawing.Font("Segoe UI Variable Small", 8.25F);
             this.btnCreateUsb.ForeColor = System.Drawing.Color.Black;
-            this.btnCreateUsb.Location = new System.Drawing.Point(656, 427);
+            this.btnCreateUsb.Location = new System.Drawing.Point(656, 417);
             this.btnCreateUsb.Name = "btnCreateUsb";
             this.btnCreateUsb.Size = new System.Drawing.Size(138, 27);
             this.btnCreateUsb.TabIndex = 338;
@@ -119,7 +103,7 @@
             this.lblOneClick.AutoEllipsis = true;
             this.lblOneClick.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
             this.lblOneClick.ForeColor = System.Drawing.Color.Black;
-            this.lblOneClick.Location = new System.Drawing.Point(418, 430);
+            this.lblOneClick.Location = new System.Drawing.Point(418, 420);
             this.lblOneClick.Name = "lblOneClick";
             this.lblOneClick.Size = new System.Drawing.Size(89, 27);
             this.lblOneClick.TabIndex = 336;
@@ -140,9 +124,9 @@
             this.panelInstall.Controls.Add(this.btnDownload);
             this.panelInstall.Controls.Add(this.btnRun);
             this.panelInstall.Controls.Add(this.lblBadgeNative);
-            this.panelInstall.Location = new System.Drawing.Point(42, 169);
+            this.panelInstall.Location = new System.Drawing.Point(42, 141);
             this.panelInstall.Name = "panelInstall";
-            this.panelInstall.Size = new System.Drawing.Size(752, 214);
+            this.panelInstall.Size = new System.Drawing.Size(752, 242);
             this.panelInstall.TabIndex = 335;
             // 
             // lblBadgeDl
@@ -272,24 +256,23 @@
             this.lblHint.AutoEllipsis = true;
             this.lblHint.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
             this.lblHint.ForeColor = System.Drawing.Color.Black;
-            this.lblHint.Location = new System.Drawing.Point(42, 66);
+            this.lblHint.Location = new System.Drawing.Point(42, 32);
             this.lblHint.Name = "lblHint";
             this.lblHint.Size = new System.Drawing.Size(744, 87);
             this.lblHint.TabIndex = 9;
             this.lblHint.Text = "Info";
             this.lblHint.UseCompatibleTextRendering = true;
             // 
-            // InstallControlView
+            // AdvancedControlView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(244)))), ((int)(((byte)(242)))));
             this.Controls.Add(this.panel1);
-            this.Name = "InstallControlView";
+            this.Name = "AdvancedControlView";
             this.Size = new System.Drawing.Size(835, 457);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelInstall.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -309,7 +292,6 @@
         private System.Windows.Forms.Label lblBadgeDl;
         private System.Windows.Forms.Label lblBadgeIso;
         private System.Windows.Forms.Label lblBadgeExternal;
-        private System.Windows.Forms.TextBox textProviderSearch;
         private System.Windows.Forms.Button btnQuickRepair;
         private System.Windows.Forms.Button btnCreateUsb;
         private System.Windows.Forms.Label lblOneClick;

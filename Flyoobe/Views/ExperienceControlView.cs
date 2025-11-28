@@ -8,8 +8,6 @@ namespace Flyoobe
 {
     public partial class ExperienceControlView : UserControl, IView
     {
-        public string ViewTitle => "Optimize Experience Settings";
-
         private readonly FeatureManager _featureManager;
         private List<FeatureNode> _currentTweaks;
 
@@ -102,6 +100,7 @@ namespace Flyoobe
             // Update UI
             textHelp.Text = $"{feature.Info()}\r\n\r\nDetails:\r\n{feature.GetFeatureDetails()}\r\n\r\n{feature.SupportedOS()}";
         }
+
         /// <summary>
         /// Applies or undoes tweaks based on checkbox state.
         /// </summary>
@@ -188,7 +187,6 @@ namespace Flyoobe
             textHelp.Text = action;
         }
 
-
         /// <summary>
         /// Clears shared UI when no tweak is selected.
         /// </summary>
@@ -212,7 +210,5 @@ namespace Flyoobe
         {
             Process.Start("https://github.com/builtbybel/CrapFixer");
         }
-
- 
     }
 }

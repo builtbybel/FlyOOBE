@@ -1,35 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flyoobe.ToolHub
 {
-    public partial class ToolHubControlView : UserControl, IView
+    public partial class ToolHubControlView : UserControl, IView, IHasSearch
     {
-        private readonly ToolHubCategory _category; // The category this view represents
+        private ToolHubCategory _category; // The category this view represents
         private readonly List<ToolHubDefinition> _allTools = new List<ToolHubDefinition>();
 
-        public virtual string ViewTitle => "Setup Extensions";
+        // Caches UI controls for each tool so they are not recreated every time.
+        private readonly Dictionary<ToolHubDefinition, ToolHubItemControl> _controlCache
+            = new Dictionary<ToolHubDefinition, ToolHubItemControl>();
 
-        // Default constructor (shows Post-Setup tools)
-        public ToolHubControlView() : this(ToolHubCategory.Tool) { }
+        // Pending tool selection (if any) to apply after loading
+        private string _pendingSelectTool = null;
 
         // Overloaded constructor with category filter
-        public ToolHubControlView(ToolHubCategory category)
+        public ToolHubControlView(ToolHubCategory category = ToolHubCategory.All)
         {
             InitializeComponent();
             _category = category;
+            comboFilter.Items.AddRange(new object[] { "All", "Tool", "Pre", "Mid", "Post" });
+            //comboFilter.SelectedItem = _category.ToString();
+            // Prevent the SelectedIndexChanged event from firing during initial setup,
+            // because changing SelectedIndex will otherwise trigger LoadTools() too early.
+            comboFilter.SelectedIndexChanged -= comboFilter_SelectedIndexChanged;
+            comboFilter.SelectedIndex = 0; // Set default filter UI state without applying filtering logic yet
+            comboFilter.SelectedIndexChanged += comboFilter_SelectedIndexChanged;
+
             LoadTools();
         }
 
-        private void LoadTools()
+        private async void LoadTools()
         {
-            _allTools.Clear();
+            lblStatus.Visible = true;
+            // Prevent flicker during bulk UI update
+            flowLayoutPanelTools.SuspendLayout();
             flowLayoutPanelTools.Controls.Clear();
+            _controlCache.Clear();
+            _allTools.Clear();
 
             // Define the scripts directory relative to the executable path
             string scriptDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts");
@@ -38,43 +52,64 @@ namespace Flyoobe.ToolHub
             if (!Directory.Exists(scriptDirectory))
             {
                 Directory.CreateDirectory(scriptDirectory);
+                flowLayoutPanelTools.ResumeLayout();
                 return;
             }
 
-            // Get all .ps1 files in the folder
-            string[] scriptFiles = Directory.GetFiles(scriptDirectory, "*.ps1");
+            // Get all .ps1 files in the folder (async to avoid UI freeze)
+            string[] scriptFiles = await Task.Run(() => Directory.GetFiles(scriptDirectory, "*.ps1"));
 
-            // Loop through each script and create a tool item
-            foreach (var scriptPath in scriptFiles)
+            // Parse metadata and construct tool definitions in background
+            var loadedTools = await Task.Run(() =>
             {
-                string fileName = Path.GetFileNameWithoutExtension(scriptPath); // Use file name as title
-                string icon = PickIconForScript(fileName);                      // Choose an icon based on the name
+                var list = new List<ToolHubDefinition>();
 
-                // Read metadata (description, options, category, etc.)
-                var meta = ReadMetadataFromScript(scriptPath);
+                // Loop through each script and create a tool item
+                foreach (var scriptPath in scriptFiles)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(scriptPath); // Use file name as title
+                    string icon = PickIconForScript(fileName);                      // Choose an icon based on the name
 
-                // Skip tools not matching the current category
-                if (_category != ToolHubCategory.All && meta.category != _category)
-                    continue;
+                    // Read metadata (description, options, category, etc.)
+                    var meta = ReadMetadataFromScript(scriptPath);
 
-                // Create tool definition
-                var tool = new ToolHubDefinition(fileName, meta.description, icon, scriptPath);
-                tool.Options.AddRange(meta.options);
-                tool.UseConsole = meta.useConsole;
-                tool.UseLog = meta.useLog;
+                    // Skip tools not matching the current category
+                    if (_category != ToolHubCategory.All && meta.category != _category)
+                        continue;
 
-                // Create the UI control for this tool
+                    // Create tool definition
+                    var tool = new ToolHubDefinition(fileName, meta.description, icon, scriptPath);
+                    tool.Options.AddRange(meta.options);
+                    tool.UseConsole = meta.useConsole;
+                    tool.UseLog = meta.useLog;
+                    tool.SupportsInput = meta.inputEnabled;
+                    tool.InputPlaceholder = meta.inputPh;
+                    tool.PoweredByText = meta.poweredByText;
+                    tool.PoweredByUrl = meta.poweredByUrl;
+                    list.Add(tool);                // Save for search/filter
+                }
+
+                return list;
+            });
+
+            // Create UI controls now, but only once (no recreation during filtering)
+            foreach (var tool in loadedTools)
+            {
                 var control = new ToolHubItemControl(tool);
+                _controlCache[tool] = control; // Cache it so filtering is instant
                 flowLayoutPanelTools.Controls.Add(control);
-
-                // Save for search/filter
                 _allTools.Add(tool);
-
-                // Debugging aid
-                // MessageBox.Show($"Tool: {fileName}\nUseConsole={tool.UseConsole}\nUseLog={tool.UseLog}");
             }
 
-            DisplayFilteredTools("");
+            lblStatus.Visible = false;
+            flowLayoutPanelTools.ResumeLayout();
+
+            // After everything is loaded, apply the pending selection (if any)
+            if (!string.IsNullOrEmpty(_pendingSelectTool))
+            {
+                SelectTool(_pendingSelectTool);
+                _pendingSelectTool = null;
+            }
         }
 
         /// <summary>
@@ -85,7 +120,16 @@ namespace Flyoobe.ToolHub
         /// # Options: Light;Full
         /// # Host: log
         /// </summary>
-        private (string description, List<string> options, ToolHubCategory category, bool useConsole, bool useLog)
+        // Parses script header metadata (first ~15 lines) and returns all fields.
+        private (string description,
+                 List<string> options,
+                 ToolHubCategory category,
+                 bool useConsole,
+                 bool useLog,
+                 bool inputEnabled,
+                 string inputPh,
+                 string poweredByText,
+                 string poweredByUrl)
             ReadMetadataFromScript(string scriptPath)
         {
             string description = "No description available.";
@@ -93,6 +137,10 @@ namespace Flyoobe.ToolHub
             ToolHubCategory category = ToolHubCategory.All;
             bool useConsole = false;
             bool useLog = false;
+            bool inputEnabled = false;
+            string inputPh = string.Empty;
+            string poweredByText = string.Empty;
+            string poweredByUrl = string.Empty;
 
             try
             {
@@ -138,9 +186,24 @@ namespace Flyoobe.ToolHub
                             useLog = true;
                         // "embedded"/"silent" == both false
                     }
+                    else if (line.StartsWith("# Input:", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var raw = line.Substring(8).Trim().ToLowerInvariant();
+                        inputEnabled = (raw == "true" || raw == "yes" || raw == "1");
+                    }
+                    else if (line.StartsWith("# InputPlaceholder:", StringComparison.OrdinalIgnoreCase))
+                    {
+                        inputPh = line.Substring(19).Trim();
+                    }
+                    // PoweredBy metadata (optional)
+                    else if (line.StartsWith("# PoweredBy:", StringComparison.OrdinalIgnoreCase))
+                        poweredByText = line.Substring(12).Trim();   // 11 chars + 1 for :
+                    else if (line.StartsWith("# PoweredUrl:", StringComparison.OrdinalIgnoreCase))
+                        poweredByUrl = line.Substring(13).Trim();    // 12 chars + 1 for :
+
+                    // Use the first regular comment as description (if none yet)
                     else if (line.StartsWith("#"))
                     {
-                        // Use the first regular comment as description (if none yet)
                         if (description == "No description available.")
                             description = line.TrimStart('#').Trim();
                     }
@@ -150,8 +213,7 @@ namespace Flyoobe.ToolHub
             {
                 // Ignore errors and keep defaults
             }
-
-            return (description, options, category, useConsole, useLog);
+            return (description, options, category, useConsole, useLog, inputEnabled, inputPh, poweredByText, poweredByUrl);
         }
 
         private string PickIconForScript(string name)
@@ -181,75 +243,114 @@ namespace Flyoobe.ToolHub
             flowLayoutPanelTools.SuspendLayout();
             flowLayoutPanelTools.Controls.Clear();
 
-            // Apply case-insensitive search filter
-            foreach (var tool in _allTools)
+            string f = filter?.ToLowerInvariant() ?? "";
+
+            foreach (var kv in _controlCache)
             {
-                if (string.IsNullOrWhiteSpace(filter) ||
-                    tool.Title.ToLower().Contains(filter.ToLower()) ||
-                    tool.Description.ToLower().Contains(filter.ToLower()))
-                {
-                    var control = new ToolHubItemControl(tool);
+                var tool = kv.Key;
+                var control = kv.Value;
+
+                bool show = string.IsNullOrWhiteSpace(f)
+                            || tool.Title.ToLower().Contains(f)
+                            || tool.Description.ToLower().Contains(f);
+
+                if (show)
                     flowLayoutPanelTools.Controls.Add(control);
-                }
             }
 
             flowLayoutPanelTools.ResumeLayout();
         }
 
         /// <summary>
-        /// Selects a specific tool in the ToolHub by its name.
-        /// Called from outside (e.g. HomeControlView) to directly show or highlight a tool.
+        /// Selects a tool in the ToolHub by its display title.
+        /// If the tools are not loaded yet (asynchronous loading), the selection request is stored
+        /// and applied automatically once loading finishes.
         /// </summary>
+        /// <param name="toolName">The display title of the tool to select.</param>
         public void SelectTool(string toolName)
         {
-            if (string.IsNullOrWhiteSpace(toolName))
+            // If controls havent been created yet (async load still ongoing),
+            // defer selection until after loading completes.
+            if (_controlCache.Count == 0)
+            {
+                _pendingSelectTool = toolName;
                 return;
-
-            // Try to find the tool in the loaded list (_allTools) by title
-            // Comparison is case-insensitive
-            var tool = _allTools.FirstOrDefault(t =>
-                t.Title.Equals(toolName, StringComparison.OrdinalIgnoreCase));
-
-            if (tool != null)
-            {
-                // Clear the tool panel and show just the requested tool
-                flowLayoutPanelTools.SuspendLayout();
-                flowLayoutPanelTools.Controls.Clear();
-
-                // Create a new UI control for the found tool
-                var control = new ToolHubItemControl(tool);
-
-                // Highlight and auto-select
-                control.BackColor = Color.FromArgb(230, 240, 255);
-
-                flowLayoutPanelTools.Controls.Add(control);
-                flowLayoutPanelTools.ResumeLayout();
             }
-            else
+
+            // Show only the tool matching the requested title and hide all others
+            foreach (var kv in _controlCache)
             {
-                // just a Fallback behavior
-                // If no exact tool match was found, use the normal filter logic.
-                // This will show all tools that contain the search string.
-                DisplayFilteredTools(toolName);
+                var tool = kv.Key;
+                var control = kv.Value;
+
+                bool match = string.Equals(tool.Title, toolName, StringComparison.OrdinalIgnoreCase);
+
+                control.Visible = match;
+
+                if (match)
+                {
+                    // Highlight selected tool
+                    control.BackColor = Color.FromArgb(230, 240, 255);
+                }
+                else
+                {
+                    // Reset background of non-selected tools
+                    control.BackColor = SystemColors.Control;
+                }
             }
         }
 
         public void RefreshView()
         {
-            textSearch.Clear();
             flowLayoutPanelTools.Controls.Clear();
             LoadTools();
         }
 
-        private void textSearch_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Applies global search input to the tool list.
+        /// </summary>
+        public void OnGlobalSearchChanged(string text)
         {
-            var keyword = textSearch.Text.Trim();
-            DisplayFilteredTools(keyword);
+            DisplayFilteredTools(text);
         }
 
-        private void textSearch_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            textSearch.Clear();
+            contextDropDown.Show(btnAdd, new Point(0, btnAdd.Height));
+        }
+
+        private async void toolStripMenuInstallUrl_Click(object sender, EventArgs e)
+        {
+            await ToolHub.ExtensionsHelper.InstallFromUrlAsync(this);
+        }
+
+        private void toolStripMenuInstallLocal_Click(object sender, EventArgs e)
+        {
+            ToolHub.ExtensionsHelper.ImportLocalFile(this);
+        }
+
+        private void toolStripMenuWriteExtension_Click(object sender, EventArgs e)
+        {
+            ToolHub.ExtensionsHelper.OpenExtensionGuide();
+        }
+
+        private void toolStripMenuExtensionDirectory_Click(object sender, EventArgs e)
+        {
+            ToolHub.ExtensionsHelper.OpenScriptsFolder(this);
+        }
+
+        private void comboFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboFilter.SelectedItem.ToString())
+            {
+                case "Tool": _category = ToolHubCategory.Tool; break;
+                case "Pre": _category = ToolHubCategory.Pre; break;
+                case "Mid": _category = ToolHubCategory.Mid; break;
+                case "Post": _category = ToolHubCategory.Post; break;
+                default: _category = ToolHubCategory.All; break;
+            }
+
+            LoadTools(); // re-render based on new category
         }
     }
 }

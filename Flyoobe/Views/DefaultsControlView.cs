@@ -9,8 +9,6 @@ namespace Flyoobe
 {
     public partial class DefaultsControlView : UserControl, IView
     {
-        public string ViewTitle => "Set Default Browser";
-
         // winget IDs for common browsers
         private readonly Dictionary<string, string> WingetIds = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -166,7 +164,7 @@ namespace Flyoobe
                 return;
             }
 
-            lblStatus.Text = $"Installing {name} via winget...";
+            lblHeader.Text = $"Installing {name} via winget...";
             btnInstall.Enabled = false;
 
             // Start the installation
@@ -175,10 +173,9 @@ namespace Flyoobe
             // cosmetic feedback only
             await Task.Delay(4000);
 
-            lblStatus.Text = "Choose your browser";
+            lblHeader.Text = "Choose your browser";
             btnInstall.Enabled = true;
         }
-
 
         /// <summary>
         /// Show or hide the download panel when checkbox is toggled.

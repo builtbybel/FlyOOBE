@@ -11,10 +11,8 @@ using Windows.Management.Deployment;
 
 namespace Flyoobe
 {
-    public partial class AppsControlView : UserControl, IView
+    public partial class AppsControlView : UserControl, IView, IHasSearch
     {
-        public string ViewTitle => "Manage Installed Apps";
-
         private Dictionary<string, string> _appDirectory = new Dictionary<string, string>();
         private string currentSearchTerm = string.Empty;
         private string activePatternFile = "FlyOOBE_Profile_Full.txt";
@@ -304,6 +302,7 @@ namespace Flyoobe
             progressBar.Visible = true;
             progressBar.Maximum = selected.Count;
             progressBar.Value = 0;
+            progressBar.Step = 1; // one step per removed app
 
             foreach (var row in selected)
             {
@@ -327,13 +326,14 @@ namespace Flyoobe
             await LoadAndDisplayApps();
         }
 
-        private void textSearch_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Applies global search input.
+        /// </summary>
+        public void OnGlobalSearchChanged(string text)
         {
-            currentSearchTerm = textSearch.Text.Trim().ToLower();
+            currentSearchTerm = (text ?? "").Trim().ToLower();
             _ = LoadAndDisplayApps();
         }
-
-        private void textSearch_Click(object sender, EventArgs e) => textSearch.Clear();
 
         /// <summary>
         /// Reloads the current view with the selected profile.

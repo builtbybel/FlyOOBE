@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblHeader = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnCheck = new System.Windows.Forms.Button();
             this.listResults = new System.Windows.Forms.ListView();
@@ -37,19 +36,6 @@
             this.btnDisable = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 11.75F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(835, 31);
-            this.lblHeader.TabIndex = 31;
-            this.lblHeader.Text = "AI is built into different parts of Windows 11";
-            this.lblHeader.UseCompatibleTextRendering = true;
             // 
             // lblStatus
             // 
@@ -73,7 +59,7 @@
             this.btnCheck.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
             this.btnCheck.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCheck.Font = new System.Drawing.Font("Segoe UI Variable Text Semiligh", 10.25F);
+            this.btnCheck.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnCheck.ForeColor = System.Drawing.Color.White;
             this.btnCheck.Location = new System.Drawing.Point(470, 423);
             this.btnCheck.Name = "btnCheck";
@@ -128,7 +114,7 @@
             this.btnDisable.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
             this.btnDisable.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.btnDisable.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnDisable.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
+            this.btnDisable.Font = new System.Drawing.Font("Segoe UI Variable Text Semiligh", 10.25F);
             this.btnDisable.ForeColor = System.Drawing.Color.Black;
             this.btnDisable.Location = new System.Drawing.Point(649, 423);
             this.btnDisable.Name = "btnDisable";
@@ -161,7 +147,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDisable);
             this.Controls.Add(this.listResults);
-            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnCheck);
             this.Name = "AiControlView";
@@ -171,8 +156,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.ListView listResults;

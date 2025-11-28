@@ -9,8 +9,6 @@ namespace Flyoobe
 {
     public partial class AiControlView : UserControl, IView
     {
-        public string ViewTitle => "AI Experiences";
-
         public AiControlView()
         {
             InitializeComponent();
@@ -75,7 +73,7 @@ namespace Flyoobe
 
             lblStatus.Text = "Applying change...";
 
-            // Snapshot only the display texts 
+            // Snapshot only the display texts
             var selectedNames = listResults.CheckedItems
                 .Cast<ListViewItem>()
                 .Select(it => it.SubItems[0].Text)
@@ -111,7 +109,6 @@ namespace Flyoobe
                             // Finally, set the normal user preference (ignored if a policy exists)
                             WriteDwordHKCU(@"Software\Microsoft\Edge", "HubsSidebarEnabled", 0);
                         }
-
                         else if (name == "Edge: Allow Copilot")
                             WriteDwordHKLM(@"SOFTWARE\Policies\Microsoft\Edge", "AllowCopilot", 0);
                         else if (name == "Edge: Configure Copilot")
@@ -178,7 +175,6 @@ namespace Flyoobe
             int val = ReadDwordHKLM(@"SOFTWARE\Policies\Microsoft\Edge", "EdgeSidebarEnabled", -1);
             return val == 0 ? "Disabled" : val == 1 ? "Enabled" : "Not set";
         }
-
 
         /// <summary>
         /// Checks Edge Hubs (side panel) status.

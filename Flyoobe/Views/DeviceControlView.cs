@@ -9,7 +9,7 @@ namespace Flyoobe
 {
     public partial class DeviceControlView : UserControl, IView
     {
-        public string ViewTitle => "Device Prep";
+
         private const string PlaceholderText = "System display language";
 
         public DeviceControlView()

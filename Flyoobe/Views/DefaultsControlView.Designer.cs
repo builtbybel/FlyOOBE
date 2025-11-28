@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.comboBrowsers = new System.Windows.Forms.ComboBox();
             this.btnSetDefaultBrowser = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.checkNeedOtherBrowser = new System.Windows.Forms.CheckBox();
             this.comboDownload = new System.Windows.Forms.ComboBox();
             this.panelDownload = new System.Windows.Forms.Panel();
             this.checkRunAsAdmin = new System.Windows.Forms.CheckBox();
             this.btnInstall = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblHeader = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelDownload.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +49,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(240)))));
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.comboBrowsers);
             this.panel1.Controls.Add(this.btnSetDefaultBrowser);
             this.panel1.Location = new System.Drawing.Point(23, 38);
@@ -58,17 +57,17 @@
             this.panel1.Size = new System.Drawing.Size(795, 383);
             this.panel1.TabIndex = 35;
             // 
-            // label1
+            // lblStatus
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(30, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 23);
-            this.label1.TabIndex = 35;
-            this.label1.Text = "Set as default";
-            this.label1.UseCompatibleTextRendering = true;
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
+            this.lblStatus.ForeColor = System.Drawing.Color.Black;
+            this.lblStatus.Location = new System.Drawing.Point(30, 28);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(90, 23);
+            this.lblStatus.TabIndex = 35;
+            this.lblStatus.Text = "Set as default";
+            this.lblStatus.UseCompatibleTextRendering = true;
             // 
             // comboBrowsers
             // 
@@ -105,19 +104,6 @@
             this.btnSetDefaultBrowser.UseCompatibleTextRendering = true;
             this.btnSetDefaultBrowser.UseVisualStyleBackColor = false;
             this.btnSetDefaultBrowser.Click += new System.EventHandler(this.btnSetDefaultBrowser_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoEllipsis = true;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 11.75F, System.Drawing.FontStyle.Bold);
-            this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(835, 31);
-            this.lblStatus.TabIndex = 36;
-            this.lblStatus.Text = "Choose your browser";
-            this.lblStatus.UseCompatibleTextRendering = true;
             // 
             // checkNeedOtherBrowser
             // 
@@ -160,7 +146,7 @@
             this.panelDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(243)))), ((int)(((byte)(240)))));
             this.panelDownload.Controls.Add(this.checkRunAsAdmin);
             this.panelDownload.Controls.Add(this.btnInstall);
-            this.panelDownload.Controls.Add(this.label2);
+            this.panelDownload.Controls.Add(this.lblHeader);
             this.panelDownload.Controls.Add(this.comboDownload);
             this.panelDownload.Location = new System.Drawing.Point(23, 38);
             this.panelDownload.Name = "panelDownload";
@@ -201,17 +187,17 @@
             this.btnInstall.UseVisualStyleBackColor = false;
             this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
             // 
-            // label2
+            // lblHeader
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(30, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 23);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "Download browser";
-            this.label2.UseCompatibleTextRendering = true;
+            this.lblHeader.AutoSize = true;
+            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
+            this.lblHeader.Location = new System.Drawing.Point(30, 28);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(125, 23);
+            this.lblHeader.TabIndex = 37;
+            this.lblHeader.Text = "Download browser";
+            this.lblHeader.UseCompatibleTextRendering = true;
             // 
             // DefaultsControlView
             // 
@@ -219,7 +205,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Controls.Add(this.checkNeedOtherBrowser);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.panelDownload);
             this.Controls.Add(this.panel1);
             this.Name = "DefaultsControlView";
@@ -235,15 +220,14 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ComboBox comboBrowsers;
         private System.Windows.Forms.Button btnSetDefaultBrowser;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.CheckBox checkNeedOtherBrowser;
         private System.Windows.Forms.ComboBox comboDownload;
         private System.Windows.Forms.Panel panelDownload;
         private System.Windows.Forms.Button btnInstall;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.CheckBox checkRunAsAdmin;
     }
 }

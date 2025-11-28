@@ -41,7 +41,7 @@
             // 
             this.assetViewInfo.AutoSize = true;
             this.assetViewInfo.Font = new System.Drawing.Font("Segoe MDL2 Assets", 60.75F);
-            this.assetViewInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(139)))), ((int)(((byte)(217)))));
+            this.assetViewInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(95)))), ((int)(((byte)(194)))));
             this.assetViewInfo.Location = new System.Drawing.Point(9, 19);
             this.assetViewInfo.Name = "assetViewInfo";
             this.assetViewInfo.Size = new System.Drawing.Size(86, 81);
@@ -51,7 +51,7 @@
             // btnCheckUpdates
             // 
             this.btnCheckUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(103)))), ((int)(((byte)(192)))));
+            this.btnCheckUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(95)))), ((int)(((byte)(194)))));
             this.btnCheckUpdates.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnCheckUpdates.FlatAppearance.BorderSize = 0;
             this.btnCheckUpdates.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(205)))), ((int)(((byte)(250)))));
@@ -87,7 +87,7 @@
             // btnInstallUpdates
             // 
             this.btnInstallUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInstallUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(103)))), ((int)(((byte)(192)))));
+            this.btnInstallUpdates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(95)))), ((int)(((byte)(194)))));
             this.btnInstallUpdates.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));
             this.btnInstallUpdates.FlatAppearance.BorderSize = 0;
             this.btnInstallUpdates.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(194)))), ((int)(((byte)(255)))));

@@ -30,7 +30,6 @@
         {
             this.btnChangeAccent = new System.Windows.Forms.Button();
             this.btnChangeWallpaper = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.btnApplyTheme = new System.Windows.Forms.Button();
             this.checkToggleTransparency = new System.Windows.Forms.CheckBox();
             this.pictureBoxWallpaper = new System.Windows.Forms.PictureBox();
@@ -42,6 +41,7 @@
             this.comboSystemTheme = new System.Windows.Forms.ComboBox();
             this.comboAppTheme = new System.Windows.Forms.ComboBox();
             this.btnChangeDesktopIcons = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWallpaper)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -84,18 +84,6 @@
             this.btnChangeWallpaper.UseCompatibleTextRendering = true;
             this.btnChangeWallpaper.UseVisualStyleBackColor = false;
             this.btnChangeWallpaper.Click += new System.EventHandler(this.btnChangeWallpaper_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoEllipsis = true;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 11.75F, System.Drawing.FontStyle.Bold);
-            this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(835, 31);
-            this.lblStatus.TabIndex = 28;
-            this.lblStatus.Text = "Let\'s personalize your device";
             // 
             // btnApplyTheme
             // 
@@ -271,15 +259,29 @@
             this.btnChangeDesktopIcons.UseVisualStyleBackColor = false;
             this.btnChangeDesktopIcons.Click += new System.EventHandler(this.btnChangeDesktopIcons_Click);
             // 
+            // lblStatus
+            // 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStatus.AutoEllipsis = true;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI Variable Text Semiligh", 10.25F);
+            this.lblStatus.ForeColor = System.Drawing.Color.Black;
+            this.lblStatus.Location = new System.Drawing.Point(448, 427);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(368, 22);
+            this.lblStatus.TabIndex = 40;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblStatus.UseCompatibleTextRendering = true;
+            // 
             // PersonalizationControlView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnChangeDesktopIcons);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnChangeWallpaper);
             this.Controls.Add(this.btnChangeAccent);
             this.Name = "PersonalizationControlView";
@@ -295,7 +297,6 @@
         #endregion
         private System.Windows.Forms.Button btnChangeAccent;
         private System.Windows.Forms.Button btnChangeWallpaper;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnApplyTheme;
         private System.Windows.Forms.CheckBox checkToggleTransparency;
         private System.Windows.Forms.PictureBox pictureBoxWallpaper;
@@ -307,5 +308,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboTaskbarAlignment;
         private System.Windows.Forms.Button btnChangeDesktopIcons;
+        private System.Windows.Forms.Label lblStatus;
     }
 }

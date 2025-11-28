@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.textSearch = new System.Windows.Forms.TextBox();
             this.btnInstall = new System.Windows.Forms.Button();
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -43,20 +42,6 @@
             this.UpdateColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApps)).BeginInit();
             this.SuspendLayout();
-            // 
-            // textSearch
-            // 
-            this.textSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textSearch.Font = new System.Drawing.Font("Segoe UI Variable Small", 9.75F);
-            this.textSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textSearch.Location = new System.Drawing.Point(197, 3);
-            this.textSearch.Name = "textSearch";
-            this.textSearch.Size = new System.Drawing.Size(473, 25);
-            this.textSearch.TabIndex = 13;
-            this.textSearch.Text = "Search apps";
-            this.textSearch.Click += new System.EventHandler(this.textSearch_Click);
-            this.textSearch.TextChanged += new System.EventHandler(this.textSearch_TextChanged);
             // 
             // btnInstall
             // 
@@ -85,7 +70,7 @@
             this.lblCategory.AutoEllipsis = true;
             this.lblCategory.Font = new System.Drawing.Font("Segoe UI Variable Small Semilig", 10.25F);
             this.lblCategory.ForeColor = System.Drawing.Color.Black;
-            this.lblCategory.Location = new System.Drawing.Point(42, 66);
+            this.lblCategory.Location = new System.Drawing.Point(51, 15);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(756, 45);
             this.lblCategory.TabIndex = 20;
@@ -170,10 +155,10 @@
             this.dgvApps.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvApps.EnableHeadersVisualStyles = false;
             this.dgvApps.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.dgvApps.Location = new System.Drawing.Point(42, 114);
+            this.dgvApps.Location = new System.Drawing.Point(42, 63);
             this.dgvApps.Name = "dgvApps";
             this.dgvApps.RowHeadersVisible = false;
-            this.dgvApps.Size = new System.Drawing.Size(776, 267);
+            this.dgvApps.Size = new System.Drawing.Size(776, 318);
             this.dgvApps.TabIndex = 25;
             this.dgvApps.TabStop = false;
             this.dgvApps.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvApps_CellContentClick);
@@ -217,18 +202,14 @@
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.btnInstall);
-            this.Controls.Add(this.textSearch);
             this.Name = "InstallerControlView";
             this.Size = new System.Drawing.Size(835, 457);
             ((System.ComponentModel.ISupportInitialize)(this.dgvApps)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textSearch;
         private System.Windows.Forms.Button btnInstall;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblStatus;

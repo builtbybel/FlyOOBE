@@ -33,7 +33,6 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.radioWifi = new System.Windows.Forms.RadioButton();
             this.radioEthernet = new System.Windows.Forms.RadioButton();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.listBoxNetworks = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
@@ -48,7 +47,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(468, 423);
+            this.btnRefresh.Location = new System.Drawing.Point(468, 414);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(160, 31);
             this.btnRefresh.TabIndex = 15;
@@ -68,7 +67,7 @@
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnConnect.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 10.25F, System.Drawing.FontStyle.Bold);
             this.btnConnect.ForeColor = System.Drawing.Color.Black;
-            this.btnConnect.Location = new System.Drawing.Point(647, 423);
+            this.btnConnect.Location = new System.Drawing.Point(647, 414);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(160, 31);
             this.btnConnect.TabIndex = 14;
@@ -116,24 +115,11 @@
             this.radioEthernet.UseCompatibleTextRendering = true;
             this.radioEthernet.UseVisualStyleBackColor = true;
             // 
-            // lblHeader
-            // 
-            this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 11.75F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(835, 31);
-            this.lblHeader.TabIndex = 23;
-            this.lblHeader.Text = "Let\'s connect you to a network";
-            this.lblHeader.UseCompatibleTextRendering = true;
-            // 
             // listBoxNetworks
             // 
             this.listBoxNetworks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxNetworks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(232)))), ((int)(((byte)(230)))));
+            this.listBoxNetworks.BackColor = System.Drawing.Color.White;
             this.listBoxNetworks.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listBoxNetworks.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 11.25F, System.Drawing.FontStyle.Bold);
             this.listBoxNetworks.FormattingEnabled = true;
@@ -149,7 +135,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(244)))), ((int)(((byte)(242)))));
-            this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.radioEthernet);
             this.Controls.Add(this.radioWifi);
             this.Controls.Add(this.lblStatus);
@@ -170,7 +155,6 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.RadioButton radioWifi;
         private System.Windows.Forms.RadioButton radioEthernet;
-        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.ListBox listBoxNetworks;
     }
 }

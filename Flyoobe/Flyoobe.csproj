@@ -57,18 +57,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AboutForm.Designer.cs">
-      <DependentUpon>AboutForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Helper\BackgroundHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
-    <Compile Include="ToolHubView\PostToolHubControlView.cs">
+    <Compile Include="NavButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OobeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ToolHubView\PostToolHubControlView.Designer.cs">
-      <DependentUpon>PostToolHubControlView.cs</DependentUpon>
+    <Compile Include="OobeControl.Designer.cs">
+      <DependentUpon>OobeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMetadata.cs" />
+    <Compile Include="Views\LoggerControlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\LoggerControlView.Designer.cs">
+      <DependentUpon>LoggerControlView.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolHubView\ToolHubCategory.cs" />
     <Compile Include="ToolHubView\ToolHubHelper.cs" />
@@ -88,12 +93,6 @@
     <Compile Include="InstallView\RunSetupFromIsoProvider.cs" />
     <Compile Include="InstallView\ToolHelper.cs" />
     <Compile Include="InstallView\VentoyProvider.cs" />
-    <Compile Include="LogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LogForm.Designer.cs">
-      <DependentUpon>LogForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -179,6 +178,12 @@
     <Compile Include="Features\UI\SnapAssistFlyout.cs" />
     <Compile Include="Features\UI\StartLayout.cs" />
     <Compile Include="Features\UI\Transparency.cs" />
+    <Compile Include="Views\AppSettingsControlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\AppSettingsControlView.Designer.cs">
+      <DependentUpon>AppSettingsControlView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\DefaultsControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -212,6 +217,15 @@
     <Compile Include="Views\HomeControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\HomeControlView.Designer.cs">
+      <DependentUpon>HomeControlView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\HomeItemControl.Designer.cs">
+      <DependentUpon>HomeItemControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\InstallerControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -230,11 +244,11 @@
     <Compile Include="Views\PersonalizationControlView.Designer.cs">
       <DependentUpon>PersonalizationControlView.cs</DependentUpon>
     </Compile>
-    <Compile Include="InstallView\InstallControlView.cs">
+    <Compile Include="InstallView\AdvancedControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InstallView\InstallControlView.Designer.cs">
-      <DependentUpon>InstallControlView.cs</DependentUpon>
+    <Compile Include="InstallView\AdvancedControlView.Designer.cs">
+      <DependentUpon>AdvancedControlView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdatesControlView.cs">
       <SubType>UserControl</SubType>
@@ -242,14 +256,11 @@
     <Compile Include="Views\UpdatesControlView.Designer.cs">
       <DependentUpon>UpdatesControlView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AboutForm.resx">
-      <DependentUpon>AboutForm.cs</DependentUpon>
+    <EmbeddedResource Include="InstallView\AdvancedControlView.resx">
+      <DependentUpon>AdvancedControlView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogForm.resx">
-      <DependentUpon>LogForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ToolHubView\PostToolHubControlView.resx">
-      <DependentUpon>PostToolHubControlView.cs</DependentUpon>
+    <EmbeddedResource Include="OobeControl.resx">
+      <DependentUpon>OobeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolHubView\ToolHubControlView.resx">
       <DependentUpon>ToolHubControlView.cs</DependentUpon>
@@ -265,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AppsControlView.resx">
       <DependentUpon>AppsControlView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AppSettingsControlView.resx">
+      <DependentUpon>AppSettingsControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DefaultsControlView.resx">
       <DependentUpon>DefaultsControlView.cs</DependentUpon>
@@ -286,17 +300,20 @@
     <EmbeddedResource Include="Views\HomeControlView.resx">
       <DependentUpon>HomeControlView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\HomeItemControl.resx">
+      <DependentUpon>HomeItemControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\InstallerControlView.resx">
       <DependentUpon>InstallerControlView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoggerControlView.resx">
+      <DependentUpon>LoggerControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\NetworkControlView.resx">
       <DependentUpon>NetworkControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PersonalizationControlView.resx">
       <DependentUpon>PersonalizationControlView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InstallView\InstallControlView.resx">
-      <DependentUpon>InstallControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UpdatesControlView.resx">
       <DependentUpon>UpdatesControlView.cs</DependentUpon>

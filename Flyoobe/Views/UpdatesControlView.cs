@@ -10,8 +10,6 @@ namespace Flyoobe
 {
     public partial class UpdatesControlView : UserControl, IView
     {
-        public string ViewTitle => "Windows Updates";
-
         // Keep updates by stable UpdateID (titles are not unique)
         private readonly Dictionary<string, IUpdate> _byId = new Dictionary<string, IUpdate>();
 

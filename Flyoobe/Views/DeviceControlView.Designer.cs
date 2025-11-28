@@ -32,7 +32,6 @@
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.btnApply = new System.Windows.Forms.Button();
             this.textUsername = new System.Windows.Forms.TextBox();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.textComputername = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
@@ -90,19 +89,6 @@
             this.textUsername.TabStop = false;
             this.textUsername.Text = "Name";
             this.toolTip.SetToolTip(this.textUsername, "Set or rename User");
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.AutoEllipsis = true;
-            this.lblHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI Variable Display Semib", 11.75F, System.Drawing.FontStyle.Bold);
-            this.lblHeader.ForeColor = System.Drawing.Color.Black;
-            this.lblHeader.Location = new System.Drawing.Point(0, 0);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(835, 31);
-            this.lblHeader.TabIndex = 21;
-            this.lblHeader.Text = "Tell us who you are and how you want your system to speak to you";
-            this.lblHeader.UseCompatibleTextRendering = true;
             // 
             // textComputername
             // 
@@ -165,7 +151,6 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(243)))), ((int)(((byte)(240)))));
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblHeader);
             this.Name = "DeviceControlView";
             this.Size = new System.Drawing.Size(835, 457);
             this.panel1.ResumeLayout(false);
@@ -178,7 +163,6 @@
         private System.Windows.Forms.ComboBox cmbLanguage;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.TextBox textUsername;
-        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.TextBox textComputername;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Panel panel1;
